@@ -148,6 +148,7 @@ export const translations = {
       formMessagePlaceholder: "Tell us about your needs...",
       formSubmit: "Send Message",
       formSending: "Sending...",
+      formError: "Something went wrong. Please try again or email us directly.",
       formDisclaimer:
         "We respond within 24–48 hours. Your data is kept confidential.",
       successTitle: "Message Sent",
@@ -317,6 +318,7 @@ export const translations = {
       formMessagePlaceholder: "Conte-nos sobre o seu negócio e como podemos colaborar...",
       formSubmit: "Enviar Mensagem",
       formSending: "A enviar...",
+      formError: "Algo correu mal. Tente novamente ou envie-nos um email diretamente.",
       formDisclaimer:
         "Respondemos em 24–48 horas. Os seus dados são tratados com total confidencialidade.",
       successTitle: "Mensagem Enviada",

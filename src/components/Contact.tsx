@@ -2,13 +2,17 @@
 
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Send, MapPin, Mail, Phone, CheckCircle, Loader2 } from "lucide-react";
+import { Send, MapPin, Mail, Phone, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { fadeUp, slideFromLeft, slideFromRight } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+
+// Get your free access key at https://web3forms.com
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -20,21 +24,28 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
+    setError(false);
 
     const formData = new FormData(e.currentTarget);
+    formData.append("access_key", WEB3FORMS_KEY);
+    formData.append("subject", "New contact from DS Crédito website");
+    formData.append("from_name", "DS Crédito Website");
 
     try {
-      const res = await fetch("https://formsubmit.co/ajax/ibrantinabrito@dsicredito.pt", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: formData,
       });
 
-      if (res.ok) {
+      const data = await res.json();
+
+      if (data.success) {
         setSubmitted(true);
+      } else {
+        setError(true);
       }
     } catch {
-      // Silently handle — form will remain visible for retry
+      setError(true);
     } finally {
       setSending(false);
     }
@@ -144,10 +155,7 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-3xl p-8 lg:p-10 space-y-5"
               >
-                {/* Formsubmit.co config */}
-                <input type="hidden" name="_subject" value="New contact from DS Crédito website" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="botcheck" className="hidden" />
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
@@ -217,6 +225,13 @@ export default function Contact() {
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all resize-none"
                   />
                 </div>
+
+                {error && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3">
+                    <AlertCircle size={16} className="shrink-0" />
+                    <span>{t.contact.formError || "Something went wrong. Please try again or email us directly."}</span>
+                  </div>
+                )}
 
                 <button
                   type="submit"
