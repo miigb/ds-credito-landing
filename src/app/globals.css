@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-900: #0F172A;
+  --color-brand-800: #1E293B;
+  --color-brand-700: #334155;
+  --color-brand-600: #475569;
+  --color-brand-500: #64748B;
+  --color-brand-400: #94A3B8;
+  --color-brand-300: #CBD5E1;
+  --color-brand-200: #E2E8F0;
+  --color-brand-100: #F1F5F9;
+  --color-brand-50: #F8FAFC;
+
+  --color-accent-900: #5B0A2E;
+  --color-accent-800: #7A0D3E;
+  --color-accent-700: #A30F4F;
+  --color-accent-600: #C4135F;
+  --color-accent-500: #D9286F;
+  --color-accent-400: #E85D91;
+  --color-accent-300: #F08DB3;
+  --color-accent-200: #F7BDD5;
+  --color-accent-100: #FBE4EC;
+  --color-accent-50: #FEF1F6;
+
+  --color-gold-500: #D4A843;
+  --color-gold-400: #E0BC62;
+  --color-gold-300: #EBD08A;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-brand-50);
+    color: var(--color-brand-900);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent-100);
+    color: var(--color-accent-900);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-500) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-hero-gradient {
+    background: linear-gradient(160deg, var(--color-brand-900) 0%, #1a1f3a 40%, #2a1a2e 70%, var(--color-accent-900) 100%);
+  }
+
+  .bg-section-gradient {
+    background: linear-gradient(180deg, var(--color-brand-50) 0%, white 50%, var(--color-brand-50) 100%);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+}
