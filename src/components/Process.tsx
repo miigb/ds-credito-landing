@@ -92,7 +92,7 @@ export default function Process() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 custom={0}
                 className={`relative flex items-start gap-8 lg:gap-0 ${
                   i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"

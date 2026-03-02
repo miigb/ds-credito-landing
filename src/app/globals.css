@@ -50,6 +50,15 @@
   }
 }
 
+/* Ensure animated content is visible for reduced-motion users and no-JS */
+@media (prefers-reduced-motion: reduce) {
+  [style*="opacity: 0"],
+  [style*="opacity:0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @layer utilities {
   .text-gradient {
     background: linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-500) 100%);

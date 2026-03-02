@@ -56,7 +56,7 @@ export default function Services() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, amount: 0.1 }}
           className="max-w-2xl mb-16"
         >
           <motion.p
@@ -83,7 +83,7 @@ export default function Services() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, amount: 0.05 }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20"
         >
           {services.map((s, i) => (
