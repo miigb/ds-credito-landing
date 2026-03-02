@@ -189,7 +189,7 @@ const faqSchema = {
       name: "Where is DS Crédito Setúbal Vitória located?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We are located at Avenida Bento Gonçalves nº 2, 2910-431 Setúbal, Portugal. We are part of the Decisões e Soluções group which has 170+ offices across the country. Contact us at info@dssetubalvitoria.pt to schedule an appointment.",
+        text: "We are located at Avenida Bento Gonçalves nº 2, 2910-431 Setúbal, Portugal. We are part of the Decisões e Soluções group which has 170+ offices across the country. Contact us at ibrantinabrito@dsicredito.pt to schedule an appointment.",
       },
     },
   ],

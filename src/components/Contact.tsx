@@ -2,12 +2,13 @@
 
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Send, MapPin, Mail, Phone, CheckCircle } from "lucide-react";
+import { Send, MapPin, Mail, Phone, CheckCircle, Loader2 } from "lucide-react";
 import { fadeUp, slideFromLeft, slideFromRight } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -16,9 +17,27 @@ export default function Contact() {
   const bgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/ibrantinabrito@dsicredito.pt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch {
+      // Silently handle — form will remain visible for retry
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -79,8 +98,8 @@ export default function Contact() {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-0.5">
                     {t.contact.email}
                   </p>
-                  <a href="mailto:info@dssetubalvitoria.pt" className="text-white/80 text-sm hover:text-white transition-colors">
-                    info@dssetubalvitoria.pt
+                  <a href="mailto:ibrantinabrito@dsicredito.pt" className="text-white/80 text-sm hover:text-white transition-colors">
+                    ibrantinabrito@dsicredito.pt
                   </a>
                 </div>
               </div>
@@ -92,7 +111,7 @@ export default function Contact() {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-0.5">
                     {t.contact.phone}
                   </p>
-                  <a href="tel:+351XXXXXXXXX" className="text-white/80 text-sm hover:text-white transition-colors">+351 XXX XXX XXX</a>
+                  <a href="tel:+351265117174" className="text-white/80 text-sm hover:text-white transition-colors">+351 265 117 174</a>
                 </div>
               </div>
             </address>
@@ -125,6 +144,11 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-3xl p-8 lg:p-10 space-y-5"
               >
+                {/* Formsubmit.co config */}
+                <input type="hidden" name="_subject" value="New contact from DS Crédito website" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
@@ -132,6 +156,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder={t.contact.formNamePlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
@@ -143,6 +168,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder={t.contact.formEmailPlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
@@ -157,6 +183,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       placeholder={t.contact.formPhonePlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
                     />
@@ -166,6 +193,7 @@ export default function Contact() {
                       {t.contact.formRole}
                     </label>
                     <select
+                      name="role"
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/60 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all appearance-none"
                     >
                       <option value="">{t.contact.formRoleSelect}</option>
@@ -183,6 +211,7 @@ export default function Contact() {
                     {t.contact.formMessage}
                   </label>
                   <textarea
+                    name="message"
                     rows={4}
                     placeholder={t.contact.formMessagePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all resize-none"
@@ -191,10 +220,15 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-accent-700 text-white font-semibold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 hover:-translate-y-0.5"
+                  disabled={sending}
+                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-accent-700 text-white font-semibold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
-                  <Send size={16} />
-                  {t.contact.formSubmit}
+                  {sending ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <Send size={16} />
+                  )}
+                  {sending ? (t.contact.formSending || "Sending...") : t.contact.formSubmit}
                 </button>
 
                 <p className="text-white/25 text-xs text-center">

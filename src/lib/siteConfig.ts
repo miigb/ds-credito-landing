@@ -4,8 +4,8 @@ export const siteConfig = {
     "DS Crédito Setúbal Vitória - Intermediário de Crédito Vinculado",
   parentOrganization: "Decisões e Soluções",
   url: "https://www.dssetubalvitoria.pt",
-  email: "info@dssetubalvitoria.pt",
-  phone: "+351 XXX XXX XXX",
+  email: "ibrantinabrito@dsicredito.pt",
+  phone: "+351 265 117 174",
   foundingYear: 2003,
 
   address: {

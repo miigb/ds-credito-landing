@@ -126,7 +126,7 @@ export default function RootLayout({
               management for international buyers.
             </p>
             <p>Address: Av. Bento Gonçalves nº 2, 2910-431 Setúbal, Portugal</p>
-            <p>Contact: info@dssetubalvitoria.pt</p>
+            <p>Contact: ibrantinabrito@dsicredito.pt</p>
             <p>Hours: Mon-Fri 09:00-18:00, Sat 10:00-13:00</p>
           </div>
         </noscript>

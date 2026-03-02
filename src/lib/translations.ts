@@ -147,6 +147,7 @@ export const translations = {
       formMessage: "Message",
       formMessagePlaceholder: "Tell us about your needs...",
       formSubmit: "Send Message",
+      formSending: "Sending...",
       formDisclaimer:
         "We respond within 24–48 hours. Your data is kept confidential.",
       successTitle: "Message Sent",
@@ -315,6 +316,7 @@ export const translations = {
       formMessage: "Mensagem",
       formMessagePlaceholder: "Conte-nos sobre o seu negócio e como podemos colaborar...",
       formSubmit: "Enviar Mensagem",
+      formSending: "A enviar...",
       formDisclaimer:
         "Respondemos em 24–48 horas. Os seus dados são tratados com total confidencialidade.",
       successTitle: "Mensagem Enviada",
