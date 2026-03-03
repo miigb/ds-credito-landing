@@ -106,6 +106,8 @@ export default function Navbar() {
                   e.stopPropagation();
                   setLangMenuOpen(!langMenuOpen);
                 }}
+                aria-label="Change language"
+                aria-expanded={langMenuOpen}
                 className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   scrolled
                     ? "text-brand-600 hover:text-brand-900 hover:bg-brand-100"
@@ -167,6 +169,7 @@ export default function Navbar() {
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setLocale(locale === "en" ? "pt" : "en")}
+              aria-label={locale === "en" ? "Mudar para Português" : "Switch to English"}
               className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg transition-colors text-xs font-semibold ${
                 scrolled
                   ? "text-brand-600 hover:bg-brand-100"
@@ -178,6 +181,8 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
               className={`p-2 rounded-lg transition-colors ${
                 scrolled
                   ? "text-brand-700 hover:bg-brand-100"

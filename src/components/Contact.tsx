@@ -159,10 +159,11 @@ export default function Contact() {
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-name" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
                       {t.contact.formName}
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       name="name"
                       required
@@ -171,10 +172,11 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-email" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
                       {t.contact.formEmail}
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       name="email"
                       required
@@ -186,10 +188,11 @@ export default function Contact() {
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-phone" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
                       {t.contact.formPhone}
                     </label>
                     <input
+                      id="contact-phone"
                       type="tel"
                       name="phone"
                       placeholder={t.contact.formPhonePlaceholder}
@@ -197,10 +200,11 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-role" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
                       {t.contact.formRole}
                     </label>
                     <select
+                      id="contact-role"
                       name="role"
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/60 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all appearance-none"
                     >
@@ -215,10 +219,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-white/50 text-xs uppercase tracking-wider mb-2">
+                  <label htmlFor="contact-message" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
                     {t.contact.formMessage}
                   </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     rows={4}
                     placeholder={t.contact.formMessagePlaceholder}

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "DS Crédito Setúbal Vitória | Credit Brokerage for International Buyers in Portugal",
+      "DS Crédito Setúbal Vitória | Credit Brokerage Portugal",
     template: "%s | DS Crédito Setúbal Vitória",
   },
 

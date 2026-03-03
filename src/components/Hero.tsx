@@ -47,6 +47,7 @@ export default function Hero() {
           className="absolute top-20 right-10 lg:right-20 w-32 h-32 lg:w-64 lg:h-64 opacity-[0.04]"
           viewBox="0 0 200 200"
           fill="none"
+          aria-hidden="true"
         >
           <circle cx="100" cy="100" r="95" stroke="white" strokeWidth="1" />
           <circle cx="100" cy="100" r="70" stroke="white" strokeWidth="0.5" />
@@ -73,12 +74,11 @@ export default function Hero() {
             {t.hero.eyebrow}
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline — no initial hidden to avoid delaying LCP */}
           <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
+            initial={{ opacity: 1, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
             className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
           >
             {t.hero.headlineStart}
@@ -87,12 +87,11 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Subheading */}
+          {/* Subheading — no initial hidden to avoid delaying LCP */}
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={2}
+            initial={{ opacity: 1, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
             className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl mb-10"
           >
             {t.hero.subheading}

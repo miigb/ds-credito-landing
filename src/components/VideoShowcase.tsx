@@ -12,6 +12,7 @@ export default function VideoShowcase() {
   const [hovering, setHovering] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const inView = useInView(containerRef, { amount: 0.4 });
   const { t } = useLanguage();
 
@@ -117,7 +118,20 @@ export default function VideoShowcase() {
             playsInline
             preload="metadata"
             className="w-full aspect-video object-cover"
-          />
+            onError={() => setVideoError(true)}
+          >
+            <track kind="captions" />
+          </video>
+
+          {/* Fallback when video fails to load */}
+          {videoError && (
+            <div className="absolute inset-0 bg-brand-900 flex items-center justify-center">
+              <div className="text-center px-8">
+                <Play size={48} className="text-white/20 mx-auto mb-4" />
+                <p className="text-white/40 text-sm">{t.video.headline}</p>
+              </div>
+            </div>
+          )}
 
           {/* Overlay — fades out on hover/play */}
           <div
