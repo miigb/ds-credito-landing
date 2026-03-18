@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import StructuredData from "@/components/StructuredData";
 import { siteConfig } from "@/lib/siteConfig";
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -131,6 +132,7 @@ export default function RootLayout({
           </div>
         </noscript>
         <LanguageProvider>{children}</LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );
