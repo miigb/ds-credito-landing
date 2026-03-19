@@ -30,19 +30,19 @@ export default function WhyUs() {
   const { t } = useLanguage();
 
   const businessBenefits = [
-    { icon: TrendingUp, text: t.whyUs.biz1 },
-    { icon: Clock, text: t.whyUs.biz2 },
-    { icon: FileCheck, text: t.whyUs.biz3 },
-    { icon: MessageCircle, text: t.whyUs.biz4 },
-    { icon: UserCheck, text: t.whyUs.biz5 },
+    { id: "biz1", icon: TrendingUp, text: t.whyUs.biz1 },
+    { id: "biz2", icon: Clock, text: t.whyUs.biz2 },
+    { id: "biz3", icon: FileCheck, text: t.whyUs.biz3 },
+    { id: "biz4", icon: MessageCircle, text: t.whyUs.biz4 },
+    { id: "biz5", icon: UserCheck, text: t.whyUs.biz5 },
   ];
 
   const clientBenefits = [
-    { icon: Scale, text: t.whyUs.cli1 },
-    { icon: Eye, text: t.whyUs.cli2 },
-    { icon: HeartHandshake, text: t.whyUs.cli3 },
-    { icon: MapPin, text: t.whyUs.cli4 },
-    { icon: Users, text: t.whyUs.cli5 },
+    { id: "cli1", icon: Scale, text: t.whyUs.cli1 },
+    { id: "cli2", icon: Eye, text: t.whyUs.cli2 },
+    { id: "cli3", icon: HeartHandshake, text: t.whyUs.cli3 },
+    { id: "cli4", icon: MapPin, text: t.whyUs.cli4 },
+    { id: "cli5", icon: Users, text: t.whyUs.cli5 },
   ];
 
   return (
@@ -82,7 +82,7 @@ export default function WhyUs() {
               <div className="space-y-5">
                 {businessBenefits.map((b) => (
                   <div
-                    key={b.text}
+                    key={b.id}
                     className="flex items-start gap-4 group"
                   >
                     <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center shrink-0 group-hover:bg-accent-50 transition-colors duration-300">
@@ -113,7 +113,7 @@ export default function WhyUs() {
               <div className="space-y-5">
                 {clientBenefits.map((b) => (
                   <div
-                    key={b.text}
+                    key={b.id}
                     className="flex items-start gap-4 group"
                   >
                     <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors duration-300">

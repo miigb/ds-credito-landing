@@ -23,12 +23,7 @@
   --color-accent-100: #FBE4EC;
   --color-accent-50: #FEF1F6;
 
-  --color-gold-500: #D4A843;
-  --color-gold-400: #E0BC62;
-  --color-gold-300: #EBD08A;
-
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 @layer base {

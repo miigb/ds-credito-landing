@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Send, MapPin, Mail, Phone, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { fadeUp, slideFromLeft, slideFromRight } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { siteConfig } from "@/lib/siteConfig";
 
 // Get your free access key at https://web3forms.com
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
@@ -109,8 +110,8 @@ export default function Contact() {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-0.5">
                     {t.contact.email}
                   </p>
-                  <a href="mailto:ibrantinabrito@dsicredito.pt" className="text-white/80 text-sm hover:text-white transition-colors">
-                    ibrantinabrito@dsicredito.pt
+                  <a href={`mailto:${siteConfig.email}`} className="text-white/80 text-sm hover:text-white transition-colors">
+                    {siteConfig.email}
                   </a>
                 </div>
               </div>
@@ -122,7 +123,7 @@ export default function Contact() {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-0.5">
                     {t.contact.phone}
                   </p>
-                  <a href="tel:+351265117174" className="text-white/80 text-sm hover:text-white transition-colors">+351 265 117 174</a>
+                  <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="text-white/80 text-sm hover:text-white transition-colors">{siteConfig.phone}</a>
                 </div>
               </div>
             </address>

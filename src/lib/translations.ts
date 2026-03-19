@@ -167,6 +167,7 @@ export const translations = {
     footer: {
       legal1: "Decisões e Soluções Group",
       legal2: "Intermediário de Crédito Vinculado",
+      legal3: "Registered with Banco de Portugal",
       rights: "All rights reserved.",
     },
   },
@@ -337,6 +338,7 @@ export const translations = {
     footer: {
       legal1: "Grupo Decisões e Soluções",
       legal2: "Intermediário de Crédito Vinculado",
+      legal3: "Registado no Banco de Portugal",
       rights: "Todos os direitos reservados.",
     },
   },

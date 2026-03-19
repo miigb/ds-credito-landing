@@ -1,12 +1,21 @@
 export const siteConfig = {
   name: "DS Crédito Setúbal Vitória",
-  legalName:
-    "DS Crédito Setúbal Vitória - Intermediário de Crédito Vinculado",
+  legalName: "Letraperfeiçoada - Unipessoal Lda",
   parentOrganization: "Decisões e Soluções",
-  url: "https://www.dssetubalvitoria.pt",
+  url: "https://meuintermediario.com",
   email: "ibrantinabrito@dsicredito.pt",
   phone: "+351 265 117 174",
   foundingYear: 2003,
+
+  regulation: {
+    registrationNumber: "0007470",
+    category: "Vinculado",
+    regulator: "Banco de Portugal",
+    registryUrl: "https://www.bportugal.pt/intermediariocreditofar/letraperfeicoada-unipessoal-lda",
+    exclusivity: false,
+    creditTypes: ["Crédito à habitação", "Crédito aos consumidores"],
+    consultancyServices: true,
+  },
 
   address: {
     streetAddress: "Avenida Bento Gonçalves nº 2",
@@ -34,6 +43,14 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/dssetubalvitoria",
     instagram: "https://www.instagram.com/dssetubalvitoria",
     linkedin: "https://www.linkedin.com/company/dssetubalvitoria",
+  },
+
+  stats: {
+    yearsExperience: 22,
+    stores: 170,
+    teamMembers: 1400,
+    deedsValueMillions: 545,
+    growthPercent: 54,
   },
 
   description: {

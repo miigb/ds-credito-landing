@@ -25,19 +25,19 @@ export default function Services() {
   const { t } = useLanguage();
 
   const services = [
-    { icon: FileSearch, title: t.services.preCheck, description: t.services.preCheckDesc },
-    { icon: BarChart3, title: t.services.compare, description: t.services.compareDesc },
-    { icon: FileText, title: t.services.docs, description: t.services.docsDesc },
-    { icon: Handshake, title: t.services.negotiation, description: t.services.negotiationDesc },
-    { icon: ShieldCheck, title: t.services.approval, description: t.services.approvalDesc },
-    { icon: Lock, title: t.services.transparency, description: t.services.transparencyDesc },
+    { id: "pre-check", icon: FileSearch, title: t.services.preCheck, description: t.services.preCheckDesc },
+    { id: "compare", icon: BarChart3, title: t.services.compare, description: t.services.compareDesc },
+    { id: "docs", icon: FileText, title: t.services.docs, description: t.services.docsDesc },
+    { id: "negotiation", icon: Handshake, title: t.services.negotiation, description: t.services.negotiationDesc },
+    { id: "approval", icon: ShieldCheck, title: t.services.approval, description: t.services.approvalDesc },
+    { id: "transparency", icon: Lock, title: t.services.transparency, description: t.services.transparencyDesc },
   ];
 
   const situations = [
-    { icon: Landmark, label: t.services.situationHome },
-    { icon: BarChart3, label: t.services.situationInvestment },
-    { icon: Compass, label: t.services.situationRelocation },
-    { icon: FileText, label: t.services.situationCredit },
+    { id: "home", icon: Landmark, label: t.services.situationHome },
+    { id: "investment", icon: BarChart3, label: t.services.situationInvestment },
+    { id: "relocation", icon: Compass, label: t.services.situationRelocation },
+    { id: "credit", icon: FileText, label: t.services.situationCredit },
   ];
 
   return (
@@ -88,7 +88,7 @@ export default function Services() {
         >
           {services.map((s, i) => (
             <motion.div
-              key={s.title}
+              key={s.id}
               variants={fadeUp}
               custom={i}
               className="group relative bg-white rounded-2xl p-7 border border-brand-100 hover:border-accent-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
@@ -158,9 +158,9 @@ export default function Services() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {situations.map(({ icon: Icon, label }) => (
+              {situations.map(({ id, icon: Icon, label }) => (
                 <div
-                  key={label}
+                  key={id}
                   className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
                 >
                   <Icon size={20} className="text-accent-400 shrink-0" />

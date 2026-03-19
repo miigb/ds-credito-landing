@@ -50,7 +50,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <nav className="flex items-center justify-between h-18 lg:h-20">
+        <nav aria-label="Main navigation" className="flex items-center justify-between h-18 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div

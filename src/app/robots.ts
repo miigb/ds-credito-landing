@@ -15,6 +15,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Applebot-Extended", allow: "/" },
       { userAgent: "GoogleOther", allow: "/" },
     ],
-    sitemap: "https://www.dssetubalvitoria.pt/sitemap.xml",
+    sitemap: "https://meuintermediario.com/sitemap.xml",
   };
 }

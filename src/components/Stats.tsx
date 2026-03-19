@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { siteConfig } from "@/lib/siteConfig";
 
 function AnimatedCounter({
   value,
@@ -51,10 +52,10 @@ export default function Stats() {
   const { t } = useLanguage();
 
   const stats = [
-    { value: 22, suffix: "+", label: t.stats.years },
-    { value: 170, suffix: "", label: t.stats.stores },
-    { value: 1400, suffix: "+", label: t.stats.team },
-    { value: 545, suffix: "M+", prefix: "€", label: t.stats.deeds },
+    { id: "years", value: siteConfig.stats.yearsExperience, suffix: "+", label: t.stats.years },
+    { id: "stores", value: siteConfig.stats.stores, suffix: "", label: t.stats.stores },
+    { id: "team", value: siteConfig.stats.teamMembers, suffix: "+", label: t.stats.team },
+    { id: "deeds", value: siteConfig.stats.deedsValueMillions, suffix: "M+", prefix: "€", label: t.stats.deeds },
   ];
 
   return (
@@ -93,7 +94,7 @@ export default function Stats() {
         >
           {stats.map((stat, i) => (
             <motion.div
-              key={stat.label}
+              key={stat.id}
               variants={fadeUp}
               custom={i}
               className="relative group"
@@ -124,8 +125,8 @@ export default function Stats() {
           className="mt-12 flex justify-center"
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent-50 border border-accent-100">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-700 text-white text-xs font-bold">
-              54%
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-700 text-white text-xs font-bold" aria-label={`${siteConfig.stats.growthPercent}% growth`}>
+              {siteConfig.stats.growthPercent}%
             </span>
             <span className="text-sm font-medium text-brand-700">
               {t.stats.growth}

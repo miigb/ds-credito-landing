@@ -93,7 +93,7 @@ export default function Process() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.05 }}
-                custom={0}
+                custom={i}
                 className={`relative flex items-start gap-8 lg:gap-0 ${
                   i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 }`}
