@@ -3,7 +3,7 @@ export const siteConfig = {
   legalName: "Letraperfeiçoada - Unipessoal Lda",
   parentOrganization: "Decisões e Soluções",
   url: "https://meuintermediario.com",
-  email: "ibrantinabrito@dsicredito.pt",
+  email: "infosuporteds@gmail.com",
   phone: "+351 265 117 174",
   foundingYear: 2003,
 
