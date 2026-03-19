@@ -27,18 +27,21 @@ export default function Footer() {
           className="flex flex-col items-center gap-8"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
-            {/* Brand */}
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-accent-700 flex items-center justify-center font-bold text-sm text-white">
-                DS
-              </div>
-              <div>
-                <span className="text-white text-sm font-semibold">
-                  {siteConfig.name.split(" ").slice(0, 2).join(" ")}
+            {/* Brand — Combined mark: LETRAPERFEIÇOADA wordmark + DS Crédito badge */}
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col items-start">
+                <span className="text-white text-sm tracking-wide">
+                  <span className="font-bold">LETRA</span>
+                  <span className="font-light">PERFEI&Ccedil;OADA</span>
                 </span>
-                <span className="text-white/40 text-xs block">
-                  {siteConfig.name.split(" ").slice(2).join(" ")}
-                </span>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="text-white/30 text-[10px] tracking-wider">Parte da rede</span>
+                  <img
+                    src="/ds-credito-logo.png"
+                    alt="DS Crédito"
+                    className="h-5 w-auto"
+                  />
+                </div>
               </div>
             </div>
 
@@ -73,7 +76,7 @@ export default function Footer() {
           <div className="text-white/25 text-xs text-center border-t border-white/5 pt-6 w-full space-y-1">
             <p>{siteConfig.legalName} &middot; {t.footer.legal1} &middot; {t.footer.legal2}</p>
             <p>
-              {t.footer.legal3} &mdash; Nº{" "}
+              {siteConfig.legalName} &mdash; {t.footer.legal3} Nº{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"

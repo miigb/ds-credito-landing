@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { AudienceProvider } from "@/lib/AudienceContext";
 import StructuredData from "@/components/StructuredData";
 import { siteConfig } from "@/lib/siteConfig";
 import { Analytics } from '@vercel/analytics/next';
@@ -131,7 +132,9 @@ export default function RootLayout({
             <p>Hours: Mon-Fri 09:00-18:00, Sat 10:00-13:00</p>
           </div>
         </noscript>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <AudienceProvider>{children}</AudienceProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

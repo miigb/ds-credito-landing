@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Shield, Globe, Banknote } from "lucide-react";
+import { ArrowDown, Shield, Globe, Banknote, Building2, User } from "lucide-react";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,7 +13,9 @@ export default function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
+  const { setAudience } = useAudience();
+  const isPt = locale === "pt";
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
@@ -105,31 +108,64 @@ export default function Hero() {
             custom={3}
             className="flex flex-col sm:flex-row gap-4 mb-16"
           >
-            <a
-              href="#contact"
-              className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-            >
-              {t.hero.ctaPrimary}
-              <svg
-                className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </a>
-            <a
-              href="#process"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
-            >
-              {t.hero.ctaSecondary}
-            </a>
+            {isPt ? (
+              <>
+                {/* PT: Audience selector */}
+                <button
+                  onClick={() => {
+                    setAudience("client");
+                    // Wait for React to render the PreQualification section
+                    setTimeout(() => {
+                      document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" });
+                    }, 150);
+                  }}
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
+                >
+                  <User size={18} />
+                  {t.audienceSelector.client}
+                </button>
+                <button
+                  onClick={() => {
+                    setAudience("partner");
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
+                >
+                  <Building2 size={18} />
+                  {t.audienceSelector.partner}
+                </button>
+              </>
+            ) : (
+              <>
+                {/* EN: Original CTAs */}
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
+                >
+                  {t.hero.ctaPrimary}
+                  <svg
+                    className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="#process"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
+                >
+                  {t.hero.ctaSecondary}
+                </a>
+              </>
+            )}
           </motion.div>
 
           {/* Trust badges */}
