@@ -15,7 +15,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
   const [error, setError] = useState(false);
   const [sellProperty, setSellProperty] = useState("nao");
   const sectionRef = useRef<HTMLElement>(null);
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const cf = t.creditForm;
 
   // Scroll into view when made visible (after DOM paint)
@@ -37,7 +37,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
 
     const formData = new FormData(e.currentTarget);
     formData.append("access_key", WEB3FORMS_KEY);
-    formData.append("subject", "Novo pedido de crédito — meuintermediario.com");
+    const firstName = formData.get("first_name") || "";
+    const lastName = formData.get("last_name") || "";
+    const fullName = `${firstName} ${lastName}`.trim() || "Sem nome";
+    const opType = formData.get("operation_type") || "";
+    formData.append("subject", `[B2C] Pedido de crédito: ${fullName}${opType ? ` — ${opType}` : ""}`);
     formData.append("from_name", "DS Crédito — Pedido de Crédito");
 
     try {
@@ -49,13 +53,15 @@ export default function CreditForm({ visible }: { visible: boolean }) {
       if (data.success) {
         setSubmitted(true);
         track("credit_form_submitted", { operation_type: String(formData.get("operation_type") || "") });
-        // Fire-and-forget Notion backup
+        // Fire-and-forget Notion backup + auto-reply
+        const creditName = `${formData.get("first_name")} ${formData.get("last_name")}`.trim();
+        const creditEmail = formData.get("email");
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            name: `${formData.get("first_name")} ${formData.get("last_name")}`,
-            email: formData.get("email"),
+            name: creditName,
+            email: creditEmail,
             phone: formData.get("phone"),
             source: "B2C Credit Request",
             operation_type: formData.get("operation_type"),
@@ -66,6 +72,16 @@ export default function CreditForm({ visible }: { visible: boolean }) {
             proponents: formData.get("proponents"),
             income: formData.get("income"),
             preferred_schedule: formData.get("preferred_schedule"),
+          }),
+        }).catch(() => {});
+        fetch("/api/auto-reply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: creditName,
+            email: creditEmail,
+            locale,
+            formType: "b2c",
           }),
         }).catch(() => {});
       } else {

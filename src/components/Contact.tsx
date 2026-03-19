@@ -21,7 +21,7 @@ export default function Contact() {
     offset: ["start end", "end start"],
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +30,9 @@ export default function Contact() {
 
     const formData = new FormData(e.currentTarget);
     formData.append("access_key", WEB3FORMS_KEY);
-    formData.append("subject", "New contact from DS Crédito website");
+    const name = formData.get("name") || "Sem nome";
+    const role = formData.get("role") || "";
+    formData.append("subject", `[B2B] Novo contacto: ${name}${role ? ` — ${role}` : ""}`);
     formData.append("from_name", "DS Crédito Website");
 
     try {
@@ -44,17 +46,28 @@ export default function Contact() {
       if (data.success) {
         setSubmitted(true);
         track("contact_form_submitted", { role: String(formData.get("role") || "") });
-        // Fire-and-forget Notion backup
+        // Fire-and-forget Notion backup + auto-reply
+        const leadData = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          role: formData.get("role"),
+          message: formData.get("message"),
+          source: "B2B Contact",
+        };
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(leadData),
+        }).catch(() => {});
+        fetch("/api/auto-reply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            name: formData.get("name"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            role: formData.get("role"),
-            message: formData.get("message"),
-            source: "B2B Contact",
+            name: leadData.name,
+            email: leadData.email,
+            locale,
+            formType: "b2b",
           }),
         }).catch(() => {});
       } else {
