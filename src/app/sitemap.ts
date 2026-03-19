@@ -14,5 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://meuintermediario.com/privacidade",
+      lastModified: "2026-03-19",
+      changeFrequency: "yearly",
+      priority: 0.3,
+      alternates: {
+        languages: {
+          pt: "https://meuintermediario.com/privacidade",
+        },
+      },
+    },
   ];
 }

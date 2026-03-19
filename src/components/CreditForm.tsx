@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 
@@ -20,6 +21,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
   // Scroll into view when made visible (after DOM paint)
   useEffect(() => {
     if (visible && sectionRef.current) {
+      track("credit_form_opened");
       requestAnimationFrame(() => {
         sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -46,6 +48,26 @@ export default function CreditForm({ visible }: { visible: boolean }) {
       const data = await res.json();
       if (data.success) {
         setSubmitted(true);
+        track("credit_form_submitted", { operation_type: String(formData.get("operation_type") || "") });
+        // Fire-and-forget Notion backup
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: `${formData.get("first_name")} ${formData.get("last_name")}`,
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            source: "B2C Credit Request",
+            operation_type: formData.get("operation_type"),
+            help_type: formData.get("help_type"),
+            financing_value: formData.get("financing_value"),
+            property_choice: formData.get("property_choice"),
+            sell_property: formData.get("sell_property"),
+            proponents: formData.get("proponents"),
+            income: formData.get("income"),
+            preferred_schedule: formData.get("preferred_schedule"),
+          }),
+        }).catch(() => {});
       } else {
         setError(true);
       }
@@ -406,6 +428,25 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                     <span>{cf.errorMessage}</span>
                   </div>
                 )}
+
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-0.5 w-4 h-4 accent-accent-700 shrink-0"
+                  />
+                  <span className="text-brand-500 text-sm">
+                    {t.privacy.consentLabel}{" "}
+                    <a
+                      href="/privacidade"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-700 hover:text-accent-600 underline underline-offset-2 transition-colors"
+                    >
+                      {t.privacy.consentLink}
+                    </a>
+                  </span>
+                </label>
 
                 <button
                   type="submit"

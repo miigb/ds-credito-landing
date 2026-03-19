@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { AudienceProvider } from "@/lib/AudienceContext";
 import StructuredData from "@/components/StructuredData";
+import CookieConsent from "@/components/CookieConsent";
 import { siteConfig } from "@/lib/siteConfig";
 import { Analytics } from '@vercel/analytics/next';
 
@@ -134,6 +135,7 @@ export default function RootLayout({
         </noscript>
         <LanguageProvider>
           <AudienceProvider>{children}</AudienceProvider>
+          <CookieConsent />
         </LanguageProvider>
         <Analytics />
       </body>

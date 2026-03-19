@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Send, MapPin, Mail, Phone, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { fadeUp, slideFromLeft, slideFromRight } from "@/lib/animations";
+import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -42,6 +43,20 @@ export default function Contact() {
 
       if (data.success) {
         setSubmitted(true);
+        track("contact_form_submitted", { role: String(formData.get("role") || "") });
+        // Fire-and-forget Notion backup
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            role: formData.get("role"),
+            message: formData.get("message"),
+            source: "B2B Contact",
+          }),
+        }).catch(() => {});
       } else {
         setError(true);
       }
@@ -238,6 +253,25 @@ export default function Contact() {
                     <span>{t.contact.formError || "Something went wrong. Please try again or email us directly."}</span>
                   </div>
                 )}
+
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-0.5 w-4 h-4 accent-accent-700 shrink-0"
+                  />
+                  <span className="text-white/50 text-sm">
+                    {t.privacy.consentLabel}{" "}
+                    <a
+                      href="/privacidade"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-400 hover:text-accent-300 underline underline-offset-2 transition-colors"
+                    >
+                      {t.privacy.consentLink}
+                    </a>
+                  </span>
+                </label>
 
                 <button
                   type="submit"

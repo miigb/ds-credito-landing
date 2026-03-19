@@ -260,6 +260,16 @@ export const translations = {
       successMessage: "",
       errorMessage: "",
     },
+    // Privacy / Cookie Consent
+    privacy: {
+      cookieTitle: "This website uses cookies",
+      cookieDesc: "We use cookies and local storage to improve your experience.",
+      cookieAccept: "Accept",
+      cookieNecessary: "Necessary only",
+      cookiePolicy: "Privacy Policy",
+      consentLabel: "I have read and accept the",
+      consentLink: "Privacy Policy",
+    },
     // Footer
     footer: {
       legal1: "Decisões e Soluções Group",
@@ -527,6 +537,16 @@ export const translations = {
       successTitle: "Pedido Enviado!",
       successMessage: "Um especialista entrará em contacto consigo em menos de 24 horas. Obrigado pela confiança.",
       errorMessage: "Algo correu mal. Tente novamente ou ligue-nos diretamente.",
+    },
+    // Privacy / Cookie Consent
+    privacy: {
+      cookieTitle: "Este site utiliza cookies",
+      cookieDesc: "Utilizamos cookies e armazenamento local para melhorar a sua experiência.",
+      cookieAccept: "Aceitar",
+      cookieNecessary: "Apenas necessários",
+      cookiePolicy: "Política de Privacidade",
+      consentLabel: "Li e aceito a",
+      consentLink: "Política de Privacidade",
     },
     // Footer
     footer: {

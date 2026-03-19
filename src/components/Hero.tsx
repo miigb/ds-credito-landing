@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Shield, Globe, Banknote, Building2, User } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
@@ -114,7 +115,7 @@ export default function Hero() {
                 <button
                   onClick={() => {
                     setAudience("client");
-                    // Wait for React to render the PreQualification section
+                    track("audience_selected", { type: "client" });
                     setTimeout(() => {
                       document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" });
                     }, 150);
@@ -127,6 +128,7 @@ export default function Hero() {
                 <button
                   onClick={() => {
                     setAudience("partner");
+                    track("audience_selected", { type: "partner" });
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"

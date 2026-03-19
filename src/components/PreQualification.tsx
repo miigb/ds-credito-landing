@@ -12,6 +12,7 @@ import {
   RotateCcw,
   Phone,
 } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { siteConfig } from "@/lib/siteConfig";
@@ -91,10 +92,12 @@ export default function PreQualification({
     : Math.round(((step + 1) / total) * 100);
 
   const handleAnswer = useCallback(
-    (pass: boolean) => {
+    (pass: boolean, letter: string) => {
+      track("quiz_answer", { question: step + 1, answer: letter, pass });
       if (!pass) {
         setDirection(1);
         setResult("fail");
+        track("quiz_completed", { result: "fail", failed_at: step + 1 });
         return;
       }
       if (step < total - 1) {
@@ -102,6 +105,7 @@ export default function PreQualification({
         setStep((s) => s + 1);
       } else {
         setResult("pass");
+        track("quiz_completed", { result: "pass" });
       }
     },
     [step, total]
@@ -209,7 +213,7 @@ export default function PreQualification({
                     {currentQ.options.map((opt) => (
                       <button
                         key={opt.key}
-                        onClick={() => handleAnswer(opt.pass)}
+                        onClick={() => handleAnswer(opt.pass, opt.letter)}
                         className="w-full text-left border border-brand-200 rounded-xl px-5 py-4 text-sm font-medium text-brand-900 hover:border-accent-700 hover:bg-accent-50 transition-all duration-200 flex items-center gap-3 group"
                       >
                         <span className="w-7 h-7 rounded-full border-2 border-brand-300 flex items-center justify-center text-xs font-bold text-brand-400 group-hover:border-accent-700 group-hover:text-accent-700 group-hover:bg-accent-50 transition-colors">
