@@ -51,7 +51,7 @@ export const teamMembers: TeamMember[] = [
       pt: "Gestão do programa de parcerias com imobiliárias, mediadores e promotores. Responsável pela expansão da rede de parceiros B2B.",
       en: "Manages the partnership program with real estate agencies, brokers, and promoters. Drives B2B partner network expansion.",
     },
-    photo: "/team/armanda-amorim.jpg",
+    photo: "/team/Armanda_Amorim_DS_Crédito.pptx.png",
     featured: true,
     order: 3,
   },
