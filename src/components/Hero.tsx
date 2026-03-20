@@ -233,7 +233,7 @@ export default function Hero() {
           >
             <p className="text-accent-700 font-bold text-2xl mb-1">10+</p>
             <p className="text-[10px] text-brand-600 font-bold uppercase tracking-wider leading-snug">
-              Bancos parceiros a competir pelas melhores condições
+              Comparamos ofertas de múltiplos bancos parceiros
             </p>
           </motion.div>
         </motion.div>
