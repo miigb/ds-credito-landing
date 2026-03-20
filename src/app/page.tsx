@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import BankPartners from "@/components/BankPartners";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import VideoShowcase from "@/components/VideoShowcase";
@@ -35,6 +36,7 @@ export default function Home() {
     <main className="relative">
       <Navbar />
       <Hero />
+      <BankPartners />
       <Stats />
       <Services />
       <VideoShowcase />

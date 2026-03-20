@@ -65,7 +65,8 @@ export default function Hero() {
         style={{ y, opacity }}
         className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20"
       >
-        <div className="max-w-3xl">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-xl">
           {/* Eyebrow */}
           <motion.div
             variants={fadeUp}
@@ -188,6 +189,37 @@ export default function Hero() {
               </div>
             ))}
           </motion.div>
+        </div>
+
+        {/* Hero Image */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={2}
+          className="hidden lg:block relative"
+        >
+          <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
+            <img
+              src="/hero-property.jpg"
+              alt="Modern property in Portugal"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+          {/* Floating stat card */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="absolute -bottom-6 -left-6 glass-light p-5 rounded-xl shadow-xl max-w-[220px]"
+          >
+            <p className="text-accent-700 font-bold text-2xl mb-1">10+</p>
+            <p className="text-xs text-brand-600 font-medium uppercase tracking-wider leading-snug">
+              Bancos parceiros a competir pelas melhores condições
+            </p>
+          </motion.div>
+        </motion.div>
         </div>
       </motion.div>
 
