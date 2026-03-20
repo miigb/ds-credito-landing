@@ -48,9 +48,9 @@ function layout(content: string) {
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:10px auto 0 auto">
         <tr>
-          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Parte da rede</td>
+          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Um Agente</td>
           <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="20" height="20" style="border-radius:4px;display:block" /></td>
-          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-left:6px;vertical-align:middle">&middot; meuintermediario.com</td>
+          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-left:6px;vertical-align:middle">DS Cr&eacute;dito</td>
         </tr>
       </table>
     </div>
@@ -362,9 +362,9 @@ function _header(s: SchemeColors) {
       <div style="font-size:20px;letter-spacing:1.5px;color:${s.headerText}"><b>LETRA</b><span style="font-weight:300">PERFEI&Ccedil;OADA</span></div>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 0 auto">
         <tr>
-          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Parte da rede</td>
+          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Um Agente</td>
           <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="18" height="18" style="border-radius:3px;display:block" /></td>
-          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-left:6px;vertical-align:middle">DS Cr&eacute;dito</td>
+          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-left:4px;vertical-align:middle">DS Cr&eacute;dito</td>
         </tr>
       </table>
     </div>`;
