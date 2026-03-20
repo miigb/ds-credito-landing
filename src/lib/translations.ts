@@ -473,7 +473,7 @@ export const translations = {
       q4Title: "Tem outros créditos ou encargos mensais?",
       q4Desc: "A taxa de esforço total (todos os créditos) não deve ultrapassar ~35% do rendimento líquido.",
       q4a: "Não tenho outros créditos",
-      q4b: "Sim, mas representam menos de 15% do meu rendimento",
+      q4b: "Sim, mas representam menos de 35% do meu rendimento",
       q4c: "Sim, representam mais de 35% do meu rendimento",
       passTitle: "Parabéns! Cumpre os critérios iniciais.",
       passDesc: "Com base nas suas respostas, reúne as condições básicas para avançar com a simulação de crédito habitação.",
