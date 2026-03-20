@@ -1,11 +1,13 @@
 import { siteConfig } from "./siteConfig";
 
 const ACCENT = "#A30F4F";
-const DARK = "#0F172A";
-const DARK_SECONDARY = "#1E293B";
+const HEADER_BG = "#1E293B";
+const DARK = "#334155";
 const MUTED = "#64748B";
 const LIGHT_BG = "#F8FAFC";
 const BORDER = "#E2E8F0";
+// Absolute URL for email clients — must be the live domain
+const LOGO_URL = "https://meuintermediario.com/ds-credito-logo.png";
 
 function layout(content: string) {
   return `<!DOCTYPE html>
@@ -16,7 +18,7 @@ function layout(content: string) {
   <style>
     body{margin:0;padding:0;background:${LIGHT_BG};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
     .wrapper{max-width:600px;margin:0 auto;background:#ffffff}
-    .header{background:${DARK};padding:32px 40px;text-align:center}
+    .header{background:${HEADER_BG};padding:32px 40px;text-align:center}
     .wordmark{font-size:22px;letter-spacing:1.5px;color:#ffffff}
     .wordmark b{font-weight:700}
     .wordmark span{font-weight:300}
@@ -28,12 +30,12 @@ function layout(content: string) {
     .steps{margin:0;padding:0;list-style:none}
     .steps li{font-size:14px;color:#475569;line-height:1.6;padding:8px 0 8px 28px;position:relative}
     .steps li::before{content:attr(data-n);position:absolute;left:0;top:8px;width:20px;height:20px;border-radius:50%;background:${ACCENT};color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:20px}
-    .cta-box{background:${DARK};border-radius:12px;padding:28px 32px;text-align:center;margin:28px 0}
+    .cta-box{background:${HEADER_BG};border-radius:12px;padding:28px 32px;text-align:center;margin:28px 0}
     .cta-title{font-size:16px;font-weight:700;color:#ffffff;margin:0 0 8px 0}
     .cta-text{font-size:13px;color:rgba(255,255,255,0.6);margin:0 0 16px 0}
     .cta-btn{display:inline-block;background:${ACCENT};color:#ffffff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none}
     .footer{background:${LIGHT_BG};padding:28px 40px;border-top:1px solid ${BORDER}}
-    .footer-name{font-size:13px;font-weight:600;color:${DARK_SECONDARY};margin:0 0 4px 0}
+    .footer-name{font-size:13px;font-weight:600;color:${DARK};margin:0 0 4px 0}
     .footer-text{font-size:12px;color:${MUTED};line-height:1.6;margin:0}
     .footer-text a{color:${ACCENT};text-decoration:none}
     .footer-reg{font-size:11px;color:#94A3B8;margin-top:12px}
@@ -44,7 +46,13 @@ function layout(content: string) {
   <div class="wrapper">
     <div class="header">
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
-      <div class="subtitle">Parte da rede DS Cr&eacute;dito &middot; meuintermediario.com</div>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:10px auto 0 auto">
+        <tr>
+          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Parte da rede</td>
+          <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="20" height="20" style="border-radius:4px;display:block" /></td>
+          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-left:6px;vertical-align:middle">&middot; meuintermediario.com</td>
+        </tr>
+      </table>
     </div>
     <div class="body">
       ${content}
