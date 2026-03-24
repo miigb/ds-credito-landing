@@ -1,10 +1,10 @@
-# DS Crédito Setúbal Vitória
+# Letraperfeiçoada
 
 > Independent credit brokerage in Setúbal, Portugal. Part of Decisões e Soluções, Portugal's largest credit intermediary group.
 
 ## Company Overview
 
-DS Crédito Setúbal Vitória is an independent credit brokerage (intermediário de crédito vinculado) located in Setúbal, Portugal. We are part of the Decisões e Soluções group, which has over 22 years of experience, 1,400+ team members, and 170+ offices across Portugal.
+Letraperfeiçoada is an independent credit brokerage (intermediário de crédito vinculado) located in Setúbal, Portugal. We are part of the Decisões e Soluções group, which has over 22 years of experience, 1,400+ team members, and 170+ offices across Portugal.
 
 We specialize in mortgage advisory and credit brokerage for both Portuguese residents and international property buyers. Our service is completely free for the buyer — we are compensated by lending institutions.
 
@@ -80,3 +80,13 @@ Decisões e Soluções (DS Group)
 ## Languages
 
 Services available in Portuguese and English.
+
+## API Endpoints (Machine-Readable)
+
+All endpoints return JSON. No authentication required for read operations.
+
+- GET /api/v1/company — Company info, contact, regulation, statistics
+- GET /api/v1/services — Services, 5-step process, partner banks, credit types
+- GET /api/v1/faq — FAQ (supports ?category= and ?lang=en or ?lang=pt filters)
+- POST /api/v1/consultation — Submit consultation request (GET for schema docs)
+- GET /.well-known/agent.json — A2A agent card with capabilities and endpoints

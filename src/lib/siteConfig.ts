@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "DS Crédito Setúbal Vitória",
+  name: "Letraperfeiçoada",
   legalName: "Letraperfeiçoada - Unipessoal Lda",
   parentOrganization: "Decisões e Soluções",
   url: "https://meuintermediario.com",

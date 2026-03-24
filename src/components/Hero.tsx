@@ -1,12 +1,15 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
 import { ArrowDown, Shield, Globe, Banknote, Building2, User } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
+
+const TubesCursor = dynamic(() => import("./TubesCursor"), { ssr: false });
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -21,6 +24,8 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+
+  const [tubesEnabled, setTubesEnabled] = useState(false);
 
   const badges = [
     { icon: Shield, label: t.hero.badgeIndependent },
@@ -38,28 +43,28 @@ export default function Hero() {
         style={{ scale }}
         className="absolute inset-0 bg-hero-gradient"
       >
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent-700/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-accent-500/8 blur-[100px]" />
-        <svg
-          className="absolute top-20 right-10 lg:right-20 w-32 h-32 lg:w-64 lg:h-64 opacity-[0.04]"
-          viewBox="0 0 200 200"
-          fill="none"
-          aria-hidden="true"
-        >
-          <circle cx="100" cy="100" r="95" stroke="white" strokeWidth="1" />
-          <circle cx="100" cy="100" r="70" stroke="white" strokeWidth="0.5" />
-          <line x1="100" y1="5" x2="100" y2="195" stroke="white" strokeWidth="0.5" />
-          <line x1="5" y1="100" x2="195" y2="100" stroke="white" strokeWidth="0.5" />
-          <path d="M100 10 L106 90 L100 80 L94 90 Z" fill="white" />
-        </svg>
+        {tubesEnabled && <TubesCursor />}
       </motion.div>
+
+      {/* Tubes effect toggle */}
+      <button
+        onClick={() => setTubesEnabled((v) => !v)}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3 py-1.5 rounded-full glass text-white/60 text-xs hover:text-white/90 transition-colors"
+        title="Toggle tubes effect"
+      >
+        <div
+          className={`w-7 h-4 rounded-full transition-colors relative ${
+            tubesEnabled ? "bg-accent-700" : "bg-white/20"
+          }`}
+        >
+          <div
+            className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-transform ${
+              tubesEnabled ? "translate-x-3.5" : "translate-x-0.5"
+            }`}
+          />
+        </div>
+        FX
+      </button>
 
       <motion.div
         style={{ y, opacity }}
@@ -233,7 +238,7 @@ export default function Hero() {
           >
             <p className="text-accent-700 font-bold text-2xl mb-1">10+</p>
             <p className="text-[10px] text-brand-600 font-bold uppercase tracking-wider leading-snug">
-              Comparamos ofertas de múltiplos bancos parceiros
+              Bancos parceiros a competir pelas melhores condições
             </p>
           </motion.div>
         </motion.div>

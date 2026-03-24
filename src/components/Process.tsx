@@ -5,6 +5,53 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 
+const STEP_PHOTOS = [
+  "/process/step-01.jpg",
+  "/process/step-02.png",
+  "/process/step-03.jpg",
+  "/process/step-04.jpg",
+  "/process/step-05.jpg",
+];
+
+function StepPhoto({ src, index }: { src: string; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
+
+  const isEven = index % 2 === 0;
+  const slideX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [isEven ? 60 : -60, 0]
+  );
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const rotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [isEven ? 3 : -3, 0]
+  );
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: slideX, opacity, scale, rotate }}
+      className="hidden lg:block lg:w-[calc(50%-40px)]"
+    >
+      <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-black/10">
+        <img
+          src={src}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -77,7 +124,8 @@ export default function Process() {
           </p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
+          {/* Timeline line */}
           <div className="absolute left-[27px] lg:left-1/2 lg:-translate-x-px top-0 bottom-0 w-[2px] bg-brand-200">
             <motion.div
               style={{ height: lineHeight }}
@@ -85,7 +133,7 @@ export default function Process() {
             />
           </div>
 
-          <div className="space-y-16 lg:space-y-20">
+          <div className="space-y-16 lg:space-y-24">
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -98,10 +146,12 @@ export default function Process() {
                   i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 }`}
               >
+                {/* Timeline dot */}
                 <div className="absolute left-[19px] lg:left-1/2 lg:-translate-x-1/2 z-10">
                   <div className="w-[18px] h-[18px] rounded-full bg-white border-[3px] border-accent-700 shadow-lg shadow-accent-700/20" />
                 </div>
 
+                {/* Step card */}
                 <div
                   className={`ml-16 lg:ml-0 lg:w-[calc(50%-40px)] ${
                     i % 2 === 0 ? "lg:pr-0" : "lg:pl-0"
@@ -125,7 +175,8 @@ export default function Process() {
                   </div>
                 </div>
 
-                <div className="hidden lg:block lg:w-[calc(50%-40px)]" />
+                {/* Photo — opposite side of the card */}
+                <StepPhoto src={STEP_PHOTOS[i]} index={i} />
               </motion.div>
             ))}
           </div>

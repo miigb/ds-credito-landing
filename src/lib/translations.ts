@@ -14,7 +14,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      eyebrow: "DS Crédito Setúbal Vitória",
+      eyebrow: "Letraperfeiçoada",
       headlineStart: "Where international buyers meet ",
       headlineHighlight: "effortless financing",
       subheading:
@@ -333,7 +333,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      eyebrow: "DS Crédito Setúbal Vitória",
+      eyebrow: "Letraperfeiçoada",
       headlineStart: "O seu crédito, ",
       headlineHighlight: "simplificado.",
       subheading:
