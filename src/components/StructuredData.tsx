@@ -5,7 +5,7 @@ const financialServiceSchema = {
   "@type": "FinancialService",
   "@id": `${siteConfig.url}/#financialservice`,
   name: siteConfig.name,
-  alternateName: ["DS Crédito Setúbal", siteConfig.legalName],
+  alternateName: ["DS Crédito", siteConfig.legalName],
   description: siteConfig.description.en,
   url: siteConfig.url,
   telephone: siteConfig.phone,
@@ -152,10 +152,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is DS Crédito Setúbal Vitória?",
+      name: "What is Letraperfeiçoada?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "DS Crédito Setúbal Vitória is an independent credit brokerage in Setúbal, Portugal, part of the Decisões e Soluções group. We help international property buyers and Portuguese clients secure the best mortgage terms by comparing offers across multiple partner banks, managing all documentation, and providing end-to-end support from pre-check to deed signing — at no cost to the buyer.",
+        text: "Letraperfeiçoada is an independent credit brokerage in Setúbal, Portugal, part of the Decisões e Soluções group. We help international property buyers and Portuguese clients secure the best mortgage terms by comparing offers across multiple partner banks, managing all documentation, and providing end-to-end support from pre-check to deed signing — at no cost to the buyer.",
       },
     },
     {
@@ -176,7 +176,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "What are the opening hours of DS Crédito Setúbal Vitória?",
+      name: "What are the opening hours of Letraperfeiçoada?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "We are open Monday to Friday from 09:00 to 18:00, and Saturday from 10:00 to 13:00. We are closed on Sundays and public holidays.",
@@ -192,7 +192,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Where is DS Crédito Setúbal Vitória located?",
+      name: "Where is Letraperfeiçoada located?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "We are located at Avenida Bento Gonçalves nº 2, 2910-431 Setúbal, Portugal. We are part of the Decisões e Soluções group which has 170+ offices across the country. Contact us at infosuporteds@gmail.com to schedule an appointment.",

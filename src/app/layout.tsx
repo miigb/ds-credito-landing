@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "DS Crédito Setúbal Vitória | Credit Brokerage Portugal",
-    template: "%s | DS Crédito Setúbal Vitória",
+      "Letraperfeiçoada | Credit Brokerage Portugal",
+    template: "%s | Letraperfeiçoada",
   },
 
   description: siteConfig.description.en,
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     "credit brokerage Portugal",
     "mortgage Portugal international buyers",
     "buy property Portugal financing",
-    "Decisões e Soluções Setúbal",
-    "DS Crédito Setúbal",
+    "Decisões e Soluções",
+    "Letraperfeiçoada",
     "intermediário de crédito Setúbal",
     "crédito habitação Portugal",
     "mortgage broker Setúbal",
@@ -70,14 +70,14 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     title:
-      "DS Crédito Setúbal Vitória | Credit Brokerage in Portugal",
+      "Letraperfeiçoada | Credit Brokerage in Portugal",
     description: siteConfig.description.en,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "DS Crédito Setúbal Vitória - Credit brokerage for international buyers in Portugal",
+        alt: "Letraperfeiçoada - Credit brokerage for international buyers in Portugal",
       },
     ],
   },
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "DS Crédito Setúbal Vitória | Credit Brokerage in Portugal",
+      "Letraperfeiçoada | Credit Brokerage in Portugal",
     description: siteConfig.description.en,
     images: ["/og-image.jpg"],
   },
@@ -119,7 +119,7 @@ export default function RootLayout({
         <StructuredData />
         <noscript>
           <div style={{ padding: "2rem", fontFamily: "system-ui" }}>
-            <h1>DS Crédito Setúbal Vitória</h1>
+            <h1>Letraperfeiçoada</h1>
             <p>
               Independent credit brokerage in Setúbal, Portugal. Part of
               Decisões e Soluções group.

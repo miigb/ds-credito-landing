@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Política de privacidade e proteção de dados pessoais da " +
     siteConfig.legalName +
-    " (DS Crédito Setúbal Vitória), em conformidade com o RGPD.",
+    " (Letraperfeiçoada), em conformidade com o RGPD.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: `${siteConfig.url}/privacidade`,

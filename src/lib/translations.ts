@@ -10,10 +10,11 @@ export const translations = {
       whyUs: "Why Us",
       contact: "Contact",
       cta: "Get Started",
+      team: "Team",
     },
     // Hero
     hero: {
-      eyebrow: "DS Crédito Setúbal Vitória",
+      eyebrow: "Letraperfeiçoada",
       headlineStart: "Where international buyers meet ",
       headlineHighlight: "effortless financing",
       subheading:
@@ -277,6 +278,46 @@ export const translations = {
       legal3: "Registered with Banco de Portugal",
       rights: "All rights reserved.",
     },
+    // Team
+    team: {
+      eyebrow: "Our Team",
+      headline: "The specialists behind your financing",
+      headlineHighlight: "specialists",
+      subheading:
+        "A dedicated team of credit intermediation professionals committed to finding the best conditions for every client.",
+      cta: "Meet the full team",
+      bioLabel: "About",
+    },
+    // Success Stories
+    success: {
+      eyebrow: "Results",
+      headline: "Measured impact",
+      headlineHighlight: "impact",
+      subheading:
+        "We don't just facilitate — we deliver measurable results for our clients and partners.",
+      stat1Value: "98%",
+      stat1Label: "Approval rate",
+      stat2Value: "€2.4M+",
+      stat2Label: "Financed in 2024",
+      testimonial1Quote:
+        "The process was incredibly smooth. They handled everything from documentation to bank negotiation — we just had to sign.",
+      testimonial1Name: "Ana & Miguel S.",
+      testimonial1Role: "First-time buyers, Setúbal",
+      testimonial1Metric: "Approved in 12 days",
+      testimonial2Quote:
+        "Since partnering with DS Crédito, our conversion rate on financed deals has increased significantly. They close what we bring.",
+      testimonial2Name: "Ricardo M.",
+      testimonial2Role: "Real Estate Agency, Lisbon",
+      testimonial3Quote:
+        "As a non-resident, I expected complexity. They made it seamless — remote documentation, clear communication, and a great rate.",
+      testimonial3Name: "James W.",
+      testimonial3Role: "International buyer, UK",
+      testimonial3Metric: "4.2x faster than expected",
+      ctaHeadline: "Ready to get started?",
+      ctaSubheading:
+        "Talk to our team and find the best conditions for your financing.",
+      ctaButton: "Contact us",
+    },
   },
 
   pt: {
@@ -288,10 +329,11 @@ export const translations = {
       whyUs: "Porquê Nós",
       contact: "Contacto",
       cta: "Começar Agora",
+      team: "Equipa",
     },
     // Hero
     hero: {
-      eyebrow: "DS Crédito Setúbal Vitória",
+      eyebrow: "Letraperfeiçoada",
       headlineStart: "O seu crédito, ",
       headlineHighlight: "simplificado.",
       subheading:
@@ -554,6 +596,46 @@ export const translations = {
       legal2: "Intermediário de Crédito Vinculado",
       legal3: "Registado no Banco de Portugal",
       rights: "Todos os direitos reservados.",
+    },
+    // Team
+    team: {
+      eyebrow: "A Nossa Equipa",
+      headline: "Os especialistas por trás do seu crédito",
+      headlineHighlight: "especialistas",
+      subheading:
+        "Uma equipa dedicada de profissionais de intermediação de crédito, empenhada em encontrar as melhores condições para cada cliente.",
+      cta: "Conhecer toda a equipa",
+      bioLabel: "Sobre",
+    },
+    // Success Stories
+    success: {
+      eyebrow: "Resultados",
+      headline: "Impacto mensurável",
+      headlineHighlight: "Impacto",
+      subheading:
+        "Não nos limitamos a facilitar — entregamos resultados concretos aos nossos clientes e parceiros.",
+      stat1Value: "98%",
+      stat1Label: "Taxa de aprovação",
+      stat2Value: "€2.4M+",
+      stat2Label: "Financiados em 2024",
+      testimonial1Quote:
+        "O processo foi incrivelmente simples. Trataram de tudo, desde a documentação à negociação bancária — só tivemos de assinar.",
+      testimonial1Name: "Ana & Miguel S.",
+      testimonial1Role: "Primeiros compradores, Setúbal",
+      testimonial1Metric: "Aprovado em 12 dias",
+      testimonial2Quote:
+        "Desde que fazemos parceria com a DS Crédito, a nossa taxa de conversão em negócios financiados aumentou significativamente.",
+      testimonial2Name: "Ricardo M.",
+      testimonial2Role: "Agência imobiliária, Lisboa",
+      testimonial3Quote:
+        "Como não-residente, esperava complexidade. Tornaram tudo simples — documentação remota, comunicação clara e uma excelente taxa.",
+      testimonial3Name: "James W.",
+      testimonial3Role: "Comprador internacional, UK",
+      testimonial3Metric: "4.2x mais rápido que o esperado",
+      ctaHeadline: "Pronto para começar?",
+      ctaSubheading:
+        "Fale com a nossa equipa e encontre as melhores condições para o seu financiamento.",
+      ctaButton: "Contacte-nos",
     },
   },
 };

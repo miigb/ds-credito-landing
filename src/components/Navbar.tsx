@@ -17,6 +17,7 @@ export default function Navbar() {
     { label: t.nav.services, href: "#services" },
     { label: t.nav.process, href: "#process" },
     { label: t.nav.whyUs, href: "#why-us" },
+    { label: t.nav.team, href: "/equipa" },
     { label: t.nav.contact, href: "#contact" },
   ];
 
@@ -53,29 +54,26 @@ export default function Navbar() {
         <nav aria-label="Main navigation" className="flex items-center justify-between h-18 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div
-              className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg transition-all duration-300 ${
-                scrolled
-                  ? "bg-accent-700 text-white"
-                  : "bg-white/15 text-white border border-white/20"
-              }`}
-            >
-              DS
-            </div>
+            <img
+              src="/ds-credito-logo.png"
+              alt="DS Crédito"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
             <div className="hidden sm:block">
               <span
-                className={`text-sm font-semibold tracking-tight transition-colors duration-300 ${
+                className={`block text-sm uppercase tracking-[0.05em] transition-colors duration-300 ${
                   scrolled ? "text-brand-900" : "text-white"
                 }`}
               >
-                DS Crédito
+                <span className="font-bold">LETRA</span>
+                <span className="font-normal">PERFEIÇOADA</span>
               </span>
               <span
                 className={`block text-[10px] tracking-wider uppercase transition-colors duration-300 ${
                   scrolled ? "text-brand-500" : "text-white/60"
                 }`}
               >
-                Setúbal Vitória
+                Agente DS Crédito
               </span>
             </div>
           </a>
