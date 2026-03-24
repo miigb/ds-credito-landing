@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 import type { Locale } from "@/lib/translations";
 
 export default function Navbar() {
@@ -11,6 +12,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { locale, setLocale, t } = useLanguage();
+  const { audience, setAudience } = useAudience();
 
   const navLinks = [
     { label: t.nav.about, href: "#about" },
@@ -95,8 +97,38 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side: Lang switcher + CTA */}
+          {/* Right side: Audience toggle + Lang switcher + CTA */}
           <div className="hidden lg:flex items-center gap-3">
+            {/* Audience toggle (PT only) */}
+            {locale === "pt" && (
+              <div className="flex items-center bg-white/10 rounded-full p-0.5 text-xs">
+                <button
+                  onClick={() => setAudience("client")}
+                  className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
+                    audience === "client"
+                      ? "bg-white text-brand-900 font-semibold shadow-sm"
+                      : scrolled
+                        ? "text-brand-500 hover:text-brand-700"
+                        : "text-white/60 hover:text-white/80"
+                  }`}
+                >
+                  {t.audienceToggle.client}
+                </button>
+                <button
+                  onClick={() => setAudience("partner")}
+                  className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
+                    audience === "partner"
+                      ? "bg-white text-brand-900 font-semibold shadow-sm"
+                      : scrolled
+                        ? "text-brand-500 hover:text-brand-700"
+                        : "text-white/60 hover:text-white/80"
+                  }`}
+                >
+                  {t.audienceToggle.partner}
+                </button>
+              </div>
+            )}
+
             {/* Language switcher */}
             <div className="relative">
               <button
@@ -203,6 +235,32 @@ export default function Navbar() {
             className="lg:hidden bg-white/95 backdrop-blur-xl border-b border-brand-200"
           >
             <div className="px-6 py-4 space-y-1">
+              {/* Audience toggle (PT only) */}
+              {locale === "pt" && (
+                <div className="flex items-center justify-center bg-brand-100 rounded-full p-0.5 text-xs mb-3">
+                  <button
+                    onClick={() => setAudience("client")}
+                    className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                      audience === "client"
+                        ? "bg-white text-brand-900 font-semibold shadow-sm"
+                        : "text-brand-500 hover:text-brand-700"
+                    }`}
+                  >
+                    {t.audienceToggle.client}
+                  </button>
+                  <button
+                    onClick={() => setAudience("partner")}
+                    className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                      audience === "partner"
+                        ? "bg-white text-brand-900 font-semibold shadow-sm"
+                        : "text-brand-500 hover:text-brand-700"
+                    }`}
+                  >
+                    {t.audienceToggle.partner}
+                  </button>
+                </div>
+              )}
+
               {navLinks.map((link) => (
                 <a
                   key={link.href}
