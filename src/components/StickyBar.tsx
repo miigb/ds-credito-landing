@@ -4,11 +4,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 
 export default function StickyBar() {
   const [visible, setVisible] = useState(false);
-  const { locale } = useLanguage();
-  const isPt = locale === "pt";
+  const { t } = useLanguage();
+  const { audience } = useAudience();
+
+  const isPartner = audience === "partner";
+  const barContent = isPartner ? t.stickyBar.b2b : t.stickyBar.b2c;
+  const scrollTarget = isPartner ? "contact" : "pre-qualification";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,9 +25,8 @@ export default function StickyBar() {
   }, []);
 
   const handleClick = () => {
-    track("sticky_bar_cta");
-    document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" }) ||
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    track("sticky_bar_cta", { audience });
+    document.getElementById(scrollTarget)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -36,19 +40,14 @@ export default function StickyBar() {
           className="fixed top-[4.5rem] lg:top-20 left-0 right-0 z-40 bg-brand-900/90 backdrop-blur-xl border-b border-white/5"
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-8 h-12 flex items-center justify-between">
-            <p className="text-sm text-white/60 hidden sm:block">
-              {isPt
-                ? "Simulação gratuita em 24h — sem compromisso"
-                : "Free simulation within 24h — no commitment"}
-            </p>
-            <p className="text-sm text-white/60 sm:hidden">
-              {isPt ? "Simulação gratuita em 24h" : "Free simulation in 24h"}
+            <p className="text-sm text-white/60">
+              {barContent.text}
             </p>
             <button
               onClick={handleClick}
-              className="px-5 py-1.5 text-sm font-semibold rounded-lg bg-accent-700 text-white hover:bg-accent-600 transition-all duration-200 shadow-md shadow-accent-700/20"
+              className="px-5 py-1.5 text-sm font-semibold rounded-lg bg-accent-700 text-white hover:bg-accent-600 transition-all duration-200 shadow-md shadow-accent-700/20 whitespace-nowrap"
             >
-              {isPt ? "Simular Agora" : "Simulate Now"}
+              {barContent.cta}
             </button>
           </div>
         </motion.div>
