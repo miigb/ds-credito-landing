@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 const STEP_PHOTOS = [
   "/process/step-01.jpg",
-  "/process/step-02.png",
+  "/process/step-02.jpg",
   "/process/step-03.jpg",
   "/process/step-04.jpg",
   "/process/step-05.jpg",
