@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Building2, User } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import MiniSimulator from "./MiniSimulator";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
@@ -16,9 +16,8 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const { locale, t } = useLanguage();
-  const { setAudience } = useAudience();
-  const isPt = locale === "pt";
   const { audience } = useAudience();
+  const isPt = locale === "pt";
   const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -87,63 +86,33 @@ export default function Hero() {
               custom={3}
               className="flex flex-col sm:flex-row gap-4 mb-10"
             >
-              {isPt ? (
-                <>
-                  <button
-                    onClick={() => {
-                      setAudience("client");
-                      track("audience_selected", { type: "client" });
-                      setTimeout(() => {
-                        document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" });
-                      }, 150);
-                    }}
-                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-                  >
-                    <User size={18} />
-                    {t.audienceSelector.client}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setAudience("partner");
-                      track("audience_selected", { type: "partner" });
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
-                  >
-                    <Building2 size={18} />
-                    {t.audienceSelector.partner}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <a
-                    href="#contact"
-                    className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-                  >
-                    {heroAud.ctaPrimary}
-                    <svg
-                      className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    href="#process"
-                    className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
-                  >
-                    {heroAud.ctaSecondary}
-                  </a>
-                </>
-              )}
+              <a
+                href={audience === "partner" ? "#contact" : "#pre-qualification"}
+                onClick={() => track("hero_cta", { type: "primary", audience })}
+                className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
+              >
+                {heroAud.ctaPrimary}
+                <svg
+                  className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </a>
+              <a
+                href={audience === "partner" ? "#process" : "#process"}
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
+              >
+                {heroAud.ctaSecondary}
+              </a>
             </motion.div>
 
             {/* Bank counter — trust signal above fold */}
@@ -169,8 +138,8 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Mini Simulator */}
-            <MiniSimulator />
+            {/* Mini Simulator — B2C only */}
+            {audience === "client" && <MiniSimulator />}
           </div>
 
           {/* Right column — images */}
