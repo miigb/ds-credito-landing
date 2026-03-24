@@ -15,18 +15,12 @@ import PreQualification from "@/components/PreQualification";
 import CreditForm from "@/components/CreditForm";
 import Footer from "@/components/Footer";
 import StickyBar from "@/components/StickyBar";
-import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 
 export default function Home() {
-  const { locale } = useLanguage();
-  const { audience, setAudience } = useAudience();
+  const { audience } = useAudience();
   const [qualified, setQualified] = useState(false);
-  const isPt = locale === "pt";
   const isClient = audience === "client";
-  const showB2C = isPt && isClient;
-  const showB2B = !showB2C;
-
 
   return (
     <main className="relative">
@@ -40,13 +34,14 @@ export default function Home() {
       <Process />
       <WhyUs />
       <TeamPreview />
-      {showB2C && (
-        <PreQualification
-          onQualified={() => setQualified(true)}
-        />
+      {isClient ? (
+        <>
+          <PreQualification onQualified={() => setQualified(true)} />
+          <CreditForm visible={qualified} />
+        </>
+      ) : (
+        <Contact />
       )}
-      {showB2C && <CreditForm visible={qualified} />}
-      {showB2B && <Contact />}
       <Footer />
     </main>
   );
