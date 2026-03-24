@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -23,6 +24,8 @@ export default function Services() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const { t } = useLanguage();
+  const { audience } = useAudience();
+  const svcAud = audience === "partner" ? t.services.b2b : t.services.b2c;
 
   const services = [
     { id: "pre-check", icon: FileSearch, title: t.services.preCheck, description: t.services.preCheckDesc },
@@ -63,19 +66,19 @@ export default function Services() {
             variants={fadeUp}
             className="text-accent-700 text-sm font-semibold tracking-widest uppercase mb-4"
           >
-            {t.services.eyebrow}
+            {svcAud.eyebrow}
           </motion.p>
           <motion.h2
             variants={fadeUp}
             className="text-3xl lg:text-5xl font-bold text-brand-900 tracking-tight mb-5"
           >
-            {t.services.headline}
+            {svcAud.headline}
           </motion.h2>
           <motion.p
             variants={fadeUp}
             className="text-lg text-brand-500 leading-relaxed"
           >
-            {t.services.subheading}
+            {svcAud.subheading}
           </motion.p>
         </motion.div>
 

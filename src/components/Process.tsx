@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 
 const STEP_PHOTOS = [
   "/process/step-01.jpg",
@@ -60,37 +61,40 @@ export default function Process() {
   });
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.85], ["0%", "100%"]);
   const { t } = useLanguage();
+  const { audience } = useAudience();
+  const procAud = audience === "partner" ? t.process.b2b : t.process.b2c;
+  const procSteps = audience === "partner" ? t.process.b2bSteps : t.process.b2cSteps;
 
   const steps = [
     {
       number: "01",
-      title: t.process.step1Title,
-      description: t.process.step1Desc,
-      detail: t.process.step1Detail,
+      title: procSteps.step1Title,
+      description: procSteps.step1Desc,
+      detail: procSteps.step1Detail,
     },
     {
       number: "02",
-      title: t.process.step2Title,
-      description: t.process.step2Desc,
-      detail: t.process.step2Detail,
+      title: procSteps.step2Title,
+      description: procSteps.step2Desc,
+      detail: procSteps.step2Detail,
     },
     {
       number: "03",
-      title: t.process.step3Title,
-      description: t.process.step3Desc,
-      detail: t.process.step3Detail,
+      title: procSteps.step3Title,
+      description: procSteps.step3Desc,
+      detail: procSteps.step3Detail,
     },
     {
       number: "04",
-      title: t.process.step4Title,
-      description: t.process.step4Desc,
-      detail: t.process.step4Detail,
+      title: procSteps.step4Title,
+      description: procSteps.step4Desc,
+      detail: procSteps.step4Detail,
     },
     {
       number: "05",
-      title: t.process.step5Title,
-      description: t.process.step5Desc,
-      detail: t.process.step5Detail,
+      title: procSteps.step5Title,
+      description: procSteps.step5Desc,
+      detail: procSteps.step5Detail,
     },
   ];
 
@@ -114,13 +118,13 @@ export default function Process() {
           className="text-center mb-20"
         >
           <p className="text-accent-700 text-sm font-semibold tracking-widest uppercase mb-4">
-            {t.process.eyebrow}
+            {procAud.eyebrow}
           </p>
           <h2 className="text-3xl lg:text-5xl font-bold text-brand-900 tracking-tight mb-5">
-            {t.process.headline}
+            {procAud.headline}
           </h2>
           <p className="text-lg text-brand-500 max-w-2xl mx-auto">
-            {t.process.subheading}
+            {procAud.subheading}
           </p>
         </motion.div>
 

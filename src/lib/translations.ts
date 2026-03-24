@@ -15,12 +15,22 @@ export const translations = {
     // Hero
     hero: {
       eyebrow: "Letraperfeiçoada",
-      headlineStart: "Where international buyers meet ",
-      headlineHighlight: "effortless financing",
-      subheading:
-        "Independent credit brokerage for international property buyers in Portugal. We compare offers across partner banks, handle all documentation, and support you from pre-check to deed signing — at no direct cost.",
-      ctaPrimary: "Start Your Pre-Check",
-      ctaSecondary: "See How It Works",
+      b2c: {
+        headlineStart: "Where international buyers meet ",
+        headlineHighlight: "effortless financing",
+        subheading:
+          "Independent credit brokerage for international property buyers in Portugal. We compare offers across partner banks, handle all documentation, and support you from pre-check to deed signing — at no direct cost.",
+        ctaPrimary: "Start Your Pre-Check",
+        ctaSecondary: "See How It Works",
+      },
+      b2b: {
+        headlineStart: "Your clients' financing, ",
+        headlineHighlight: "sorted.",
+        subheading:
+          "We handle the entire financing process for your clients — bank comparison, documentation, and end-to-end support through to deed signing. More deals closed, less paperwork for your team.",
+        ctaPrimary: "Become a Partner",
+        ctaSecondary: "How the Partnership Works",
+      },
       badgeIndependent: "Independent Advisory",
       badgeInternational: "International Clients",
       badgeNoCost: "No Cost to Client",
@@ -38,10 +48,18 @@ export const translations = {
     },
     // Services
     services: {
-      eyebrow: "What We Do",
-      headline: "Independent, solution-driven credit brokerage",
-      subheading:
-        "Personalised advisory with full offer comparison across partner banks. No direct cost to you — ever.",
+      b2c: {
+        eyebrow: "Our Services",
+        headline: "How we simplify your financing",
+        subheading:
+          "From first contact to deed signing, we handle everything so you can focus on what matters — finding your home.",
+      },
+      b2b: {
+        eyebrow: "What We Do",
+        headline: "Independent, solution-driven credit brokerage",
+        subheading:
+          "Personalised advisory with full offer comparison across partner banks. No direct cost to you — ever.",
+      },
       preCheck: "Financial Viability Pre-Check",
       preCheckDesc:
         "Quick assessment of your purchasing capacity to set clear expectations from the start.",
@@ -72,36 +90,73 @@ export const translations = {
     },
     // Process
     process: {
-      eyebrow: "How It Works",
-      headline: "Simple, transparent process",
-      subheading:
-        "From first contact to deed signing, we guide you through every step of your financing journey in Portugal.",
+      b2c: {
+        eyebrow: "How It Works",
+        headline: "Simple, transparent process",
+        subheading:
+          "From first contact to deed signing, we guide you through every step of your financing journey in Portugal.",
+      },
+      b2b: {
+        eyebrow: "How the Partnership Works",
+        headline: "Simple for you, complete for your client",
+        subheading:
+          "Refer your client and we handle the entire financing process. You focus on the sale.",
+      },
       step: "Step",
-      step1Title: "Initial Contact",
-      step1Desc:
-        "We understand your goals, timeframe and context. A short feasibility call is scheduled within 24–48 hours.",
-      step1Detail:
-        "We explain necessary documentation depending on country, profession, and loan purpose.",
-      step2Title: "Review & Scenarios",
-      step2Desc:
-        "We assess your profile and present clear options. A detailed finance roadmap with budget, down payment expectations, and timeline is shared.",
-      step2Detail:
-        "We simulate and compare multiple bank offers side by side.",
-      step3Title: "Pre-Approval",
-      step3Desc:
-        "We submit and liaise directly with banks and lenders on your behalf.",
-      step3Detail:
-        "Weekly status updates after each bank milestone for you and your agent.",
-      step4Title: "Formalisation",
-      step4Desc:
-        "We manage documents and validations end-to-end, coordinating with banks, lawyers, and notaries.",
-      step4Detail:
-        "All steps are aligned between all parties for a seamless experience.",
-      step5Title: "Completion",
-      step5Desc:
-        "We support you through signing and funding, and assist with all post-deed steps.",
-      step5Detail:
-        "From deed signing to final settlement — we're with you all the way.",
+      b2cSteps: {
+        step1Title: "Initial Contact",
+        step1Desc:
+          "We understand your goals, timeframe and context. A short feasibility call is scheduled within 24–48 hours.",
+        step1Detail:
+          "We explain necessary documentation depending on country, profession, and loan purpose.",
+        step2Title: "Review & Scenarios",
+        step2Desc:
+          "We assess your profile and present clear options. A detailed finance roadmap with budget, down payment expectations, and timeline is shared.",
+        step2Detail:
+          "We simulate and compare multiple bank offers side by side.",
+        step3Title: "Pre-Approval",
+        step3Desc:
+          "We submit and liaise directly with banks and lenders on your behalf.",
+        step3Detail:
+          "Weekly status updates after each bank milestone for you and your agent.",
+        step4Title: "Formalisation",
+        step4Desc:
+          "We manage documents and validations end-to-end, coordinating with banks, lawyers, and notaries.",
+        step4Detail:
+          "All steps are aligned between all parties for a seamless experience.",
+        step5Title: "Completion",
+        step5Desc:
+          "We support you through signing and funding, and assist with all post-deed steps.",
+        step5Detail:
+          "From deed signing to final settlement — we're with you all the way.",
+      },
+      b2bSteps: {
+        step1Title: "Referral",
+        step1Desc:
+          "Send us your client's contact. We schedule a feasibility call within 24–48 hours.",
+        step1Detail:
+          "We inform about required documentation based on profile and loan purpose.",
+        step2Title: "Review & Scenarios",
+        step2Desc:
+          "We assess your client's profile and present clear scenarios with budget, down payment, and timeline.",
+        step2Detail:
+          "We compare multiple bank offers side by side for your client.",
+        step3Title: "Pre-Approval",
+        step3Desc:
+          "We submit and liaise directly with banks on your client's behalf.",
+        step3Detail:
+          "We keep you informed with weekly updates after each bank milestone.",
+        step4Title: "Formalisation",
+        step4Desc:
+          "We manage documents and validations end-to-end, coordinating with banks, lawyers, and notaries.",
+        step4Detail:
+          "All steps are aligned between all parties so the deal moves without delays.",
+        step5Title: "Completion & Deed",
+        step5Desc:
+          "We support signing, funding, and all post-deed steps.",
+        step5Detail:
+          "From deed signing to final settlement — we ensure everything goes as planned.",
+      },
     },
     // Why Us
     whyUs: {
@@ -163,6 +218,22 @@ export const translations = {
       description:
         "Part of Portugal's largest credit intermediary group with 170+ offices nationwide.",
       hover: "Hover to play",
+    },
+    // Audience toggle
+    audienceToggle: {
+      client: "Private",
+      partner: "Partner",
+    },
+    // Sticky bar
+    stickyBar: {
+      b2c: {
+        text: "Free simulation within 24h — no commitment",
+        cta: "Simulate Now",
+      },
+      b2b: {
+        text: "Free partnership — more deals for your business",
+        cta: "Become a Partner",
+      },
     },
     // Audience selector (PT only — EN stubs for type safety)
     audienceSelector: {
@@ -334,12 +405,22 @@ export const translations = {
     // Hero
     hero: {
       eyebrow: "Letraperfeiçoada",
-      headlineStart: "O seu crédito, ",
-      headlineHighlight: "simplificado.",
-      subheading:
-        "Intermediários de crédito independentes em Setúbal. Comparamos ofertas de múltiplos bancos, tratamos de toda a documentação e acompanhamos o processo do início à escritura — sem custo para si.",
-      ctaPrimary: "Agendar Reunião",
-      ctaSecondary: "Como Funciona",
+      b2c: {
+        headlineStart: "O seu crédito, ",
+        headlineHighlight: "simplificado.",
+        subheading:
+          "Comparamos ofertas de múltiplos bancos, tratamos de toda a documentação e acompanhamos o processo do início à escritura — sem custo para si.",
+        ctaPrimary: "Simular Crédito",
+        ctaSecondary: "Como Funciona",
+      },
+      b2b: {
+        headlineStart: "O crédito dos seus clientes, ",
+        headlineHighlight: "resolvido.",
+        subheading:
+          "Tratamos de todo o processo de financiamento dos seus clientes — comparação bancária, documentação e acompanhamento até à escritura. Mais negócios fechados, menos burocracia para a sua equipa.",
+        ctaPrimary: "Tornar-se Parceiro",
+        ctaSecondary: "Como Funciona a Parceria",
+      },
       badgeIndependent: "Intermediário Independente",
       badgeInternational: "Particulares & Empresas",
       badgeNoCost: "Sem Custo para o Seu Cliente",
@@ -357,10 +438,18 @@ export const translations = {
     },
     // Services
     services: {
-      eyebrow: "O Que Fazemos Pelos Seus Clientes",
-      headline: "Tratamos do crédito para que feche mais negócios",
-      subheading:
-        "Acompanhamento completo do financiamento dos seus clientes — comparação de ofertas, gestão documental e negociação bancária. Sem custo direto para o comprador.",
+      b2c: {
+        eyebrow: "Os Nossos Serviços",
+        headline: "Como simplificamos o seu crédito",
+        subheading:
+          "Do primeiro contacto à escritura, tratamos de tudo para que se foque no que importa — encontrar a sua casa.",
+      },
+      b2b: {
+        eyebrow: "O Que Fazemos Pelos Seus Clientes",
+        headline: "Tratamos do crédito para que feche mais negócios",
+        subheading:
+          "Acompanhamento completo do financiamento dos seus clientes — comparação de ofertas, gestão documental e negociação bancária. Sem custo direto para o comprador.",
+      },
       preCheck: "Pré-Análise de Viabilidade",
       preCheckDesc:
         "Avaliação rápida da capacidade de compra do seu cliente para definir expectativas claras antes de avançar.",
@@ -391,36 +480,73 @@ export const translations = {
     },
     // Process
     process: {
-      eyebrow: "Como Funciona a Parceria",
-      headline: "Simples para si, completo para o seu cliente",
-      subheading:
-        "Encaminhe o seu cliente e nós tratamos de todo o processo de financiamento. Você foca-se na venda.",
+      b2c: {
+        eyebrow: "O Processo",
+        headline: "Como funciona",
+        subheading:
+          "Do primeiro contacto à escritura, acompanhamos cada etapa do seu financiamento.",
+      },
+      b2b: {
+        eyebrow: "Como Funciona a Parceria",
+        headline: "Simples para si, completo para o seu cliente",
+        subheading:
+          "Encaminhe o seu cliente e nós tratamos de todo o processo de financiamento. Você foca-se na venda.",
+      },
       step: "Passo",
-      step1Title: "Encaminhamento",
-      step1Desc:
-        "Envia-nos o contacto do seu cliente. Agendamos uma chamada de viabilidade em 24–48 horas.",
-      step1Detail:
-        "Informamos sobre a documentação necessária consoante o perfil e finalidade do crédito.",
-      step2Title: "Análise & Simulação",
-      step2Desc:
-        "Avaliamos o perfil do cliente e apresentamos cenários claros com orçamento, entrada necessária e cronograma.",
-      step2Detail:
-        "Comparamos múltiplas ofertas bancárias lado a lado para o seu cliente.",
-      step3Title: "Pré-Aprovação",
-      step3Desc:
-        "Submetemos e articulamos diretamente com os bancos em nome do seu cliente.",
-      step3Detail:
-        "Mantemo-lo informado com atualizações semanais após cada etapa bancária.",
-      step4Title: "Formalização",
-      step4Desc:
-        "Gerimos documentos e validações de ponta a ponta, coordenando com bancos, advogados e notários.",
-      step4Detail:
-        "Todas as etapas são alinhadas entre todas as partes para que o negócio avance sem atrasos.",
-      step5Title: "Escritura & Conclusão",
-      step5Desc:
-        "Apoiamos na assinatura, financiamento e todos os passos pós-escritura.",
-      step5Detail:
-        "Da escritura à liquidação final — garantimos que tudo corre como previsto.",
+      b2cSteps: {
+        step1Title: "Contacto Inicial",
+        step1Desc:
+          "Contacte-nos para uma avaliação gratuita da sua capacidade de financiamento. Respondemos em 24-48 horas.",
+        step1Detail:
+          "Saiba quanto pode financiar sem compromisso.",
+        step2Title: "Análise & Simulação",
+        step2Desc:
+          "Avaliamos o seu perfil e apresentamos cenários claros com orçamento, entrada necessária e cronograma.",
+        step2Detail:
+          "Receba propostas de múltiplos bancos sem sair de casa.",
+        step3Title: "Pré-Aprovação",
+        step3Desc:
+          "Submetemos o seu pedido aos bancos parceiros e negociamos as melhores condições para o seu caso.",
+        step3Detail:
+          "Tratamos de tudo com os bancos por si.",
+        step4Title: "Formalização",
+        step4Desc:
+          "Organizamos toda a documentação necessária e coordenamos com advogados, notários e bancos.",
+        step4Detail:
+          "Zero burocracia para si.",
+        step5Title: "Escritura",
+        step5Desc:
+          "Acompanhamos até à assinatura da escritura e apoiamos nos passos pós-conclusão.",
+        step5Detail:
+          "Estamos consigo até ao fim.",
+      },
+      b2bSteps: {
+        step1Title: "Encaminhamento",
+        step1Desc:
+          "Envia-nos o contacto do seu cliente. Agendamos uma chamada de viabilidade em 24–48 horas.",
+        step1Detail:
+          "Informamos sobre a documentação necessária consoante o perfil e finalidade do crédito.",
+        step2Title: "Análise & Simulação",
+        step2Desc:
+          "Avaliamos o perfil do cliente e apresentamos cenários claros com orçamento, entrada necessária e cronograma.",
+        step2Detail:
+          "Comparamos múltiplas ofertas bancárias lado a lado para o seu cliente.",
+        step3Title: "Pré-Aprovação",
+        step3Desc:
+          "Submetemos e articulamos diretamente com os bancos em nome do seu cliente.",
+        step3Detail:
+          "Mantemo-lo informado com atualizações semanais após cada etapa bancária.",
+        step4Title: "Formalização",
+        step4Desc:
+          "Gerimos documentos e validações de ponta a ponta, coordenando com bancos, advogados e notários.",
+        step4Detail:
+          "Todas as etapas são alinhadas entre todas as partes para que o negócio avance sem atrasos.",
+        step5Title: "Escritura & Conclusão",
+        step5Desc:
+          "Apoiamos na assinatura, financiamento e todos os passos pós-escritura.",
+        step5Detail:
+          "Da escritura à liquidação final — garantimos que tudo corre como previsto.",
+      },
     },
     // Why Us
     whyUs: {
@@ -482,6 +608,22 @@ export const translations = {
       description:
         "Com mais de 170 lojas em todo o país, a DS é o maior grupo de intermediação de crédito em Portugal. Junte-se à nossa rede de parceiros.",
       hover: "Passe o rato para reproduzir",
+    },
+    // Audience toggle
+    audienceToggle: {
+      client: "Particular",
+      partner: "Parceiro",
+    },
+    // Sticky bar
+    stickyBar: {
+      b2c: {
+        text: "Simulação gratuita em 24h — sem compromisso",
+        cta: "Simular Agora",
+      },
+      b2b: {
+        text: "Parceria sem custos — mais negócios para a sua empresa",
+        cta: "Tornar-se Parceiro",
+      },
     },
     // Audience selector
     audienceSelector: {

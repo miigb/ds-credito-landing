@@ -18,6 +18,8 @@ export default function Hero() {
   const { locale, t } = useLanguage();
   const { setAudience } = useAudience();
   const isPt = locale === "pt";
+  const { audience } = useAudience();
+  const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
@@ -61,9 +63,9 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
               className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
             >
-              {t.hero.headlineStart}
+              {heroAud.headlineStart}
               <span className="bg-gradient-to-r from-accent-300 via-accent-400 to-accent-300 bg-clip-text text-transparent">
-                {t.hero.headlineHighlight}
+                {heroAud.headlineHighlight}
               </span>
             </motion.h1>
 
@@ -74,7 +76,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
               className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl mb-10"
             >
-              {t.hero.subheading}
+              {heroAud.subheading}
             </motion.p>
 
             {/* CTA group */}
@@ -118,7 +120,7 @@ export default function Hero() {
                     href="#contact"
                     className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
                   >
-                    {t.hero.ctaPrimary}
+                    {heroAud.ctaPrimary}
                     <svg
                       className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
                       fill="none"
@@ -138,7 +140,7 @@ export default function Hero() {
                     href="#process"
                     className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
                   >
-                    {t.hero.ctaSecondary}
+                    {heroAud.ctaSecondary}
                   </a>
                 </>
               )}
