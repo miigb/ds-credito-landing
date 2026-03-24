@@ -14,6 +14,7 @@ import Contact from "@/components/Contact";
 import PreQualification from "@/components/PreQualification";
 import CreditForm from "@/components/CreditForm";
 import Footer from "@/components/Footer";
+import StickyBar from "@/components/StickyBar";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 
@@ -35,6 +36,7 @@ export default function Home() {
 
   return (
     <main className="relative">
+      <StickyBar />
       <Navbar />
       <Hero />
       <BankPartners />

@@ -2,7 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Shield, Globe, Banknote, Building2, User } from "lucide-react";
+import { ArrowDown, Building2, User } from "lucide-react";
+import MiniSimulator from "./MiniSimulator";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -23,12 +24,6 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
 
-  const badges = [
-    { icon: Shield, label: t.hero.badgeIndependent },
-    { icon: Globe, label: t.hero.badgeInternational },
-    { icon: Banknote, label: t.hero.badgeNoCost },
-  ];
-
   return (
     <section
       ref={ref}
@@ -38,185 +33,190 @@ export default function Hero() {
       <motion.div
         style={{ scale }}
         className="absolute inset-0 bg-hero-gradient"
-      >
-      </motion.div>
+      />
 
       <motion.div
         style={{ y, opacity }}
         className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20"
       >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div className="max-w-xl">
-          {/* Eyebrow */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-white/80 text-xs font-medium tracking-wide uppercase mb-8"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse" />
-            {t.hero.eyebrow}
-          </motion.div>
+          {/* Left column — text content */}
+          <div className="max-w-xl">
+            {/* Eyebrow */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-white/80 text-xs font-medium tracking-wide uppercase mb-8"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse" />
+              {t.hero.eyebrow}
+            </motion.div>
 
-          {/* Headline — no initial hidden to avoid delaying LCP */}
-          <motion.h1
-            initial={{ opacity: 1, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
-          >
-            {t.hero.headlineStart}
-            <span className="bg-gradient-to-r from-accent-300 via-accent-400 to-accent-300 bg-clip-text text-transparent">
-              {t.hero.headlineHighlight}
-            </span>
-          </motion.h1>
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 1, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
+            >
+              {t.hero.headlineStart}
+              <span className="bg-gradient-to-r from-accent-300 via-accent-400 to-accent-300 bg-clip-text text-transparent">
+                {t.hero.headlineHighlight}
+              </span>
+            </motion.h1>
 
-          {/* Subheading — no initial hidden to avoid delaying LCP */}
-          <motion.p
-            initial={{ opacity: 1, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-            className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl mb-10"
-          >
-            {t.hero.subheading}
-          </motion.p>
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 1, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
+              className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl mb-10"
+            >
+              {t.hero.subheading}
+            </motion.p>
 
-          {/* CTA group */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={3}
-            className="flex flex-col sm:flex-row gap-4 mb-16"
-          >
-            {isPt ? (
-              <>
-                {/* PT: Audience selector */}
-                <button
-                  onClick={() => {
-                    setAudience("client");
-                    track("audience_selected", { type: "client" });
-                    setTimeout(() => {
-                      document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" });
-                    }, 150);
-                  }}
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-                >
-                  <User size={18} />
-                  {t.audienceSelector.client}
-                </button>
-                <button
-                  onClick={() => {
-                    setAudience("partner");
-                    track("audience_selected", { type: "partner" });
-                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
-                >
-                  <Building2 size={18} />
-                  {t.audienceSelector.partner}
-                </button>
-              </>
-            ) : (
-              <>
-                {/* EN: Original CTAs */}
-                <a
-                  href="#contact"
-                  className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-                >
-                  {t.hero.ctaPrimary}
-                  <svg
-                    className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
+            {/* CTA group */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              className="flex flex-col sm:flex-row gap-4 mb-10"
+            >
+              {isPt ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setAudience("client");
+                      track("audience_selected", { type: "client" });
+                      setTimeout(() => {
+                        document.getElementById("pre-qualification")?.scrollIntoView({ behavior: "smooth" });
+                      }, 150);
+                    }}
+                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href="#process"
-                  className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
-                >
-                  {t.hero.ctaSecondary}
-                </a>
-              </>
-            )}
-          </motion.div>
+                    <User size={18} />
+                    {t.audienceSelector.client}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAudience("partner");
+                      track("audience_selected", { type: "partner" });
+                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
+                  >
+                    <Building2 size={18} />
+                    {t.audienceSelector.partner}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a
+                    href="#contact"
+                    className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
+                  >
+                    {t.hero.ctaPrimary}
+                    <svg
+                      className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    href="#process"
+                    className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-2xl glass text-white hover:bg-white/15 transition-all duration-300"
+                  >
+                    {t.hero.ctaSecondary}
+                  </a>
+                </>
+              )}
+            </motion.div>
 
-          {/* Trust badges */}
+            {/* Bank counter — trust signal above fold */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={5}
+              className="inline-flex items-center gap-3 mt-4 px-4 py-2.5 rounded-xl glass"
+            >
+              <motion.span
+                initial={{ scale: 0.8 }}
+                animate={{ scale: [1, 1.08, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="text-lg font-bold text-accent-400"
+              >
+                10+
+              </motion.span>
+              <span className="text-xs text-white/50">
+                {isPt
+                  ? "bancos parceiros a competir pelas melhores condições"
+                  : "partner banks competing for your best rates"}
+              </span>
+            </motion.div>
+
+            {/* Mini Simulator */}
+            <MiniSimulator />
+          </div>
+
+          {/* Right column — images */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            custom={4}
-            className="flex flex-wrap gap-4"
+            custom={2}
+            className="hidden lg:block relative"
           >
-            {badges.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl glass text-white/70 text-sm"
-              >
-                <Icon size={16} className="text-accent-400" />
-                {label}
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Hero Images — stacked layout */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          className="hidden lg:block relative"
-        >
-          {/* Main image — villa */}
-          <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
-            <img
-              src="/vila.png"
-              alt="Modern luxury villa at dusk"
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-          </div>
-          {/* Secondary image — penthouse overlay */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="absolute -bottom-8 -left-12 w-[55%] rounded-xl overflow-hidden shadow-2xl shadow-black/40 border-4 border-brand-900"
-          >
-            <div className="aspect-[4/3]">
+            {/* Main image — villa */}
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
               <img
-                src="/penthouse.png"
-                alt="Luxury penthouse with city skyline view"
+                src="/vila.png"
+                alt="Modern luxury villa at dusk"
                 className="w-full h-full object-cover"
                 loading="eager"
               />
             </div>
+            {/* Secondary image — penthouse overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="absolute -bottom-8 -left-12 w-[55%] rounded-xl overflow-hidden shadow-2xl shadow-black/40 border-4 border-brand-900"
+            >
+              <div className="aspect-[4/3]">
+                <img
+                  src="/penthouse.png"
+                  alt="Luxury penthouse with city skyline view"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </motion.div>
+            {/* Floating stat card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="absolute top-6 -left-8 bg-white p-4 rounded-xl shadow-xl max-w-[200px]"
+            >
+              <p className="text-accent-700 font-bold text-2xl mb-1">€0</p>
+              <p className="text-[10px] text-brand-600 font-bold uppercase tracking-wider leading-snug">
+                {isPt ? "Sem custo para si — o nosso serviço é gratuito" : "No cost to you — our service is completely free"}
+              </p>
+            </motion.div>
           </motion.div>
-          {/* Floating stat card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="absolute top-6 -left-8 bg-white p-4 rounded-xl shadow-xl max-w-[200px]"
-          >
-            <p className="text-accent-700 font-bold text-2xl mb-1">10+</p>
-            <p className="text-[10px] text-brand-600 font-bold uppercase tracking-wider leading-snug">
-              Bancos parceiros a competir pelas melhores condições
-            </p>
-          </motion.div>
-        </motion.div>
         </div>
       </motion.div>
 

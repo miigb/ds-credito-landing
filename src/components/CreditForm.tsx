@@ -20,12 +20,21 @@ export default function CreditForm({ visible }: { visible: boolean }) {
 
   // Scroll into view when made visible (after DOM paint)
   useEffect(() => {
-    if (visible && sectionRef.current) {
-      track("credit_form_opened");
-      requestAnimationFrame(() => {
-        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
+    if (!visible) return;
+    track("credit_form_opened");
+    // Wait for DOM to paint before scrolling
+    const timer = setTimeout(() => {
+      document.getElementById("credit-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Pre-fill financing value from simulator if available
+      try {
+        const simValue = sessionStorage.getItem("sim_property_value");
+        if (simValue) {
+          const input = document.getElementById("cf-financing") as HTMLInputElement;
+          if (input) input.value = Number(simValue).toLocaleString("pt-PT");
+        }
+      } catch {}
+    }, 200);
+    return () => clearTimeout(timer);
   }, [visible]);
 
   if (!visible) return null;
