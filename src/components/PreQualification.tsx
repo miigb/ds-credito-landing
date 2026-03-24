@@ -10,7 +10,7 @@ import {
   CheckCircle,
   AlertTriangle,
   RotateCcw,
-  Phone,
+
 } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
@@ -27,10 +27,8 @@ interface Question {
 
 export default function PreQualification({
   onQualified,
-  onFail,
 }: {
   onQualified: () => void;
-  onFail: () => void;
 }) {
   const [step, setStep] = useState(0);
   const [result, setResult] = useState<"pass" | "fail" | null>(null);
@@ -279,10 +277,9 @@ export default function PreQualification({
                     {pq.failDetail}
                   </p>
                   <button
-                    onClick={onFail}
+                    onClick={onQualified}
                     className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent-700 text-white font-semibold rounded-full hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25"
                   >
-                    <Phone size={16} />
                     {pq.failCta}
                   </button>
                   <button

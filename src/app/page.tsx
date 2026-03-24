@@ -27,12 +27,6 @@ export default function Home() {
   const showB2C = isPt && isClient;
   const showB2B = !showB2C;
 
-  const handleFail = () => {
-    setAudience("partner");
-    setTimeout(() => {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
 
   return (
     <main className="relative">
@@ -49,7 +43,6 @@ export default function Home() {
       {showB2C && (
         <PreQualification
           onQualified={() => setQualified(true)}
-          onFail={handleFail}
         />
       )}
       {showB2C && <CreditForm visible={qualified} />}
