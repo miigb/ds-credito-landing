@@ -78,11 +78,22 @@ export const translations = {
       transparency: "Total Transparency",
       transparencyDesc:
         "Complete confidentiality and compliance mindset throughout the entire process.",
-      intlEyebrow: "International Clients",
-      intlHeadline: "Specialist support for non-residents",
-      intlDesc:
-        "From remote document handling and coordination with lawyers and notaries, to clear professional communication in English — we make buying property in Portugal seamless.",
-      intlCta: "Get in touch",
+      intl: {
+        b2c: {
+          eyebrow: "Who This Is For",
+          headline: "Whatever your situation, we can help",
+          desc: "Whether you're buying your first home, investing, relocating to Portugal, or restructuring credit — we handle the entire process for you, at no cost.",
+          cta: "Start Your Pre-Check",
+          ctaHref: "#pre-qualification",
+        },
+        b2b: {
+          eyebrow: "International Clients",
+          headline: "Specialist support for non-residents",
+          desc: "From remote document handling and coordination with lawyers and notaries, to clear professional communication in English — we make buying property in Portugal seamless.",
+          cta: "Get in touch",
+          ctaHref: "#contact",
+        },
+      },
       situationHome: "Buying a Home in Portugal",
       situationInvestment: "Investment & Rental Properties",
       situationRelocation: "Relocation to Portugal",
@@ -503,11 +514,22 @@ export const translations = {
       transparency: "Transparência e Conformidade",
       transparencyDesc:
         "Total confidencialidade e conformidade regulatória em cada etapa do processo.",
-      intlEyebrow: "Clientes Internacionais",
-      intlHeadline: "Também tratamos de clientes não-residentes",
-      intlDesc:
-        "Se tem clientes estrangeiros a comprar em Portugal, tratamos de tudo: documentação remota, coordenação com advogados e notários, e comunicação profissional em inglês.",
-      intlCta: "Saber mais",
+      intl: {
+        b2c: {
+          eyebrow: "Para Quem é Este Serviço",
+          headline: "Seja qual for a sua situação, podemos ajudar",
+          desc: "Quer esteja a comprar a sua primeira casa, a investir, a mudar-se para Portugal ou a reestruturar crédito — tratamos de todo o processo por si, sem custo.",
+          cta: "Simular Crédito",
+          ctaHref: "#pre-qualification",
+        },
+        b2b: {
+          eyebrow: "Clientes Internacionais",
+          headline: "Também tratamos de clientes não-residentes",
+          desc: "Se tem clientes estrangeiros a comprar em Portugal, tratamos de tudo: documentação remota, coordenação com advogados e notários, e comunicação profissional em inglês.",
+          cta: "Saber mais",
+          ctaHref: "#contact",
+        },
+      },
       situationHome: "Compra de Habitação",
       situationInvestment: "Investimento & Arrendamento",
       situationRelocation: "Mudança para Portugal",

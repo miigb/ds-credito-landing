@@ -26,6 +26,7 @@ export default function Services() {
   const { t } = useLanguage();
   const { audience } = useAudience();
   const svcAud = audience === "partner" ? t.services.b2b : t.services.b2c;
+  const intlAud = audience === "partner" ? t.services.intl.b2b : t.services.intl.b2c;
 
   const services = [
     { id: "pre-check", icon: FileSearch, title: t.services.preCheck, description: t.services.preCheckDesc },
@@ -112,8 +113,7 @@ export default function Services() {
           ))}
         </motion.div>
 
-        {/* International clients section — B2B only */}
-        {audience === "partner" && (
+        {/* International clients section */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -133,19 +133,19 @@ export default function Services() {
           <div className="relative grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-accent-400 text-sm font-semibold tracking-widest uppercase mb-4">
-                {t.services.intlEyebrow}
+                {intlAud.eyebrow}
               </p>
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                {t.services.intlHeadline}
+                {intlAud.headline}
               </h3>
               <p className="text-white/60 leading-relaxed mb-6">
-                {t.services.intlDesc}
+                {intlAud.desc}
               </p>
               <a
-                href="#contact"
+                href={intlAud.ctaHref}
                 className="inline-flex items-center gap-2 text-accent-400 text-sm font-semibold hover:text-accent-300 transition-colors"
               >
-                {t.services.intlCta}
+                {intlAud.cta}
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -175,7 +175,6 @@ export default function Services() {
             </div>
           </div>
         </motion.div>
-        )}
       </div>
     </section>
   );
