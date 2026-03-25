@@ -226,6 +226,44 @@ export default function Hero() {
                 </div>
               </div>
             </motion.div>
+
+            {/* ANICA membership — prominent badge */}
+            <motion.a
+              href="https://anica.org.pt"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 2, duration: 0.7, type: "spring", stiffness: 150 }}
+              whileHover={{ scale: 1.06, y: -3 }}
+              className="absolute bottom-12 right-6 z-10"
+            >
+              <div className="relative">
+                {/* Glow effect behind the badge */}
+                <motion.div
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -inset-2 rounded-2xl bg-white/20 blur-lg"
+                />
+                <div className="relative bg-white rounded-xl px-4 py-3 shadow-2xl shadow-black/30 border border-brand-100/80">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/anica-logo.png"
+                      alt="ANICA — Associação Nacional de Intermediários de Crédito Autorizados"
+                      className="h-10 w-auto"
+                    />
+                    <div className="border-l border-brand-200 pl-3">
+                      <p className="text-[9px] text-accent-700 font-bold uppercase tracking-widest">
+                        {isPt ? "Membro Certificado" : "Certified Member"}
+                      </p>
+                      <p className="text-[10px] text-brand-500 font-medium mt-0.5">
+                        2025
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.a>
           </motion.div>
         </div>
       </motion.div>
