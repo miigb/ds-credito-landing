@@ -30,7 +30,7 @@ export default function Home() {
       <BankPartners />
       <Stats />
       <Services />
-      <VideoShowcase />
+      {!isClient && <VideoShowcase />}
       <Process />
       <WhyUs />
       <TeamPreview />

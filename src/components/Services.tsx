@@ -112,6 +112,8 @@ export default function Services() {
           ))}
         </motion.div>
 
+        {/* International clients section — B2B only */}
+        {audience === "partner" && (
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -173,6 +175,7 @@ export default function Services() {
             </div>
           </div>
         </motion.div>
+        )}
       </div>
     </section>
   );
