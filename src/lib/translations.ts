@@ -632,7 +632,7 @@ export const translations = {
       b2b: {
         eyebrow: "Contacte-nos",
         headline: "Quer oferecer crédito como serviço aos seus clientes?",
-        subheading: "Se é agente imobiliário, mediador ou promotor imobiliário — vamos conversar sobre como podemos ajudar a fechar mais negócios juntos.",
+        subheading: "Se é agente imobiliário, mediador, promotor imobiliário, advogado, contabilista ou profissional liberal — vamos conversar sobre como podemos ajudar a fechar mais negócios juntos.",
       },
       location: "Localização",
       locationValue: "Av. Bento Gonçalves nº 2, 2910-431 Setúbal",

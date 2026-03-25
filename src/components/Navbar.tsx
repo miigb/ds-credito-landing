@@ -75,7 +75,7 @@ export default function Navbar() {
                   scrolled ? "text-brand-500" : "text-white/60"
                 }`}
               >
-                Agente DS Crédito
+                Intermediários de Crédito
               </span>
             </div>
           </a>
