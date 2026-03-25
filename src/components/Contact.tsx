@@ -6,6 +6,7 @@ import { Send, MapPin, Mail, Phone, CheckCircle, Loader2, AlertCircle } from "lu
 import { fadeUp, slideFromLeft, slideFromRight } from "@/lib/animations";
 import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 import { siteConfig } from "@/lib/siteConfig";
 
 // Get your free access key at https://web3forms.com
@@ -22,6 +23,8 @@ export default function Contact() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const { locale, t } = useLanguage();
+  const { audience } = useAudience();
+  const contactHeader = audience === "partner" ? t.contact.b2b : t.contact.b2c;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,13 +110,13 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <p className="text-accent-400 text-sm font-semibold tracking-widest uppercase mb-4">
-              {t.contact.eyebrow}
+              {contactHeader.eyebrow}
             </p>
             <h2 className="text-3xl lg:text-5xl font-bold text-white tracking-tight mb-6">
-              {t.contact.headline}
+              {contactHeader.headline}
             </h2>
             <p className="text-white/50 text-lg leading-relaxed mb-10">
-              {t.contact.subheading}
+              {contactHeader.subheading}
             </p>
 
             <address className="space-y-6 not-italic">

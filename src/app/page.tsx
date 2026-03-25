@@ -34,14 +34,13 @@ export default function Home() {
       <Process />
       <WhyUs />
       <TeamPreview />
-      {isClient ? (
+      {isClient && (
         <>
           <PreQualification onQualified={() => setQualified(true)} />
           <CreditForm visible={qualified} />
         </>
-      ) : (
-        <Contact />
       )}
+      <Contact />
       <Footer />
     </main>
   );

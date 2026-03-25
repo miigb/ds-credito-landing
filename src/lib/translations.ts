@@ -199,10 +199,16 @@ export const translations = {
     },
     // Contact
     contact: {
-      eyebrow: "Get in Touch",
-      headline: "Ready to simplify your clients' financing?",
-      subheading:
-        "Whether you're a real estate agent, relocation specialist, or property developer — let's discuss how we can support your international buyers.",
+      b2c: {
+        eyebrow: "Get in Touch",
+        headline: "Have questions? Talk to us.",
+        subheading: "We're here to answer any questions about your financing. No commitment, no cost.",
+      },
+      b2b: {
+        eyebrow: "Get in Touch",
+        headline: "Ready to simplify your clients' financing?",
+        subheading: "Whether you're a real estate agent, relocation specialist, or property developer — let's discuss how we can support your international buyers.",
+      },
       location: "Location",
       locationValue: "Av. Bento Gonçalves nº 2, 2910-431 Setúbal",
       email: "Email",
@@ -609,10 +615,16 @@ export const translations = {
     },
     // Contact
     contact: {
-      eyebrow: "Contacte-nos",
-      headline: "Quer oferecer crédito como serviço aos seus clientes?",
-      subheading:
-        "Se é agente imobiliário, mediador ou promotor imobiliário — vamos conversar sobre como podemos ajudar a fechar mais negócios juntos.",
+      b2c: {
+        eyebrow: "Contacte-nos",
+        headline: "Tem dúvidas? Fale connosco.",
+        subheading: "Estamos disponíveis para esclarecer qualquer questão sobre o seu crédito. Sem compromisso, sem custos.",
+      },
+      b2b: {
+        eyebrow: "Contacte-nos",
+        headline: "Quer oferecer crédito como serviço aos seus clientes?",
+        subheading: "Se é agente imobiliário, mediador ou promotor imobiliário — vamos conversar sobre como podemos ajudar a fechar mais negócios juntos.",
+      },
       location: "Localização",
       locationValue: "Av. Bento Gonçalves nº 2, 2910-431 Setúbal",
       email: "Email",
