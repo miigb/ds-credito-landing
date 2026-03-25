@@ -35,7 +35,8 @@ export default function Contact() {
     formData.append("access_key", WEB3FORMS_KEY);
     const name = formData.get("name") || "Sem nome";
     const role = formData.get("role") || "";
-    formData.append("subject", `[B2B] Novo contacto: ${name}${role ? ` — ${role}` : ""}`);
+    const tag = audience === "partner" ? "B2B" : "B2C";
+    formData.append("subject", `[${tag}] Novo contacto: ${name}${role ? ` — ${role}` : ""}`);
     formData.append("from_name", "DS Crédito Website");
 
     try {
@@ -233,19 +234,33 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="contact-role" className="block text-white/50 text-xs uppercase tracking-wider mb-2">
-                      {t.contact.formRole}
+                      {audience === "partner" ? t.contact.formRole : t.contact.formGoal}
                     </label>
                     <select
                       id="contact-role"
                       name="role"
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/60 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all appearance-none"
                     >
-                      <option value="">{t.contact.formRoleSelect}</option>
-                      <option value="agent">{t.contact.formRoleAgent}</option>
-                      <option value="relocation">{t.contact.formRoleRelocation}</option>
-                      <option value="developer">{t.contact.formRoleDeveloper}</option>
-                      <option value="buyer">{t.contact.formRoleBuyer}</option>
-                      <option value="other">{t.contact.formRoleOther}</option>
+                      {audience === "partner" ? (
+                        <>
+                          <option value="">{t.contact.formRoleSelect}</option>
+                          <option value="agent">{t.contact.formRoleAgent}</option>
+                          <option value="relocation">{t.contact.formRoleRelocation}</option>
+                          <option value="developer">{t.contact.formRoleDeveloper}</option>
+                          <option value="buyer">{t.contact.formRoleBuyer}</option>
+                          <option value="other">{t.contact.formRoleOther}</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="">{t.contact.formGoalSelect}</option>
+                          <option value="buy">{t.contact.formGoalBuy}</option>
+                          <option value="transfer">{t.contact.formGoalTransfer}</option>
+                          <option value="personal">{t.contact.formGoalPersonal}</option>
+                          <option value="consolidate">{t.contact.formGoalConsolidate}</option>
+                          <option value="simulate">{t.contact.formGoalSimulate}</option>
+                          <option value="other">{t.contact.formGoalOther}</option>
+                        </>
+                      )}
                     </select>
                   </div>
                 </div>
@@ -258,7 +273,7 @@ export default function Contact() {
                     id="contact-message"
                     name="message"
                     rows={4}
-                    placeholder={t.contact.formMessagePlaceholder}
+                    placeholder={audience === "partner" ? t.contact.formMessagePlaceholder : t.contact.formMessagePlaceholderB2c}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all resize-none"
                   />
                 </div>
