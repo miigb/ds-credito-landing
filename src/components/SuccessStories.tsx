@@ -8,6 +8,17 @@ import { useLanguage } from "@/lib/LanguageContext";
 export default function SuccessStories() {
   const { t } = useLanguage();
 
+  // Split headline around highlight word
+  const headline = t.success.headline;
+  const highlight = t.success.headlineHighlight;
+  const hlIdx = headline.toLowerCase().indexOf(highlight.toLowerCase());
+  let hlBefore = headline;
+  let hlAfter = "";
+  if (hlIdx >= 0) {
+    hlBefore = headline.slice(0, hlIdx);
+    hlAfter = headline.slice(hlIdx + highlight.length);
+  }
+
   return (
     <section className="relative py-28 overflow-hidden">
       {/* Background */}
@@ -29,8 +40,9 @@ export default function SuccessStories() {
               {t.success.eyebrow}
             </span>
             <h2 className="text-white text-3xl lg:text-5xl font-bold tracking-tight mb-5">
-              {t.success.headline}{" "}
-              <span className="text-accent-400">{t.success.headlineHighlight}</span>
+              {hlBefore}
+              <span className="text-accent-400">{highlight}</span>
+              {hlAfter}
             </h2>
             <p className="text-white/60 text-lg leading-relaxed">
               {t.success.subheading}
