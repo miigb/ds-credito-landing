@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useAudience } from "@/lib/AudienceContext";
 
 export default function WhyUs() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -28,21 +29,23 @@ export default function WhyUs() {
   const x1 = useTransform(scrollYProgress, [0, 1], [-30, 30]);
   const x2 = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const { t } = useLanguage();
+  const { audience } = useAudience();
+  const whyAud = audience === "partner" ? t.whyUs.b2b : t.whyUs.b2c;
 
   const businessBenefits = [
-    { id: "biz1", icon: TrendingUp, text: t.whyUs.biz1 },
-    { id: "biz2", icon: Clock, text: t.whyUs.biz2 },
-    { id: "biz3", icon: FileCheck, text: t.whyUs.biz3 },
-    { id: "biz4", icon: MessageCircle, text: t.whyUs.biz4 },
-    { id: "biz5", icon: UserCheck, text: t.whyUs.biz5 },
+    { id: "biz1", icon: TrendingUp, text: whyAud.biz1 },
+    { id: "biz2", icon: Clock, text: whyAud.biz2 },
+    { id: "biz3", icon: FileCheck, text: whyAud.biz3 },
+    { id: "biz4", icon: MessageCircle, text: whyAud.biz4 },
+    { id: "biz5", icon: UserCheck, text: whyAud.biz5 },
   ];
 
   const clientBenefits = [
-    { id: "cli1", icon: Scale, text: t.whyUs.cli1 },
-    { id: "cli2", icon: Eye, text: t.whyUs.cli2 },
-    { id: "cli3", icon: HeartHandshake, text: t.whyUs.cli3 },
-    { id: "cli4", icon: MapPin, text: t.whyUs.cli4 },
-    { id: "cli5", icon: Users, text: t.whyUs.cli5 },
+    { id: "cli1", icon: Scale, text: whyAud.cli1 },
+    { id: "cli2", icon: Eye, text: whyAud.cli2 },
+    { id: "cli3", icon: HeartHandshake, text: whyAud.cli3 },
+    { id: "cli4", icon: MapPin, text: whyAud.cli4 },
+    { id: "cli5", icon: Users, text: whyAud.cli5 },
   ];
 
   return (
@@ -58,13 +61,13 @@ export default function WhyUs() {
           className="text-center mb-16"
         >
           <p className="text-accent-700 text-sm font-semibold tracking-widest uppercase mb-4">
-            {t.whyUs.eyebrow}
+            {whyAud.eyebrow}
           </p>
           <h2 className="text-3xl lg:text-5xl font-bold text-brand-900 tracking-tight mb-5">
-            {t.whyUs.headline}
+            {whyAud.headline}
           </h2>
           <p className="text-lg text-brand-500 max-w-2xl mx-auto">
-            {t.whyUs.subheading}
+            {whyAud.subheading}
           </p>
         </motion.div>
 
@@ -77,7 +80,7 @@ export default function WhyUs() {
           >
             <div className="bg-white rounded-3xl p-8 lg:p-10 border border-brand-100 shadow-sm">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-900 text-white text-xs font-semibold uppercase tracking-wider mb-6">
-                {t.whyUs.forBusiness}
+                {whyAud.forBusiness}
               </div>
               <div className="space-y-5">
                 {businessBenefits.map((b) => (
@@ -108,7 +111,7 @@ export default function WhyUs() {
           >
             <div className="bg-gradient-to-br from-accent-700 to-accent-800 rounded-3xl p-8 lg:p-10 shadow-xl shadow-accent-700/15">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold uppercase tracking-wider mb-6">
-                {t.whyUs.forClients}
+                {whyAud.forClients}
               </div>
               <div className="space-y-5">
                 {clientBenefits.map((b) => (
