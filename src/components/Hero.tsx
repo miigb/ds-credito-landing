@@ -175,17 +175,56 @@ export default function Hero() {
                 />
               </div>
             </motion.div>
-            {/* Floating stat card */}
+            {/* Floating trust badge — glassmorphism with micro-interactions */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6, type: "spring", stiffness: 200 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="absolute top-6 -left-8 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-xl shadow-brand-900/20 max-w-[210px] border border-brand-100/50 cursor-default"
+            >
+              <div className="flex items-center gap-3">
+                <motion.div
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent-700 to-accent-500 flex items-center justify-center shrink-0"
+                >
+                  <span className="text-white text-sm font-bold">€0</span>
+                </motion.div>
+                <div>
+                  <p className="text-xs font-bold text-brand-900 leading-tight">
+                    {isPt ? "Serviço gratuito" : "Free service"}
+                  </p>
+                  <p className="text-[10px] text-brand-500 leading-tight mt-0.5">
+                    {isPt ? "Sem custo para o cliente" : "No cost to the client"}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Banco de Portugal registration badge */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              className="absolute top-6 -left-8 bg-white p-4 rounded-xl shadow-xl max-w-[200px]"
+              transition={{ delay: 1.6, duration: 0.5 }}
+              whileHover={{ scale: 1.03 }}
+              className="absolute top-6 right-6 bg-brand-900/80 backdrop-blur-md px-3 py-2 rounded-lg border border-white/10 cursor-default"
             >
-              <p className="text-accent-700 font-bold text-2xl mb-1">€0</p>
-              <p className="text-[10px] text-brand-600 font-bold uppercase tracking-wider leading-snug">
-                {isPt ? "Sem custo para si — o nosso serviço é gratuito" : "No cost to you — our service is completely free"}
-              </p>
+              <div className="flex items-center gap-2">
+                <motion.div
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-1.5 h-1.5 rounded-full bg-green-400"
+                />
+                <div>
+                  <p className="text-[9px] text-white/60 uppercase tracking-wider font-medium">
+                    {isPt ? "Registado" : "Registered"}
+                  </p>
+                  <p className="text-[10px] text-white/90 font-semibold">
+                    Banco de Portugal
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
