@@ -122,7 +122,7 @@ export default function Stats() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-12 flex justify-center"
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent-50 border border-accent-100">
             <span className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-700 text-white text-xs font-bold" aria-label={`${siteConfig.stats.growthPercent}% growth`}>
@@ -132,6 +132,24 @@ export default function Stats() {
               {t.stats.growth}
             </span>
           </div>
+
+          {/* ANICA membership badge */}
+          <a
+            href="https://anica.org.pt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white border border-brand-200 hover:border-accent-200 hover:shadow-md transition-all duration-300 group"
+          >
+            <img
+              src="/anica-logo.png"
+              alt="ANICA - Associação Nacional de Intermediários de Crédito Autorizados"
+              className="h-8 w-auto"
+            />
+            <div className="flex flex-col">
+              <span className="text-[10px] font-semibold text-brand-500 uppercase tracking-wider">Membro</span>
+              <span className="text-xs font-bold text-brand-800 group-hover:text-accent-700 transition-colors">ANICA</span>
+            </div>
+          </a>
         </motion.div>
       </div>
     </section>

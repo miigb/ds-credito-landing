@@ -72,6 +72,25 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* ANICA membership */}
+          <div className="flex justify-center w-full">
+            <a
+              href="https://anica.org.pt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-5 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
+            >
+              <img
+                src="/anica-logo.png"
+                alt="ANICA"
+                className="h-6 w-auto brightness-0 invert opacity-50"
+              />
+              <span className="text-[10px] text-white/40 uppercase tracking-wider font-medium">
+                Membro ANICA
+              </span>
+            </a>
+          </div>
+
           {/* Legal */}
           <div className="text-white/25 text-xs text-center border-t border-white/5 pt-6 w-full space-y-1">
             <p>{siteConfig.legalName} &middot; {t.footer.legal1} &middot; {t.footer.legal2}</p>
