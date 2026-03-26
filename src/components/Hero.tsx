@@ -59,7 +59,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y }}
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20"
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-4"
       >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left column — text content */}
@@ -310,8 +310,10 @@ export default function Hero() {
 
       {/* Mini Simulator — outside all scroll transforms so it never fades */}
       {audience === "client" && (
-        <div className="relative z-20 w-full px-6 lg:px-8 pb-10 lg:pb-0 lg:max-w-xl lg:absolute lg:bottom-12 lg:left-8">
-          <MiniSimulator />
+        <div className="relative z-20 max-w-7xl mx-auto w-full px-6 lg:px-8 pb-8 lg:pb-12">
+          <div className="max-w-md">
+            <MiniSimulator />
+          </div>
         </div>
       )}
     </section>
