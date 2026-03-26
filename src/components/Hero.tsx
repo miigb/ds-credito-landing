@@ -24,7 +24,7 @@ export default function Hero() {
   const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.95], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
   const [tubesEnabled, setTubesEnabled] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[100svh] lg:min-h-screen flex flex-col justify-center overflow-hidden"
     >
       {/* Background */}
       <motion.div
