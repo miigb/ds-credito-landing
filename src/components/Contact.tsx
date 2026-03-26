@@ -23,6 +23,7 @@ export default function Contact() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const { locale, t } = useLanguage();
+  const isPt = locale === "pt";
   const { audience } = useAudience();
   const contactHeader = audience === "partner" ? t.contact.b2b : t.contact.b2c;
 
@@ -160,17 +161,25 @@ export default function Contact() {
               </div>
             </address>
 
-            {/* Mini map */}
-            <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
-              <div className="absolute inset-0 bg-brand-900/20 pointer-events-none z-10 group-hover:bg-transparent transition-colors duration-500" />
-              <iframe
-                title="Letraperfeiçoada location"
-                src={`https://www.openstreetmap.org/export/embed.html?bbox=${siteConfig.geo.longitude - 0.008}%2C${siteConfig.geo.latitude - 0.005}%2C${siteConfig.geo.longitude + 0.008}%2C${siteConfig.geo.latitude + 0.005}&layer=mapnik&marker=${siteConfig.geo.latitude}%2C${siteConfig.geo.longitude}`}
-                className="w-full h-full border-0 grayscale brightness-75 contrast-125 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700"
+            {/* Mini map — static image, click opens Google Maps */}
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${siteConfig.geo.latitude},${siteConfig.geo.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 block rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-brand-900/30 group-hover:bg-brand-900/10 transition-colors duration-500 z-10 flex items-center justify-center">
+                <span className="text-white/0 group-hover:text-white/70 text-xs uppercase tracking-wider font-medium transition-colors duration-500">
+                  {isPt ? "Abrir no Google Maps" : "Open in Google Maps"} →
+                </span>
+              </div>
+              <img
+                src={`https://staticmap.openstreetmap.de/staticmap.php?center=${siteConfig.geo.latitude},${siteConfig.geo.longitude}&zoom=15&size=600x300&markers=${siteConfig.geo.latitude},${siteConfig.geo.longitude},ol-marker`}
+                alt={`Map showing ${siteConfig.address.streetAddress}, ${siteConfig.address.addressLocality}`}
+                className="w-full h-full object-cover brightness-[0.3] group-hover:brightness-75 transition-all duration-700"
                 loading="lazy"
-                referrerPolicy="no-referrer"
               />
-            </div>
+            </a>
           </motion.div>
 
           <motion.div
