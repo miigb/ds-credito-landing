@@ -18,6 +18,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       "connect-src 'self' https://api.web3forms.com https://ipapi.co https://va.vercel-scripts.com https://vitals.vercel-insights.com",
       "media-src 'self'",
+      "frame-src 'self' https://www.google.com https://maps.google.com",
       "frame-ancestors 'none'",
     ].join("; "),
   },
