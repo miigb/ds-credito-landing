@@ -161,13 +161,13 @@ export default function Contact() {
               </div>
             </address>
 
-            {/* Mini map — Google Maps embed */}
+            {/* Mini map — dark-styled Google Maps embed */}
             <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
-              <div className="absolute inset-0 bg-brand-900/40 group-hover:bg-brand-900/10 transition-colors duration-500 z-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-brand-900/30 group-hover:opacity-0 transition-opacity duration-700 z-10 pointer-events-none" />
               <iframe
                 title={`${siteConfig.address.addressLocality} office location`}
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8!2d-8.8882!3d38.5244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1943a7a1b8c8c1%3A0x0!2sAv.+Bento+Gon%C3%A7alves+2%2C+Set%C3%BAbal!5e0!3m2!1spt-PT!2spt"
-                className="w-full h-full border-0 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
+                className="w-full h-full border-0 invert hue-rotate-[200deg] brightness-[0.4] saturate-[0.3] contrast-[1.2] group-hover:brightness-[0.55] group-hover:saturate-[0.5] transition-all duration-700"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
