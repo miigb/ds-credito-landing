@@ -3,7 +3,7 @@ export const siteConfig = {
   legalName: "Letraperfeiçoada - Unipessoal Lda",
   parentOrganization: "Decisões e Soluções",
   url: "https://meuintermediario.com",
-  email: "infosuporteds@gmail.com",
+  email: "info@letraperfeicoada.pt",
   phone: "+351 265 117 174",
   foundingYear: 2003,
 

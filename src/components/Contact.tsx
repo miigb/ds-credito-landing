@@ -161,25 +161,18 @@ export default function Contact() {
               </div>
             </address>
 
-            {/* Mini map — static image, click opens Google Maps */}
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${siteConfig.geo.latitude},${siteConfig.geo.longitude}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 block rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group cursor-pointer"
-            >
-              <div className="absolute inset-0 bg-brand-900/30 group-hover:bg-brand-900/10 transition-colors duration-500 z-10 flex items-center justify-center">
-                <span className="text-white/0 group-hover:text-white/70 text-xs uppercase tracking-wider font-medium transition-colors duration-500">
-                  {isPt ? "Abrir no Google Maps" : "Open in Google Maps"} →
-                </span>
-              </div>
-              <img
-                src={`https://staticmap.openstreetmap.de/staticmap.php?center=${siteConfig.geo.latitude},${siteConfig.geo.longitude}&zoom=15&size=600x300&markers=${siteConfig.geo.latitude},${siteConfig.geo.longitude},ol-marker`}
-                alt={`Map showing ${siteConfig.address.streetAddress}, ${siteConfig.address.addressLocality}`}
-                className="w-full h-full object-cover brightness-[0.3] group-hover:brightness-75 transition-all duration-700"
+            {/* Mini map — Google Maps embed */}
+            <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
+              <div className="absolute inset-0 bg-brand-900/40 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+              <iframe
+                title={`${siteConfig.address.addressLocality} office location`}
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${siteConfig.geo.longitude}!3d${siteConfig.geo.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDMxJzI3LjgiTiA4wrA1MyIxNy42Ilc!5e0!3m2!1spt-PT!2spt!4v1`}
+                className="w-full h-full border-0 grayscale invert brightness-[0.15] contrast-[3] group-hover:grayscale-0 group-hover:invert-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700"
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen={false}
               />
-            </a>
+            </div>
           </motion.div>
 
           <motion.div
