@@ -161,17 +161,34 @@ export default function Contact() {
               </div>
             </address>
 
-            {/* Mini map — dark-styled Google Maps embed */}
-            <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-brand-900/30 group-hover:opacity-0 transition-opacity duration-700 z-10 pointer-events-none" />
+            {/* Mini map — minimal light style, click opens Google Maps */}
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${siteConfig.geo.latitude},${siteConfig.geo.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 block rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group cursor-pointer"
+            >
+              {/* Gradient overlay for dark theme blending */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/20 to-brand-900/40 group-hover:from-brand-900/30 group-hover:via-transparent group-hover:to-brand-900/10 transition-all duration-700 z-10 pointer-events-none" />
+              {/* Custom pin */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full z-20 pointer-events-none">
+                <div className="flex flex-col items-center">
+                  <div className="w-7 h-7 rounded-full bg-accent-700 border-2 border-white shadow-lg shadow-accent-700/40 flex items-center justify-center">
+                    <MapPin size={12} className="text-white" />
+                  </div>
+                  <div className="w-px h-2.5 bg-accent-700/60" />
+                  <div className="w-2 h-1 rounded-full bg-black/20 blur-[1px]" />
+                </div>
+              </div>
+              {/* Google Maps embed with extreme desaturation for minimal monochrome look */}
               <iframe
                 title={`${siteConfig.address.addressLocality} office location`}
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8!2d-8.8882!3d38.5244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1943a7a1b8c8c1%3A0x0!2sAv.+Bento+Gon%C3%A7alves+2%2C+Set%C3%BAbal!5e0!3m2!1spt-PT!2spt"
-                className="w-full h-full border-0 invert hue-rotate-[200deg] brightness-[0.4] saturate-[0.3] contrast-[1.2] group-hover:brightness-[0.55] group-hover:saturate-[0.5] transition-all duration-700"
+                className="w-full h-full border-0 grayscale brightness-[0.25] contrast-[1.5] group-hover:brightness-[0.45] transition-all duration-700 pointer-events-none group-hover:pointer-events-auto"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
+            </a>
           </motion.div>
 
           <motion.div
