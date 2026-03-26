@@ -113,13 +113,13 @@ export default function Services() {
           ))}
         </motion.div>
 
-        {/* International clients section */}
+        {/* International clients / situation cards */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative bg-brand-900 rounded-3xl p-10 lg:p-14 overflow-hidden"
+          className="relative bg-brand-900 rounded-3xl p-6 sm:p-10 lg:p-14 overflow-hidden"
         >
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -135,10 +135,10 @@ export default function Services() {
               <p className="text-accent-400 text-sm font-semibold tracking-widest uppercase mb-4">
                 {intlAud.eyebrow}
               </p>
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4">
                 {intlAud.headline}
               </h3>
-              <p className="text-white/60 leading-relaxed mb-6">
+              <p className="text-sm sm:text-base text-white/60 leading-relaxed mb-6">
                 {intlAud.desc}
               </p>
               <a
@@ -162,14 +162,14 @@ export default function Services() {
               </a>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               {situations.map(({ id, icon: Icon, label }) => (
                 <div
                   key={id}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
+                  className="flex items-center gap-2.5 px-3 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
                 >
-                  <Icon size={20} className="text-accent-400 shrink-0" />
-                  <span className="text-sm text-white/80">{label}</span>
+                  <Icon size={18} className="text-accent-400 shrink-0" />
+                  <span className="text-xs sm:text-sm text-white/80 leading-tight">{label}</span>
                 </div>
               ))}
             </div>
