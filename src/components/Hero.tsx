@@ -1,8 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
 import { ArrowDown } from "lucide-react";
+
+const TubesCursor = dynamic(() => import("./TubesCursor"), { ssr: false });
 import MiniSimulator from "./MiniSimulator";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
@@ -21,8 +24,9 @@ export default function Hero() {
   const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+  const [tubesEnabled, setTubesEnabled] = useState(false);
 
 
   return (
@@ -36,13 +40,31 @@ export default function Hero() {
         className="absolute inset-0 bg-hero-gradient"
       />
 
+      {/* Tubes cursor effect — above gradient, below content, desktop only */}
+      {tubesEnabled && (
+        <div className="absolute inset-0 z-[5] hidden lg:block">
+          <TubesCursor />
+        </div>
+      )}
+
+      {/* Tubes effect toggle */}
+      <button
+        onClick={() => setTubesEnabled(!tubesEnabled)}
+        title="Toggle tubes effect"
+        className="fixed bottom-4 right-4 z-50 hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-900/80 backdrop-blur-md border border-white/10 text-white/50 text-xs hover:text-white/80 transition-colors"
+      >
+        <span className={`w-2 h-2 rounded-full ${tubesEnabled ? "bg-accent-400" : "bg-white/20"}`} />
+        FX
+      </button>
+
       <motion.div
-        style={{ y, opacity }}
+        style={{ y }}
         className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20"
       >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left column — text content */}
           <div className="max-w-xl">
+            <motion.div style={{ opacity }}>
             {/* Eyebrow */}
             <motion.div
               variants={fadeUp}
@@ -138,7 +160,9 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Mini Simulator — B2C only */}
+            </motion.div>
+
+            {/* Mini Simulator — B2C only, no fade */}
             {audience === "client" && <MiniSimulator />}
           </div>
 
