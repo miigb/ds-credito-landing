@@ -161,6 +161,9 @@ export default function Hero() {
             </motion.div>
 
             </motion.div>
+
+            {/* Mini Simulator — B2C only, outside opacity wrapper so it never fades */}
+            {audience === "client" && <MiniSimulator />}
           </div>
 
           {/* Right column — images */}
@@ -308,14 +311,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Mini Simulator — outside all scroll transforms so it never fades */}
-      {audience === "client" && (
-        <div className="relative z-20 max-w-7xl mx-auto w-full px-6 lg:px-8 pb-8 lg:pb-12">
-          <div className="max-w-md">
-            <MiniSimulator />
-          </div>
-        </div>
-      )}
     </section>
   );
 }
