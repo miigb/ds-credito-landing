@@ -159,6 +159,18 @@ export default function Contact() {
                 </div>
               </div>
             </address>
+
+            {/* Mini map */}
+            <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
+              <div className="absolute inset-0 bg-brand-900/20 pointer-events-none z-10 group-hover:bg-transparent transition-colors duration-500" />
+              <iframe
+                title="Letraperfeiçoada location"
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${siteConfig.geo.longitude - 0.008}%2C${siteConfig.geo.latitude - 0.005}%2C${siteConfig.geo.longitude + 0.008}%2C${siteConfig.geo.latitude + 0.005}&layer=mapnik&marker=${siteConfig.geo.latitude}%2C${siteConfig.geo.longitude}`}
+                className="w-full h-full border-0 grayscale brightness-75 contrast-125 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+            </div>
           </motion.div>
 
           <motion.div
