@@ -28,15 +28,6 @@ export default function Home() {
       <StickyBar />
       <Navbar />
       <Hero />
-      {isClient && (
-        <div className="relative z-10 -mt-48 lg:-mt-40 pb-6 bg-brand-900">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="max-w-md">
-              <MiniSimulator />
-            </div>
-          </div>
-        </div>
-      )}
       <BankPartners />
       <Stats />
       <Services />

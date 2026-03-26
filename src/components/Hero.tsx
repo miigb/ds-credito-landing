@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
 import { ArrowDown } from "lucide-react";
@@ -23,7 +23,16 @@ export default function Hero() {
   const isPt = locale === "pt";
   const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const yDesktop = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y = isDesktop ? yDesktop : 0;
   const opacity = useTransform(scrollYProgress, [0, 0.95], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
   const [tubesEnabled, setTubesEnabled] = useState(false);
@@ -162,6 +171,8 @@ export default function Hero() {
 
             </motion.div>
 
+            {/* Mini Simulator — B2C only, outside opacity wrapper */}
+            {audience === "client" && <MiniSimulator />}
           </div>
 
           {/* Right column — images */}
