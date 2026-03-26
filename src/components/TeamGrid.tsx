@@ -34,7 +34,7 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
       }`}
     >
       <div className="flex flex-col items-center text-center">
-        <div className="w-24 h-24 rounded-full overflow-hidden mb-6">
+        <div className="w-32 h-32 rounded-full overflow-hidden mb-6">
           {imgError || isTBD ? (
             <div className="w-full h-full bg-accent-700/30 text-white font-bold text-xl flex items-center justify-center">
               {isTBD ? "?" : getInitials(member.name)}

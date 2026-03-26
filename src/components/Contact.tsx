@@ -163,14 +163,13 @@ export default function Contact() {
 
             {/* Mini map — Google Maps embed */}
             <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 h-48 lg:h-56 relative group">
-              <div className="absolute inset-0 bg-brand-900/40 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-brand-900/40 group-hover:bg-brand-900/10 transition-colors duration-500 z-10 pointer-events-none" />
               <iframe
                 title={`${siteConfig.address.addressLocality} office location`}
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${siteConfig.geo.longitude}!3d${siteConfig.geo.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDMxJzI3LjgiTiA4wrA1MyIxNy42Ilc!5e0!3m2!1spt-PT!2spt!4v1`}
-                className="w-full h-full border-0 grayscale invert brightness-[0.15] contrast-[3] group-hover:grayscale-0 group-hover:invert-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8!2d-8.8882!3d38.5244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1943a7a1b8c8c1%3A0x0!2sAv.+Bento+Gon%C3%A7alves+2%2C+Set%C3%BAbal!5e0!3m2!1spt-PT!2spt"
+                className="w-full h-full border-0 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen={false}
               />
             </div>
           </motion.div>
