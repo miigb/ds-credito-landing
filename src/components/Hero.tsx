@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
       {/* Background */}
       <motion.div
@@ -161,9 +161,6 @@ export default function Hero() {
             </motion.div>
 
             </motion.div>
-
-            {/* Mini Simulator — B2C only, no fade */}
-            {audience === "client" && <MiniSimulator />}
           </div>
 
           {/* Right column — images */}
@@ -297,7 +294,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden lg:flex"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
@@ -310,6 +307,13 @@ export default function Hero() {
           <ArrowDown size={16} className="text-white/40" />
         </motion.div>
       </motion.div>
+
+      {/* Mini Simulator — outside all scroll transforms so it never fades */}
+      {audience === "client" && (
+        <div className="relative z-20 w-full px-6 lg:px-8 pb-10 lg:pb-0 lg:max-w-xl lg:absolute lg:bottom-12 lg:left-8">
+          <MiniSimulator />
+        </div>
+      )}
     </section>
   );
 }
