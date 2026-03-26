@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import MiniSimulator from "@/components/MiniSimulator";
 import BankPartners from "@/components/BankPartners";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
@@ -27,6 +28,15 @@ export default function Home() {
       <StickyBar />
       <Navbar />
       <Hero />
+      {isClient && (
+        <div className="relative z-10 bg-brand-900 -mt-20 pb-8 lg:-mt-12 lg:pb-12">
+          <div className="max-w-md mx-auto px-6 lg:max-w-7xl lg:px-8 lg:mx-auto">
+            <div className="lg:max-w-md">
+              <MiniSimulator />
+            </div>
+          </div>
+        </div>
+      )}
       <BankPartners />
       <Stats />
       <Services />

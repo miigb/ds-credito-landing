@@ -162,8 +162,6 @@ export default function Hero() {
 
             </motion.div>
 
-            {/* Mini Simulator — B2C only, outside opacity wrapper so it never fades */}
-            {audience === "client" && <MiniSimulator />}
           </div>
 
           {/* Right column — images */}
