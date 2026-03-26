@@ -14,14 +14,14 @@ export const teamMembers: TeamMember[] = [
     id: "paulo-brito",
     name: "Paulo Brito",
     role: {
-      pt: "Founder / Agente de Intermediação",
+      pt: "Fundador / Agente de Intermediação",
       en: "Founder / Credit Intermediation Agent",
     },
     bio: {
-      pt: "Mais de 20 anos de experiência em intermediação de crédito e solicitadoria. Fundador da Letraperfeiçoada e responsável pela estratégia e operações da DS Crédito Setúbal Vitória.",
-      en: "Over 20 years of experience in credit intermediation and legal advisory. Founder of Letraperfeiçoada and head of strategy and operations at DS Crédito Setúbal Vitória.",
+      pt: "Mais de 20 anos de experiência em intermediação de crédito e solicitadoria. Fundador da Letraperfeiçoada e responsável pela estratégia e operações da Letraperfeiçoada.",
+      en: "Over 20 years of experience in credit intermediation and legal advisory. Founder of Letraperfeiçoada and head of strategy and operations at Letraperfeiçoada.",
     },
-    photo: "/team/paulo-brito.jpg",
+    photo: "/team/paulo-brito.webp",
     featured: true,
     order: 1,
   },
@@ -29,14 +29,14 @@ export const teamMembers: TeamMember[] = [
     id: "patricia",
     name: "Patrícia",
     role: {
-      pt: "Senior Agent / Sales Lead",
-      en: "Senior Agent / Sales Lead",
+      pt: "Agente Sénior / Responsável Programa de Parcerias",
+      en: "Senior Agent / Partnership Program Lead",
     },
     bio: {
-      pt: "Especialista em crédito habitação com foco em angariação e acompanhamento de clientes particulares. Responsável pela equipa comercial.",
-      en: "Specialist in mortgage credit focused on client acquisition and support. Leads the commercial team.",
+      pt: "Gestão do programa de parcerias com imobiliárias, mediadores e promotores. Responsável pela expansão da rede de parceiros B2B.",
+      en: "Manages the partnership program with real estate agencies, brokers, and promoters. Drives B2B partner network expansion.",
     },
-    photo: "/team/patricia.jpg",
+    photo: "/team/Happy-black-woman-398455920.jpg",
     featured: true,
     order: 2,
   },
@@ -44,14 +44,14 @@ export const teamMembers: TeamMember[] = [
     id: "armanda-amorim",
     name: "Armanda Amorim",
     role: {
-      pt: "Senior Agent / Partnership Program Lead",
-      en: "Senior Agent / Partnership Program Lead",
+      pt: "Agente Sénior / Responsável Comercial",
+      en: "Senior Agent / Sales Lead",
     },
     bio: {
-      pt: "Gestão do programa de parcerias com imobiliárias, mediadores e promotores. Responsável pela expansão da rede de parceiros B2B.",
-      en: "Manages the partnership program with real estate agencies, brokers, and promoters. Drives B2B partner network expansion.",
+      pt: "Especialista em crédito habitação com foco em angariação e acompanhamento de clientes particulares. Responsável pela equipa comercial.",
+      en: "Specialist in mortgage credit focused on client acquisition and support. Leads the commercial team.",
     },
-    photo: "/team/Armanda_Amorim_DS_Crédito.pptx.png",
+    photo: "/team/armanda-amorim.png",
     featured: true,
     order: 3,
   },
@@ -59,7 +59,7 @@ export const teamMembers: TeamMember[] = [
     id: "agent-4",
     name: "A anunciar",
     role: {
-      pt: "Credit Intermediation Agent",
+      pt: "Agente de Intermediação de Crédito",
       en: "Credit Intermediation Agent",
     },
     bio: {
@@ -74,7 +74,7 @@ export const teamMembers: TeamMember[] = [
     id: "agent-5",
     name: "A anunciar",
     role: {
-      pt: "Credit Intermediation Agent",
+      pt: "Agente de Intermediação de Crédito",
       en: "Credit Intermediation Agent",
     },
     bio: {
@@ -89,7 +89,7 @@ export const teamMembers: TeamMember[] = [
     id: "agent-6",
     name: "A anunciar",
     role: {
-      pt: "Credit Intermediation Agent",
+      pt: "Agente de Intermediação de Crédito",
       en: "Credit Intermediation Agent",
     },
     bio: {

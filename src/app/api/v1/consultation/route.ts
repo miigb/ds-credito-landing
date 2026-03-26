@@ -131,7 +131,7 @@ export async function POST(req: NextRequest) {
             error: "submission_failed",
             message: "We could not process your request at this time. Please try again or contact us directly.",
             contact: {
-              email: "infosuporteds@gmail.com",
+              email: "info@letraperfeicoada.pt",
               phone: "+351 265 117 174",
             },
           },
@@ -182,7 +182,7 @@ export async function POST(req: NextRequest) {
         error: "internal_error",
         message: "An unexpected error occurred. Please contact us directly.",
         contact: {
-          email: "infosuporteds@gmail.com",
+          email: "info@letraperfeicoada.pt",
           phone: "+351 265 117 174",
         },
       },

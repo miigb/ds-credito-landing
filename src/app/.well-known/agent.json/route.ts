@@ -66,7 +66,7 @@ const agentCard = {
     description: "Standard rate limiting applies. Please be respectful of server resources.",
   },
   contact: {
-    email: "infosuporteds@gmail.com",
+    email: "info@letraperfeicoada.pt",
     phone: "+351 265 117 174",
     website: "https://meuintermediario.com",
   },
