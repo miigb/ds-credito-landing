@@ -29,9 +29,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       {isClient && (
-        <div className="relative z-10 bg-brand-900 -mt-20 pb-8 lg:-mt-12 lg:pb-12">
-          <div className="max-w-md mx-auto px-6 lg:max-w-7xl lg:px-8 lg:mx-auto">
-            <div className="lg:max-w-md">
+        <div className="relative z-10 -mt-48 lg:-mt-40 pb-6">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-md">
               <MiniSimulator />
             </div>
           </div>
