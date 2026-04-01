@@ -51,8 +51,8 @@ export const teamMembers: TeamMember[] = [
       en: "Senior Agent",
     },
     bio: {
-      pt: "Gestão do programa de parcerias com imobiliárias, mediadores e promotores. Responsável pela expansão da rede de parceiros B2B.",
-      en: "Manages the partnership program with real estate agencies, brokers, and promoters. Drives B2B partner network expansion.",
+      pt: "Especialista em intermediação de crédito com foco no acompanhamento personalizado de clientes e na obtenção das melhores condições.",
+      en: "Credit intermediation specialist focused on personalized client support and securing the best conditions.",
     },
     photo: "/team/patricia-pereira.jpg",
     photoPosition: "center 40%",
