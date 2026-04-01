@@ -76,7 +76,7 @@ export const teamMembers: TeamMember[] = [
     phone: "+351 932 982 787",
     whatsapp: "+351932982787",
     specializations: ["Crédito Habitação", "Crédito Pessoal"],
-    languages: ["Português"],
+    languages: ["Português", "English"],
     featured: true,
     order: 3,
   },
