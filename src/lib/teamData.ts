@@ -5,8 +5,14 @@ export interface TeamMember {
   bio: { pt: string; en: string };
   photo: string;
   photoPosition?: string;
-  featured: boolean;
+  email?: string;
+  phone?: string;
+  whatsapp?: string;
   linkedin?: string;
+  specializations: string[];
+  languages: string[];
+  showAvailability?: boolean;
+  featured: boolean;
   order: number;
 }
 
@@ -24,6 +30,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/paulo-brito.jpg",
     photoPosition: "center 25%",
+    email: "info@letraperfeicoada.pt",
+    phone: "+351 265 117 174",
+    specializations: ["Estratégia", "Parcerias", "Gestão"],
+    languages: [],
+    showAvailability: false,
     featured: true,
     order: 1,
   },
@@ -40,6 +51,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/armanda-amorim.jpg",
     photoPosition: "center 30%",
+    email: "armandaamorim@dsicredito.pt",
+    phone: "+351 931 049 374",
+    whatsapp: "+351931049374",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português"],
     featured: true,
     order: 2,
   },
@@ -56,6 +72,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/patricia-pereira.jpg",
     photoPosition: "center 40%",
+    email: "patriciapereira@dsicredito.pt",
+    phone: "+351 932 982 787",
+    whatsapp: "+351932982787",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português"],
     featured: true,
     order: 3,
   },
@@ -72,6 +93,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/lilia-fernandes.jpg",
     photoPosition: "center 28%",
+    email: "liliafernandes@dsicredito.pt",
+    phone: "+351 939 301 834",
+    whatsapp: "+351939301834",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português", "English"],
     featured: true,
     order: 4,
   },
@@ -88,6 +114,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/jose-nobre.jpg",
     photoPosition: "center 32%",
+    email: "josenobre@dsicredito.pt",
+    phone: "+351 966 587 771",
+    whatsapp: "+351966587771",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português", "English"],
     featured: true,
     order: 5,
   },
@@ -104,6 +135,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/armando-serra.jpg",
     photoPosition: "center 50%",
+    email: "armandoserra@dsicredito.pt",
+    phone: "+351 961 316 637",
+    whatsapp: "+351961316637",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português"],
     featured: true,
     order: 6,
   },
@@ -120,6 +156,11 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/jose-januario.jpg",
     photoPosition: "center 30%",
+    email: "josejanuario@dsicredito.pt",
+    phone: "+351 937 064 118",
+    whatsapp: "+351937064118",
+    specializations: ["Crédito Habitação", "Crédito Pessoal"],
+    languages: ["Português", "English"],
     featured: true,
     order: 7,
   },

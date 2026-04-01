@@ -26,51 +26,39 @@ function TeamCard({
     .slice(0, 2);
 
   return (
-    <motion.div
-      variants={fadeUp}
-      custom={index}
-      className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden group hover:bg-white/10 transition-all duration-300"
-    >
-      {/* Photo */}
-      <div className="aspect-[3/4] w-full overflow-hidden">
-        {imgError ? (
-          <div className="w-full h-full bg-accent-700/20 flex items-center justify-center text-white font-bold text-3xl">
-            {initials}
-          </div>
-        ) : (
-          <img
-            src={member.photo}
-            alt={member.name}
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-            style={{ objectPosition: member.photoPosition || 'center' }}
-            onError={() => setImgError(true)}
-          />
-        )}
-      </div>
-
-      {/* Info */}
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-1">
-          <h3 className="text-white font-bold text-lg">{member.name}</h3>
-          {member.linkedin && (
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${member.name} LinkedIn`}
-              className="text-white/30 hover:text-accent-400 transition-colors"
-            >
-              <Linkedin size={18} />
-            </a>
+    <motion.div variants={fadeUp} custom={index}>
+      <Link
+        href={`/equipa/${member.id}`}
+        className="block bg-white/5 border border-white/10 rounded-2xl overflow-hidden group hover:bg-white/10 transition-all duration-300 cursor-pointer"
+      >
+        {/* Photo */}
+        <div className="aspect-[3/4] w-full overflow-hidden">
+          {imgError ? (
+            <div className="w-full h-full bg-accent-700/20 flex items-center justify-center text-white font-bold text-3xl">
+              {initials}
+            </div>
+          ) : (
+            <img
+              src={member.photo}
+              alt={member.name}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              style={{ objectPosition: member.photoPosition || 'center' }}
+              onError={() => setImgError(true)}
+            />
           )}
         </div>
-        <p className="text-accent-400 text-sm font-semibold mb-3">
-          {member.role[locale]}
-        </p>
-        <p className="text-white/50 text-sm leading-relaxed">
-          {member.bio[locale]}
-        </p>
-      </div>
+
+        {/* Info */}
+        <div className="p-6">
+          <h3 className="text-white font-bold text-lg mb-1">{member.name}</h3>
+          <p className="text-accent-400 text-sm font-semibold mb-3">
+            {member.role[locale]}
+          </p>
+          <p className="text-white/50 text-sm leading-relaxed">
+            {member.bio[locale]}
+          </p>
+        </div>
+      </Link>
     </motion.div>
   );
 }
