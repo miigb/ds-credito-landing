@@ -15,12 +15,12 @@ export default function Navbar() {
   const { audience, setAudience } = useAudience();
 
   const navLinks = [
-    { label: t.nav.about, href: "#about" },
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.process, href: "#process" },
-    { label: t.nav.whyUs, href: "#why-us" },
+    { label: t.nav.about, href: "/#about" },
+    { label: t.nav.services, href: "/#services" },
+    { label: t.nav.process, href: "/#process" },
+    { label: t.nav.whyUs, href: "/#why-us" },
     { label: t.nav.team, href: "/equipa" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.contact, href: "/#contact" },
   ];
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <nav aria-label="Main navigation" className="flex items-center justify-between h-18 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <img
               src="/ds-credito-logo.png"
               alt="DS Crédito"
@@ -184,7 +184,7 @@ export default function Navbar() {
 
             {/* CTA */}
             <a
-              href="#contact"
+              href="/#contact"
               className={`inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
                 scrolled
                   ? "bg-accent-700 text-white hover:bg-accent-800 shadow-lg shadow-accent-700/20"
@@ -272,7 +272,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 className="block w-full text-center mt-3 px-5 py-3 text-sm font-semibold rounded-xl bg-accent-700 text-white"
               >
