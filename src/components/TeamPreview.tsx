@@ -42,6 +42,7 @@ function TeamCard({
             src={member.photo}
             alt={member.name}
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            style={{ objectPosition: member.photoPosition || 'center' }}
             onError={() => setImgError(true)}
           />
         )}
@@ -77,9 +78,8 @@ function TeamCard({
 export default function TeamPreview() {
   const { locale, t } = useLanguage();
 
-  const featuredMembers = teamMembers
-    .filter((m) => m.featured)
-    .sort((a, b) => a.order - b.order);
+  const sorted = [...teamMembers].sort((a, b) => a.order - b.order);
+  const previewMembers = sorted.slice(0, 3);
 
   // Split headline
   const headline = t.team.headline;
@@ -129,7 +129,7 @@ export default function TeamPreview() {
           </p>
         </motion.div>
 
-        {/* Team Cards */}
+        {/* Team Cards — Paulo, Armanda, Patrícia */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -137,7 +137,7 @@ export default function TeamPreview() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {featuredMembers.map((member, index) => (
+          {previewMembers.map((member, index) => (
             <TeamCard
               key={member.id}
               member={member}

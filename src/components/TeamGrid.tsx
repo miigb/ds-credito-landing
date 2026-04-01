@@ -45,7 +45,8 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
               alt={member.name}
               width={176}
               height={176}
-              className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              style={{ objectPosition: member.photoPosition || 'center' }}
               onError={() => setImgError(true)}
             />
           )}
@@ -73,6 +74,7 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
 
 export default function TeamGrid() {
   const sorted = [...teamMembers].sort((a, b) => a.order - b.order);
+  const [leader, ...agents] = sorted;
 
   return (
     <section className="py-20">
@@ -83,9 +85,17 @@ export default function TeamGrid() {
         viewport={{ once: true }}
         className="max-w-7xl mx-auto px-6 lg:px-8"
       >
+        {/* CEO — centered on top */}
+        <div className="flex justify-center mb-8">
+          <div className="w-full max-w-sm">
+            <TeamMemberCard member={leader} index={0} />
+          </div>
+        </div>
+
+        {/* Agents — 3-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sorted.map((member, index) => (
-            <TeamMemberCard key={member.id} member={member} index={index} />
+          {agents.map((member, index) => (
+            <TeamMemberCard key={member.id} member={member} index={index + 1} />
           ))}
         </div>
       </motion.div>
