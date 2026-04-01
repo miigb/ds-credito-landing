@@ -34,7 +34,7 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
       }`}
     >
       <div className="flex flex-col items-center text-center">
-        <div className="w-32 h-32 rounded-full overflow-hidden mb-6">
+        <div className="w-44 h-44 rounded-full overflow-hidden mb-6">
           {imgError || isTBD ? (
             <div className="w-full h-full bg-accent-700/30 text-white font-bold text-xl flex items-center justify-center">
               {isTBD ? "?" : getInitials(member.name)}
@@ -43,9 +43,9 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
             <Image
               src={member.photo}
               alt={member.name}
-              width={96}
-              height={96}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              width={176}
+              height={176}
+              className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
               onError={() => setImgError(true)}
             />
           )}

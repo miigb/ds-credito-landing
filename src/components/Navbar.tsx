@@ -19,7 +19,7 @@ export default function Navbar() {
     { label: t.nav.services, href: "#services" },
     { label: t.nav.process, href: "#process" },
     { label: t.nav.whyUs, href: "#why-us" },
-    // Team link hidden until real photos ready
+    { label: t.nav.team, href: "/equipa" },
     { label: t.nav.contact, href: "#contact" },
   ];
 

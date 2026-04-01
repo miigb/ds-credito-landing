@@ -34,7 +34,7 @@ export default function Home() {
       {!isClient && <VideoShowcase />}
       <Process />
       <WhyUs />
-      {/* TeamPreview hidden until real photos are ready */}
+      <TeamPreview />
       {isClient && (
         <>
           <PreQualification onQualified={() => setQualified(true)} />
