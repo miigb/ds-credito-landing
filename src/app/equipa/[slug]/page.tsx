@@ -306,12 +306,19 @@ export default function AgentProfilePage() {
                 </div>
                 <span className="text-white/60 text-xs">{t.profile.call}</span>
               </a>
-              <div className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl opacity-50 cursor-default min-w-0">
-                <div className="w-10 h-10 rounded-full bg-green-600/20 flex items-center justify-center">
-                  <MessageCircle size={18} className="text-green-400" />
-                </div>
-                <span className="text-white/60 text-xs">{t.profile.whatsapp}</span>
-              </div>
+              {member.whatsapp && (
+                <a
+                  href={`https://wa.me/${member.whatsapp.replace(/\+/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                >
+                  <div className="w-10 h-10 rounded-full bg-green-600/20 flex items-center justify-center">
+                    <MessageCircle size={18} className="text-green-400" />
+                  </div>
+                  <span className="text-white/60 text-xs">{t.profile.whatsapp}</span>
+                </a>
+              )}
               {member.email && (
                 <a
                   href={`mailto:${member.email}`}
