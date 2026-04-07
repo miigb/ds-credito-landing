@@ -91,21 +91,64 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Legal */}
-          <div className="text-white/25 text-xs text-center border-t border-white/5 pt-6 w-full space-y-1">
+          {/* Legal links */}
+          <div className="flex flex-wrap justify-center gap-4 text-xs border-t border-white/5 pt-6 w-full">
+            <a
+              href="/privacidade"
+              className="text-white/40 hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Política de Privacidade
+            </a>
+            <a
+              href="https://www.livroreclamacoes.pt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Livro de Reclamações
+            </a>
+            <a
+              href={siteConfig.regulation.registryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Registo Banco de Portugal
+            </a>
+          </div>
+
+          {/* Legal disclaimers */}
+          <div className="text-white/20 text-[10px] text-center w-full space-y-1.5 mt-4 leading-relaxed">
             <p>{siteConfig.legalName} &middot; {t.footer.legal1} &middot; {t.footer.legal2}</p>
             <p>
-              {siteConfig.legalName} &mdash; {t.footer.legal3} Nº{" "}
+              Registado no {siteConfig.regulation.regulator} com o Nº{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 hover:text-white/60 underline underline-offset-2 transition-colors"
+                className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
               >
                 {siteConfig.regulation.registrationNumber}
               </a>
+              {" "}&middot; Categoria: Intermediário de Crédito {siteConfig.regulation.category}
             </p>
             <p>
+              Tipos de crédito autorizados: {siteConfig.regulation.creditTypes.join(", ")}
+              {" "}&middot; Sem vínculo de exclusividade
+            </p>
+            <p>
+              Serviços de consultoria: {siteConfig.regulation.consultancyServices ? "Sim" : "Não"}
+              {" "}&middot;{" "}
+              <a
+                href="https://www.bportugal.pt/intermediariocreditofar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
+              >
+                Verificar registo
+              </a>
+            </p>
+            <p className="pt-2">
               &copy; {new Date().getFullYear()} {siteConfig.name}. {t.footer.rights}
             </p>
           </div>
