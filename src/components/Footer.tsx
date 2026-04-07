@@ -100,6 +100,12 @@ export default function Footer() {
               Política de Privacidade
             </a>
             <a
+              href="/termos"
+              className="text-white/40 hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Termos e Condições
+            </a>
+            <a
               href="https://www.livroreclamacoes.pt"
               target="_blank"
               rel="noopener noreferrer"
@@ -140,7 +146,7 @@ export default function Footer() {
               Serviços de consultoria: {siteConfig.regulation.consultancyServices ? "Sim" : "Não"}
               {" "}&middot;{" "}
               <a
-                href="https://www.bportugal.pt/intermediariocreditofar"
+                href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"

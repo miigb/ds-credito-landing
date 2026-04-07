@@ -37,5 +37,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://meuintermediario.com/termos",
+      lastModified: "2026-04-07",
+      changeFrequency: "yearly",
+      priority: 0.3,
+      alternates: {
+        languages: {
+          pt: "https://meuintermediario.com/termos",
+        },
+      },
+    },
   ];
 }
