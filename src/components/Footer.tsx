@@ -123,36 +123,28 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Legal disclaimers */}
-          <div className="text-white/20 text-[10px] text-center w-full space-y-1.5 mt-4 leading-relaxed">
-            <p>{siteConfig.legalName} &middot; {t.footer.legal1} &middot; {t.footer.legal2}</p>
+          {/* Regulatory notice */}
+          <div className="text-white/20 text-[10px] text-center w-full mt-4 leading-relaxed max-w-4xl mx-auto">
             <p>
-              Registado no {siteConfig.regulation.regulator} com o Nº{" "}
+              A <strong className="text-white/30">LETRAPERFEIÇOADA — UNIPESSOAL LDA</strong> é um Intermediário de Crédito Vinculado, com o registo nº{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
               >
-                {siteConfig.regulation.registrationNumber}
+                0007470
               </a>
-              {" "}&middot; Categoria: Intermediário de Crédito {siteConfig.regulation.category}
-            </p>
-            <p>
-              Tipos de crédito autorizados: {siteConfig.regulation.creditTypes.join(", ")}
-              {" "}&middot; Sem vínculo de exclusividade
-            </p>
-            <p>
-              Serviços de consultoria: {siteConfig.regulation.consultancyServices ? "Sim" : "Não"}
-              {" "}&middot;{" "}
+              , autorizado pelo Banco de Portugal para a prestação de serviços de consultoria e autorizado para a prestação de serviços de intermediação de crédito (Apresentação ou proposta de contratos de crédito a consumidores; Assistência a consumidores, mediante a realização de atos preparatórios ou de outros trabalhos de gestão pré-contratual relativamente a contratos de crédito que não tenham sido por si apresentados ou propostos). Contratos de crédito abrangidos: Crédito à Habitação e Crédito aos Consumidores. Mutuantes ou grupos de mutuantes com quem mantém contrato de vinculação: CAIXA GERAL DE DEPÓSITOS, S.A., BANCO SANTANDER TOTTA, S.A., NOVO BANCO, S.A., BANCO BPI, S.A., BANKINTER, S.A. — SUCURSAL EM PORTUGAL, BANCO CTT, S.A., ABANCA PORTUGAL, S.A., BNI EUROPA, S.A., UCI — UNIÃO DE CRÉDITOS IMOBILIÁRIOS, S.A., UNICRE — INSTITUIÇÃO FINANCEIRA DE CRÉDITO, S.A. Informação verificável em{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
               >
-                Verificar registo
+                bportugal.pt
               </a>
+              .
             </p>
             <p className="pt-2">
               &copy; {new Date().getFullYear()} {siteConfig.name}. {t.footer.rights}
