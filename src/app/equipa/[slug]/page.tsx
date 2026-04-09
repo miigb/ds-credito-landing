@@ -159,8 +159,9 @@ export default function AgentProfilePage() {
     }
   };
 
-  const officePhone = "+351 265 117 175";
-  const displayPhone = "265 117 175";
+  const usePersonalPhone = member.id === "armando-serra";
+  const displayedPhone = usePersonalPhone ? member.phone || "" : "+351 265 117 175";
+  const displayPhone = displayedPhone.replace(/^\+351\s?/, "");
 
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${siteConfig.address.streetAddress}, ${siteConfig.address.addressLocality}`
@@ -298,7 +299,7 @@ export default function AgentProfilePage() {
               className="flex justify-center gap-0.5 sm:gap-1 px-2 sm:px-6 py-4"
             >
               <a
-                href={`tel:${officePhone}`}
+                href={`tel:${displayedPhone}`}
                 className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
               >
                 <div className="w-10 h-10 rounded-full bg-accent-700/20 flex items-center justify-center">
@@ -425,9 +426,9 @@ export default function AgentProfilePage() {
                 {t.profile.contactAgent}
               </h2>
               <CopyableContact
-                href={`tel:${officePhone}`}
+                href={`tel:${displayedPhone}`}
                 icon={Phone}
-                text={officePhone}
+                text={displayedPhone}
                 displayText={displayPhone}
                 copiedLabel={t.profile.copied}
               />
