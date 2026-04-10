@@ -64,8 +64,8 @@ export const teamMembers: TeamMember[] = [
     id: "patricia-pereira",
     name: "Patrícia Pereira",
     role: {
-      pt: "Agente Sénior",
-      en: "Senior Agent",
+      pt: "Gestora de Crédito",
+      en: "Credit Manager",
     },
     bio: {
       pt: "Especialista em intermediação de crédito com foco no acompanhamento personalizado de clientes e na obtenção das melhores condições.",
