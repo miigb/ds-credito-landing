@@ -18,9 +18,21 @@ function AnimatedCounter({
   inView: boolean;
 }) {
   const [current, setCurrent] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
+    if (hasAnimated) return;
+
+    // Fallback: if inView hasn't triggered after 3s (e.g. in-app browsers
+    // where IntersectionObserver misbehaves), show the final value anyway.
+    const fallbackTimer = setTimeout(() => {
+      setCurrent(value);
+      setHasAnimated(true);
+    }, 3000);
+
+    if (!inView) return () => clearTimeout(fallbackTimer);
+
+    clearTimeout(fallbackTimer);
     let start = 0;
     const end = value;
     const duration = 2000;
@@ -29,13 +41,17 @@ function AnimatedCounter({
       start += increment;
       if (start >= end) {
         setCurrent(end);
+        setHasAnimated(true);
         clearInterval(timer);
       } else {
         setCurrent(Math.floor(start));
       }
     }, 16);
-    return () => clearInterval(timer);
-  }, [inView, value]);
+    return () => {
+      clearInterval(timer);
+      clearTimeout(fallbackTimer);
+    };
+  }, [inView, value, hasAnimated]);
 
   return (
     <span>
