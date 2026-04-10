@@ -54,13 +54,6 @@ export default function SuccessStories() {
                   {t.success.stat1Label}
                 </p>
               </div>
-              <div className="w-px h-12 bg-white/10" />
-              <div>
-                <p className="text-3xl font-bold text-white">{t.success.stat2Value}</p>
-                <p className="text-xs uppercase tracking-widest text-white/50 font-bold mt-1">
-                  {t.success.stat2Label}
-                </p>
-              </div>
             </div>
           </motion.div>
 
