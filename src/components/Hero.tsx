@@ -115,7 +115,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={3}
-              className="flex flex-col sm:flex-row gap-4 mb-10"
+              className="flex flex-col-reverse sm:flex-row gap-4 mb-10"
             >
               <a
                 href={audience === "partner" ? "#contact" : "#pre-qualification"}
