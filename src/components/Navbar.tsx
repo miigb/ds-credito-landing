@@ -55,7 +55,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <nav aria-label="Main navigation" className="flex items-center justify-between h-18 lg:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group" translate="no">
             <img
               src="/ds-credito-logo.png"
               alt="DS Crédito"
@@ -101,9 +101,10 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             {/* Audience toggle (PT only) */}
             {locale === "pt" && (
-              <div className="flex items-center bg-white/10 rounded-full p-0.5 text-xs">
+              <div className="flex items-center bg-white/10 rounded-full p-0.5 text-xs" translate="no">
                 <button
                   onClick={() => setAudience("client")}
+                  translate="no"
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                     audience === "client"
                       ? "bg-white text-brand-900 font-semibold shadow-sm"
@@ -116,6 +117,7 @@ export default function Navbar() {
                 </button>
                 <button
                   onClick={() => setAudience("partner")}
+                  translate="no"
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                     audience === "partner"
                       ? "bg-white text-brand-900 font-semibold shadow-sm"

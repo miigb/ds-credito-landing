@@ -105,6 +105,8 @@ export const metadata: Metadata = {
     "geo.placename": "Setúbal",
     "geo.position": `${siteConfig.geo.latitude};${siteConfig.geo.longitude}`,
     ICBM: `${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}`,
+    // Prevent Chrome / Google auto-translate from breaking React state
+    google: "notranslate",
   },
 };
 
@@ -114,8 +116,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">
+    <html lang="pt" className={inter.variable} translate="no">
+      <body className="font-sans antialiased notranslate">
         <StructuredData />
         <noscript>
           <div style={{ padding: "2rem", fontFamily: "system-ui" }}>

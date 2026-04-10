@@ -16,47 +16,38 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType>({
-  locale: "en",
+  locale: "pt",
   setLocale: () => {},
-  t: translations.en,
+  t: translations.pt,
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
-  const [detected, setDetected] = useState(false);
+  const [locale, setLocaleState] = useState<Locale>("pt");
 
   useEffect(() => {
     // Check localStorage first (user preference)
     const saved = localStorage.getItem("ds-locale") as Locale | null;
     if (saved && (saved === "en" || saved === "pt")) {
       setLocaleState(saved);
-      setDetected(true);
       return;
     }
 
-    // Check browser language
+    // Only switch to English if browser is explicitly English-only
+    // (Portuguese speakers often have PT as primary with EN fallback)
     const browserLang = navigator.language || "";
-    if (browserLang.startsWith("pt")) {
-      setLocaleState("pt");
-      localStorage.setItem("ds-locale", "pt");
-      setDetected(true);
-      return;
+    if (browserLang.startsWith("en")) {
+      setLocaleState("en");
+      localStorage.setItem("ds-locale", "en");
     }
-
-    // Try IP geolocation for Portugal detection
-    fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(3000) })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.country_code === "PT") {
-          setLocaleState("pt");
-          localStorage.setItem("ds-locale", "pt");
-        }
-      })
-      .catch(() => {
-        // Silently fail — stay with default (en)
-      })
-      .finally(() => setDetected(true));
+    // Otherwise stay with PT (default)
   }, []);
+
+  // Sync <html lang> with current locale for SEO and accessibility
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = locale;
+    }
+  }, [locale]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
