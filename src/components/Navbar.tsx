@@ -36,6 +36,16 @@ export default function Navbar() {
     return () => window.removeEventListener("click", close);
   }, [langMenuOpen]);
 
+  // Lock body scroll when mobile menu is open (prevents iOS rubber-banding)
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   const languages: { code: Locale; label: string; flag: string }[] = [
     { code: "en", label: "English", flag: "\u{1F1EC}\u{1F1E7}" },
     { code: "pt", label: "Português", flag: "\u{1F1F5}\u{1F1F9}" },
@@ -215,13 +225,13 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`min-w-11 min-h-11 flex items-center justify-center rounded-lg transition-colors ${
                 scrolled
                   ? "text-brand-700 hover:bg-brand-100"
                   : "text-white hover:bg-white/10"
               }`}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </nav>

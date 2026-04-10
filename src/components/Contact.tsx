@@ -230,8 +230,11 @@ export default function Contact() {
                       type="text"
                       name="name"
                       required
+                      autoCapitalize="words"
+                      autoComplete="name"
+                      enterKeyHint="next"
                       placeholder={t.contact.formNamePlaceholder}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-base focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
                     />
                   </div>
                   <div>
@@ -243,8 +246,13 @@ export default function Contact() {
                       type="email"
                       name="email"
                       required
+                      inputMode="email"
+                      autoComplete="email"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      enterKeyHint="next"
                       placeholder={t.contact.formEmailPlaceholder}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-base focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
                     />
                   </div>
                 </div>
@@ -258,8 +266,11 @@ export default function Contact() {
                       id="contact-phone"
                       type="tel"
                       name="phone"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      enterKeyHint="next"
                       placeholder={t.contact.formPhonePlaceholder}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-base focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all"
                     />
                   </div>
                   <div>
@@ -269,7 +280,7 @@ export default function Contact() {
                     <select
                       id="contact-role"
                       name="role"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/60 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all appearance-none"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/60 text-base focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all appearance-none"
                     >
                       {audience === "partner" ? (
                         <>
@@ -303,8 +314,9 @@ export default function Contact() {
                     id="contact-message"
                     name="message"
                     rows={4}
+                    enterKeyHint="send"
                     placeholder={audience === "partner" ? t.contact.formMessagePlaceholder : t.contact.formMessagePlaceholderB2c}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all resize-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-base focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30 transition-all resize-none"
                   />
                 </div>
 

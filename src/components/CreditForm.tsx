@@ -183,7 +183,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                       id="cf-operation"
                       name="operation_type"
                       required
-                      className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none"
+                      className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                     >
                       <option value="">{cf.operationPlaceholder}</option>
                       <option value="aquisicao">{cf.optAquisicao}</option>
@@ -213,7 +213,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                         <select
                           id="cf-help"
                           name="help_type"
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                         >
                           <option value="">{cf.helpPlaceholder}</option>
                           <option value="simular">{cf.optSimular}</option>
@@ -235,8 +235,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                             type="text"
                             id="cf-financing"
                             name="financing_value"
+                            inputMode="decimal"
+                            autoComplete="off"
+                            enterKeyHint="next"
                             placeholder={cf.financingPlaceholder}
-                            className="w-full border border-brand-200 rounded-xl px-4 py-3.5 pr-10 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900"
+                            className="w-full border border-brand-200 rounded-xl px-4 py-3.5 pr-10 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                           />
                           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-400 font-medium">
                             &euro;
@@ -256,7 +259,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                         <select
                           id="cf-property"
                           name="property_choice"
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                         >
                           <option value="escolhido">{cf.propertyChosen}</option>
                           <option value="procura">{cf.propertySearching}</option>
@@ -308,7 +311,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                         <select
                           id="cf-proponents"
                           name="proponents"
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                         >
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -329,8 +332,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                             type="text"
                             id="cf-income"
                             name="income"
+                            inputMode="decimal"
+                            autoComplete="off"
+                            enterKeyHint="next"
                             placeholder={cf.incomePlaceholder}
-                            className="w-full border border-brand-200 rounded-xl px-4 py-3.5 pr-10 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900"
+                            className="w-full border border-brand-200 rounded-xl px-4 py-3.5 pr-10 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                           />
                           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-400 font-medium">
                             &euro;
@@ -362,8 +368,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                           id="cf-firstname"
                           name="first_name"
                           required
+                          autoCapitalize="words"
+                          autoComplete="given-name"
+                          enterKeyHint="next"
                           placeholder={cf.firstNamePlaceholder}
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                         />
                       </div>
                       <div>
@@ -378,8 +387,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                           id="cf-lastname"
                           name="last_name"
                           required
+                          autoCapitalize="words"
+                          autoComplete="family-name"
+                          enterKeyHint="next"
                           placeholder={cf.lastNamePlaceholder}
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                         />
                       </div>
                     </div>
@@ -396,8 +408,13 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                         id="cf-email"
                         name="email"
                         required
+                        inputMode="email"
+                        autoComplete="email"
+                        autoCapitalize="off"
+                        spellCheck={false}
+                        enterKeyHint="next"
                         placeholder={cf.emailPlaceholder}
-                        className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900"
+                        className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                       />
                     </div>
 
@@ -420,8 +437,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                             type="tel"
                             id="cf-phone"
                             name="phone"
+                            inputMode="tel"
+                            autoComplete="tel"
+                            enterKeyHint="send"
                             placeholder={cf.phonePlaceholder}
-                            className="w-full px-4 py-3.5 outline-none text-brand-900"
+                            className="w-full px-4 py-3.5 outline-none text-brand-900 text-base"
                           />
                         </div>
                       </div>
@@ -435,7 +455,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                         <select
                           id="cf-schedule"
                           name="preferred_schedule"
-                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none"
+                          className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                         >
                           <option value="qualquer">{cf.scheduleAny}</option>
                           <option value="manha">{cf.scheduleMorning}</option>
@@ -454,11 +474,11 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                   </div>
                 )}
 
-                <label className="flex items-start gap-3 cursor-pointer">
+                <label className="flex items-start gap-3 cursor-pointer p-2 -m-2">
                   <input
                     type="checkbox"
                     required
-                    className="mt-0.5 w-4 h-4 accent-accent-700 shrink-0"
+                    className="mt-0.5 w-5 h-5 accent-accent-700 shrink-0"
                   />
                   <span className="text-brand-500 text-sm">
                     {t.privacy.consentLabel}{" "}
@@ -476,7 +496,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                 <button
                   type="submit"
                   disabled={sending}
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-accent-700 text-white font-semibold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="w-full flex items-center justify-center gap-2 px-8 py-4 min-h-12 bg-accent-700 text-white font-semibold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   {sending ? (
                     <Loader2 size={16} className="animate-spin" />

@@ -102,7 +102,9 @@ export default function MiniSimulator() {
               max={800000}
               step={10000}
               value={propertyValue}
+              onInput={(e) => setPropertyValue(Number((e.target as HTMLInputElement).value))}
               onChange={(e) => setPropertyValue(Number(e.target.value))}
+              style={{ touchAction: "pan-y" }}
               className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-white/10 accent-accent-500"
             />
             <div className="flex justify-between text-[10px] text-white/30 mt-0.5">
@@ -127,7 +129,9 @@ export default function MiniSimulator() {
               max={50}
               step={5}
               value={downPayment}
+              onInput={(e) => setDownPayment(Number((e.target as HTMLInputElement).value))}
               onChange={(e) => setDownPayment(Number(e.target.value))}
+              style={{ touchAction: "pan-y" }}
               className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-white/10 accent-accent-500"
             />
             <div className="flex justify-between text-[10px] text-white/30 mt-0.5">

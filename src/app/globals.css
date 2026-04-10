@@ -52,6 +52,31 @@
     opacity: 1 !important;
     transform: none !important;
   }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Mobile: disable hover-state stickiness on touch devices.
+   On touch screens, browsers latch hover state after a tap, making
+   buttons/cards look permanently "hovered". Only apply :hover styles
+   when the device actually has a hover-capable pointer. */
+@media (hover: none) {
+  *:hover {
+    /* Block hover states on touch devices — tailwind hover: utilities
+       still compile, but we neutralize their visual effect on touch. */
+    transform: none !important;
+  }
+}
+
+/* Prevent iOS tap highlight on interactive elements */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Range sliders — allow vertical panning while dragging thumb */
+input[type="range"] {
+  touch-action: pan-y;
 }
 
 @layer utilities {
