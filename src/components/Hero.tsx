@@ -41,7 +41,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] lg:min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[100svh] lg:min-h-screen flex flex-col justify-center overflow-x-hidden pb-16 lg:pb-24"
     >
       {/* Background */}
       <motion.div

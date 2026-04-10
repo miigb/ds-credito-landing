@@ -12,10 +12,6 @@ export type Audience = "partner" | "client";
 
 const STORAGE_KEY = "ds-credito-audience";
 
-function isValidAudience(value: unknown): value is Audience {
-  return value === "partner" || value === "client";
-}
-
 interface AudienceContextType {
   audience: Audience;
   setAudience: (audience: Audience) => void;
@@ -27,24 +23,17 @@ const AudienceContext = createContext<AudienceContextType>({
 });
 
 export function AudienceProvider({ children }: { children: ReactNode }) {
+  // Always default to "client" on fresh page load so the hero shows
+  // the B2C simulator. Context state persists across client-side
+  // navigation automatically — no storage needed.
   const [audience, setAudience] = useState<Audience>("client");
 
-  // Read from sessionStorage on mount
+  // Clear any stale session from previous visits on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const stored = sessionStorage.getItem(STORAGE_KEY);
-      if (isValidAudience(stored)) {
-        setAudience(stored);
-      }
+      sessionStorage.removeItem(STORAGE_KEY);
     }
   }, []);
-
-  // Write to sessionStorage when audience changes
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem(STORAGE_KEY, audience);
-    }
-  }, [audience]);
 
   return (
     <AudienceContext.Provider value={{ audience, setAudience }}>
