@@ -34,14 +34,9 @@ export default function Footer() {
                   <span className="font-bold">LETRA</span>
                   <span className="font-light">PERFEI&Ccedil;OADA</span>
                 </span>
-                <div className="flex items-center gap-1.5 mt-1">
-                  <span className="text-white/30 text-[10px] tracking-wider">Intermediários de Crédito</span>
-                  <img
-                    src="/ds-credito-logo.png"
-                    alt="DS Crédito"
-                    className="h-5 w-auto"
-                  />
-                </div>
+                <span className="text-white/30 text-[10px] tracking-wider mt-1">
+                  Intermediários de Crédito
+                </span>
               </div>
             </div>
 
