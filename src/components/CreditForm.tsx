@@ -474,7 +474,7 @@ export default function CreditForm({ visible }: { visible: boolean }) {
                   </div>
                 )}
 
-                <label className="flex items-start gap-3 cursor-pointer p-2 -m-2">
+                <label className="flex items-start gap-3 cursor-pointer py-1">
                   <input
                     type="checkbox"
                     required
