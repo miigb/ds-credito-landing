@@ -32,7 +32,8 @@ export default function BlogPage() {
         query = query.contains("tags", [activeTag]);
       }
 
-      const { data } = await query;
+      const { data, error } = await query;
+      if (error) console.error("Blog fetch error:", error.message);
       setArticles((data as NewsContent[]) ?? []);
       setLoading(false);
     }
