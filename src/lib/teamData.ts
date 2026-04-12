@@ -29,7 +29,7 @@ export const teamMembers: TeamMember[] = [
       en: "Over 20 years of experience in credit intermediation and legal advisory. Founder of Letraperfeiçoada and head of strategy and operations.",
     },
     photo: "/team/paulo-brito.jpg",
-    photoPosition: "center 18%",
+    photoPosition: "center 30%",
     email: "info@letraperfeicoada.pt",
     phone: "+351 265 117 174",
     whatsapp: "+351929113983",
