@@ -46,13 +46,8 @@ function layout(content: string) {
   <div class="wrapper">
     <div class="header">
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:10px auto 0 auto">
-        <tr>
-          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Intermediários de Crédito</td>
-          <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="20" height="20" style="border-radius:4px;display:block" /></td>
-          <td style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;padding-left:6px;vertical-align:middle">DS Cr&eacute;dito</td>
-        </tr>
-      </table>
+      <div style="font-size:12px;color:${ACCENT};letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-top:8px">Intermediários de Crédito</div>
     </div>
     <div class="body">
       ${content}
