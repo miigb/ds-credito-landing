@@ -39,10 +39,23 @@ export default function BlogCard({ article, index, featured = false }: BlogCardP
     >
       <Link
         href={`/blog/${article.seo_slug}`}
-        className={`block bg-white rounded-2xl border border-brand-100 hover:shadow-xl hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 overflow-hidden ${
+        className={`group block bg-white rounded-2xl border border-brand-100 hover:shadow-xl hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 overflow-hidden ${
           featured ? "md:grid md:grid-cols-2" : ""
         }`}
       >
+        {/* Cover image */}
+        {article.image_url && (
+          <div className={`overflow-hidden ${featured ? "" : "aspect-[16/9]"}`}>
+            <img
+              src={article.image_url}
+              alt={title}
+              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                featured ? "aspect-[4/3] md:aspect-auto md:h-full" : ""
+              }`}
+              loading="lazy"
+            />
+          </div>
+        )}
         <div className="p-6 flex flex-col gap-3">
           {/* Badges row */}
           <div className="flex flex-wrap items-center gap-2">

@@ -16,6 +16,7 @@ export interface NewsContent {
   summary_pt: string;
   seo_slug: string;
   seo_description: string;
+  image_url: string | null;
   tags: string[];
   importance: "major" | "minor";
   status: "draft" | "approved" | "published" | "rejected";

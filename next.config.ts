@@ -14,7 +14,7 @@ const securityHeaders = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://cdn.jsdelivr.net",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://img.logo.dev",
+      "img-src 'self' data: blob: https://img.logo.dev https://images.unsplash.com",
       "font-src 'self' https://fonts.gstatic.com",
       "connect-src 'self' https://api.web3forms.com https://ipapi.co https://va.vercel-scripts.com https://vitals.vercel-insights.com https://dyknwyxztoixxpdyepdk.supabase.co",
       "media-src 'self'",
