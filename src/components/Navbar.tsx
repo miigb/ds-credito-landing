@@ -20,6 +20,7 @@ export default function Navbar() {
     { label: t.nav.process, href: "/#process" },
     { label: t.nav.whyUs, href: "/#why-us" },
     { label: t.nav.team, href: "/equipa" },
+    { label: "Blog", href: "/blog" },
     { label: t.nav.contact, href: "/#contact" },
   ];
 

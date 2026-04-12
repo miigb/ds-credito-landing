@@ -40,12 +40,12 @@ export default function BlogCard({ article, index, featured = false }: BlogCardP
       <Link
         href={`/blog/${article.seo_slug}`}
         className={`group block bg-white rounded-2xl border border-brand-100 hover:shadow-xl hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 overflow-hidden ${
-          featured ? "md:grid md:grid-cols-2" : ""
+          featured && article.image_url ? "md:grid md:grid-cols-2" : ""
         }`}
       >
         {/* Cover image */}
         {article.image_url && (
-          <div className={`overflow-hidden ${featured ? "" : "aspect-[16/9]"}`}>
+          <div className={`overflow-hidden ${featured ? "md:min-h-full" : "aspect-[16/9]"}`}>
             <img
               src={article.image_url}
               alt={title}

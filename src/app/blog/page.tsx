@@ -72,11 +72,15 @@ export default function BlogPage() {
                 ))}
               </div>
             )}
+
+            {/* Newsletter signup */}
+            <div className="max-w-3xl mx-auto w-full mt-8">
+              <NewsletterSignup />
+            </div>
           </div>
         )}
       </main>
 
-      <NewsletterSignup />
       <Footer />
     </>
   );

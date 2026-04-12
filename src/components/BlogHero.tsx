@@ -78,10 +78,10 @@ export default function BlogHero({ activeTag, onTagChange }: BlogHeroProps) {
               <button
                 key={tab.value}
                 onClick={() => onTagChange(tab.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   activeTag === tab.value
-                    ? "bg-accent-700 text-white"
-                    : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white/80"
+                    ? "bg-accent-700 text-white font-semibold shadow-lg shadow-accent-700/20"
+                    : "glass text-white/60 hover:text-white/80 hover:bg-white/15"
                 }`}
               >
                 {tab.label}

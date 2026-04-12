@@ -35,6 +35,9 @@ function renderMarkdown(md: string): string {
     } else if (line.startsWith("## ")) {
       const text = applyInline(line.slice(3));
       html.push(`<h2 class="text-2xl font-bold text-brand-900 mt-10 mb-4">${text}</h2>`);
+    } else if (line.startsWith("> ")) {
+      const text = applyInline(line.slice(2));
+      html.push(`<blockquote class="border-l-4 border-accent-700 pl-4 italic text-brand-500 my-6">${text}</blockquote>`);
     } else if (line.startsWith("- ")) {
       if (!inList) {
         html.push('<ul class="list-disc pl-6 mb-4 space-y-1">');
@@ -46,7 +49,7 @@ function renderMarkdown(md: string): string {
       // blank line — skip
     } else {
       const text = applyInline(line);
-      html.push(`<p class="text-brand-600 leading-relaxed mb-4">${text}</p>`);
+      html.push(`<p class="text-brand-600 leading-relaxed mb-5">${text}</p>`);
     }
   }
 
@@ -55,7 +58,9 @@ function renderMarkdown(md: string): string {
 }
 
 function applyInline(text: string): string {
-  return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-700 underline underline-offset-2 hover:text-accent-600">$1</a>');
 }
 
 /* ── Article page ─────────────────────────────────────────────── */
@@ -264,6 +269,18 @@ export default function ArticlePage() {
             custom={4}
             className="h-px w-20 bg-gradient-to-r from-accent-700 to-accent-400 mb-10"
           />
+
+          {/* Cover image */}
+          {article.image_url && (
+            <div className="rounded-2xl overflow-hidden mb-10 -mx-2">
+              <img
+                src={article.image_url}
+                alt={title}
+                className="w-full aspect-[2/1] object-cover"
+                loading="eager"
+              />
+            </div>
+          )}
 
           {/* Body */}
           <motion.div
