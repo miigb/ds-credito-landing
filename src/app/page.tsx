@@ -11,6 +11,7 @@ import VideoShowcase from "@/components/VideoShowcase";
 import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
 import TeamPreview from "@/components/TeamPreview";
+import LatestNews from "@/components/LatestNews";
 import Contact from "@/components/Contact";
 import PreQualification from "@/components/PreQualification";
 import CreditForm from "@/components/CreditForm";
@@ -41,6 +42,7 @@ export default function Home() {
           <CreditForm visible={qualified} />
         </>
       )}
+      <LatestNews />
       <Contact />
       <Footer />
     </main>

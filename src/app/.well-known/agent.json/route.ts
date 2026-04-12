@@ -15,6 +15,7 @@ const agentCard = {
     "read:services",
     "read:faq",
     "write:consultation",
+    "read:blog",
   ],
   endpoints: {
     company: {
@@ -45,6 +46,16 @@ const agentCard = {
           description: "Return single-language responses",
         },
       },
+    },
+    blog: {
+      url: "https://meuintermediario.com/api/v1/blog",
+      method: "GET",
+      description: "Published blog articles. Supports ?tag=, ?limit=, ?offset= filters.",
+    },
+    blogArticle: {
+      url: "https://meuintermediario.com/api/v1/blog/{slug}",
+      method: "GET",
+      description: "Full article content by slug.",
     },
     consultation: {
       url: "https://meuintermediario.com/api/v1/consultation",

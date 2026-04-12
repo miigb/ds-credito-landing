@@ -81,6 +81,15 @@ Decisões e Soluções (DS Group)
 
 Services available in Portuguese and English.
 
+## Blog
+
+The Letraperfeiçoada blog publishes articles and analysis on the Portuguese credit and housing market, including Euribor rate updates, market trends, regulatory changes, and financial literacy content.
+
+- Blog index: /blog
+- Individual articles: /blog/{slug}
+- API: GET /api/v1/blog (supports ?tag=, ?limit=, ?offset=)
+- API: GET /api/v1/blog/{slug} (full article content)
+
 ## API Endpoints (Machine-Readable)
 
 All endpoints return JSON. No authentication required for read operations.
