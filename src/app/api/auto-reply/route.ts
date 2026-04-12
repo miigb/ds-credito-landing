@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       const err = await res.text();
       console.error("Resend API error:", err);
-      return NextResponse.json({ error: "Email send failed", detail: err, keyPresent: !!RESEND_API_KEY, keyLength: RESEND_API_KEY.length }, { status: 502 });
+      return NextResponse.json({ error: "Email send failed" }, { status: 502 });
     }
 
     return NextResponse.json({ success: true });

@@ -92,7 +92,7 @@ export function b2bContactPT(name: string) {
     <div class="cta-box">
       <p class="cta-title">Precisa de falar connosco antes?</p>
       <p class="cta-text">Estamos disponíveis por telefone nos dias úteis das 9h às 18h.</p>
-      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn">Ligar ${siteConfig.phone}</a>
+      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn" style="color:#ffffff!important;text-decoration:none">Ligar ${siteConfig.phone}</a>
     </div>
   `);
 }
@@ -112,7 +112,7 @@ export function b2bContactEN(name: string) {
     <div class="cta-box">
       <p class="cta-title">Need to reach us sooner?</p>
       <p class="cta-text">We're available by phone on weekdays from 9am to 6pm.</p>
-      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn">Call ${siteConfig.phone}</a>
+      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn" style="color:#ffffff!important;text-decoration:none">Call ${siteConfig.phone}</a>
     </div>
   `);
 }
@@ -135,7 +135,7 @@ export function b2cCreditPT(name: string) {
     <div class="cta-box">
       <p class="cta-title">Serviço 100% gratuito</p>
       <p class="cta-text">Não tem qualquer custo para si. Somos remunerados pelas instituições bancárias.</p>
-      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn">Ligar ${siteConfig.phone}</a>
+      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn" style="color:#ffffff!important;text-decoration:none">Ligar ${siteConfig.phone}</a>
     </div>
   `);
 }
@@ -676,7 +676,7 @@ export function b2cCreditEN(name: string) {
     <div class="cta-box">
       <p class="cta-title">100% free service</p>
       <p class="cta-text">There is no cost to you. We are compensated by the lending institutions.</p>
-      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn">Call ${siteConfig.phone}</a>
+      <a href="tel:${siteConfig.phone.replace(/\s/g, "")}" class="cta-btn" style="color:#ffffff!important;text-decoration:none">Call ${siteConfig.phone}</a>
     </div>
   `);
 }
