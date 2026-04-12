@@ -261,6 +261,19 @@ export default function ArticlePage() {
             </span>
           </motion.div>
 
+          {/* Source attribution */}
+          {article.source_name && (
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              className="text-xs text-brand-400 italic"
+            >
+              {t.blog.sourceAttribution} {article.source_name}
+            </motion.p>
+          )}
+
           {/* Accent gradient divider */}
           <motion.div
             variants={fadeUp}
