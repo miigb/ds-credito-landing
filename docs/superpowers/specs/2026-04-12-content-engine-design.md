@@ -145,6 +145,7 @@ Three serverless API routes in emailflow, triggered by Vercel Cron.
 | government | INE, Portal da Habitação | Housing statistics, government programs |
 | corporate | Decisões e Soluções | Group news, achievements |
 | industry | ANICA, APEMIP | Industry association news |
+| literacy | Banco de Portugal (educação), DECO, Todos Contam | Financial literacy content, school programs, consumer education |
 
 ---
 
@@ -196,7 +197,7 @@ New tab in emailflow platform alongside ScriptFlow, EmailFlow, SlideFlow.
 - Hero section matching site design (dark theme)
 - Eyebrow: "NOTÍCIAS & ANÁLISES"
 - Headline: "Mantenha-se informado sobre o mercado de crédito"
-- Filter tabs: Todos, Crédito Habitação, Mercado, Euribor, Regulação
+- Filter tabs: Todos, Crédito Habitação, Mercado, Euribor, Regulação, Literacia Financeira
 - Featured article: large card at top (latest major article)
 - Grid: 2-column below, responsive to 1-column on mobile
 - Each card: title, date, tags, 2-line summary, reading time
@@ -293,6 +294,7 @@ New tab in emailflow platform alongside ScriptFlow, EmailFlow, SlideFlow.
 - Proper heading hierarchy (single h1, h2/h3 sections)
 - AI auto-links relevant terms to other blog posts and service pages
 - Image alt text: AI-generated descriptive alt
+- Financial literacy content pillar: AI identifies posts suitable for general financial education (not just credit professionals), tags as "literacia-financeira", uses simpler language, explains concepts from scratch. Supports Letraperfeiçoada's school programs and consumer education initiatives. These posts can be repurposed for children/youth financial literacy programs in v2.
 - Reading time in structured data
 
 ### AI/LLM Discoverability
