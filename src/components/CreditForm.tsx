@@ -62,6 +62,10 @@ export default function CreditForm({ visible }: { visible: boolean }) {
       if (data.success) {
         setSubmitted(true);
         track("credit_form_submitted", { operation_type: String(formData.get("operation_type") || "") });
+        // Scroll to keep the success message visible (wait for React re-render)
+        requestAnimationFrame(() => {
+          sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
         // Fire-and-forget Notion backup + auto-reply
         const creditName = `${formData.get("first_name")} ${formData.get("last_name")}`.trim();
         const creditEmail = formData.get("email");
