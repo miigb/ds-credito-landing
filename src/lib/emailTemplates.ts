@@ -46,7 +46,7 @@ function layout(content: string) {
   <div class="wrapper">
     <div class="header">
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
-      <div style="font-size:12px;color:${ACCENT};letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
+      <div style="font-size:12px;color:#E85D91;letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
       <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-top:8px">Intermediários de Crédito</div>
     </div>
     <div class="body">
@@ -117,7 +117,7 @@ export function b2bContactEN(name: string) {
 export function b2cCreditPT(name: string) {
   return layout(`
     <p class="greeting">Olá ${name},</p>
-    <p class="text">Recebemos o seu pedido de simulação de crédito. Obrigado pela confiança na DS Crédito.</p>
+    <p class="text">Recebemos o seu pedido de simulação de crédito. Obrigado pela confiança na Letraperfeiçoada.</p>
     <p class="text">Com base na sua pré-qualificação, reúne as condições iniciais para avançar. Um especialista irá contactá-lo <strong>em menos de 24 horas</strong> para analisar o seu caso em detalhe.</p>
     <div class="divider"></div>
     <p class="text" style="font-weight:600;color:${DARK}">O que acontece a seguir:</p>
@@ -658,7 +658,7 @@ export function advogadosOutreachPT(params: OutreachParams) {
 export function b2cCreditEN(name: string) {
   return layout(`
     <p class="greeting">Hello ${name},</p>
-    <p class="text">We have received your credit simulation request. Thank you for choosing DS Crédito.</p>
+    <p class="text">We have received your credit simulation request. Thank you for choosing Letraperfeiçoada.</p>
     <p class="text">Based on your pre-qualification, you meet the initial conditions to proceed. A specialist will contact you <strong>within 24 hours</strong> to review your case in detail.</p>
     <div class="divider"></div>
     <p class="text" style="font-weight:600;color:${DARK}">What happens next:</p>
