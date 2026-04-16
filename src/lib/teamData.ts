@@ -53,7 +53,7 @@ export const teamMembers: TeamMember[] = [
     photo: "/team/armanda-amorim.jpg",
     photoPosition: "center 30%",
     email: "armandaamorim@dsicredito.pt",
-    phone: "+351 931 049 374",
+    phone: "+351 929 113 983",
     whatsapp: "+351929113983",
     specializations: ["Crédito Habitação", "Crédito Pessoal"],
     languages: ["Português"],
