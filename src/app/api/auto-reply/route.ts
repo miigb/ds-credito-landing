@@ -7,16 +7,16 @@ import {
 } from "@/lib/emailTemplates";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
-const FROM_EMAIL = "DS Crédito <noreply@meuintermediario.com>";
+const FROM_EMAIL = "Letraperfeiçoada <noreply@meuintermediario.com>";
 
 const SUBJECTS = {
   b2b: {
-    pt: "Recebemos o seu contacto — DS Crédito",
-    en: "We received your message — DS Crédito",
+    pt: "Recebemos o seu contacto — Letraperfeiçoada",
+    en: "We received your message — Letraperfeiçoada",
   },
   b2c: {
-    pt: "Pedido de crédito recebido — DS Crédito",
-    en: "Credit request received — DS Crédito",
+    pt: "Pedido de crédito recebido — Letraperfeiçoada",
+    en: "Credit request received — Letraperfeiçoada",
   },
 };
 
