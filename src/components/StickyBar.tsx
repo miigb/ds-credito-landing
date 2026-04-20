@@ -39,7 +39,7 @@ export default function StickyBar() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed top-16 lg:top-20 left-0 right-0 z-40 bg-brand-900/95 backdrop-blur-xl border-b border-white/5"
         >
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 h-14 lg:h-12 flex items-center justify-between gap-3">
+          <div className="max-w-7xl mx-auto px-4 lg:px-8 h-16 lg:h-12 flex items-center justify-between gap-3">
             <p className="text-xs lg:text-sm text-white/60 line-clamp-1">
               {barContent.text}
             </p>
