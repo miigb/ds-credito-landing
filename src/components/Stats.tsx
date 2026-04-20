@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { siteConfig } from "@/lib/siteConfig";
+import SectionCTA from "@/components/ui/section-cta";
 
 function AnimatedCounter({
   value,
@@ -167,6 +168,8 @@ export default function Stats() {
             </div>
           </a>
         </motion.div>
+
+        <SectionCTA label={t.stats.ctaLabel} href="#contact" source="stats" />
       </div>
     </section>
   );

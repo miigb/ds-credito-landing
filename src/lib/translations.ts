@@ -45,9 +45,12 @@ export const translations = {
       team: "Team Members",
       deeds: "Deeds Completed (2025)",
       growth: "Overall growth in 2025 — historic year for our structure",
+      ctaLabel: "Talk to a specialist",
     },
     // Services
     services: {
+      ctaLabelB2c: "Request free quote",
+      ctaLabelB2b: "Talk to us",
       b2c: {
         eyebrow: "Our Services",
         headline: "How we simplify your financing",
@@ -101,6 +104,8 @@ export const translations = {
     },
     // Process
     process: {
+      ctaLabelB2c: "Start my request",
+      ctaLabelB2b: "Discuss partnership",
       b2c: {
         eyebrow: "How It Works",
         headline: "Simple, transparent process",
@@ -171,6 +176,8 @@ export const translations = {
     },
     // Why Us
     whyUs: {
+      ctaLabelB2c: "Get my questions answered",
+      ctaLabelB2b: "Talk to us",
       b2c: {
         eyebrow: "Why Choose Us",
         headline: "Your financing, handled from A to Z",
@@ -499,9 +506,12 @@ export const translations = {
       team: "Colaboradores",
       deeds: "Escrituras Realizadas (2025)",
       growth: "Crescimento global em 2025 — ano histórico para a nossa estrutura",
+      ctaLabel: "Falar com um especialista",
     },
     // Services
     services: {
+      ctaLabelB2c: "Pedir proposta grátis",
+      ctaLabelB2b: "Fale connosco",
       b2c: {
         eyebrow: "Os Nossos Serviços",
         headline: "Como simplificamos o seu crédito",
@@ -555,6 +565,8 @@ export const translations = {
     },
     // Process
     process: {
+      ctaLabelB2c: "Começar o meu pedido",
+      ctaLabelB2b: "Falar sobre parceria",
       b2c: {
         eyebrow: "O Processo",
         headline: "Como funciona",
@@ -625,6 +637,8 @@ export const translations = {
     },
     // Why Us
     whyUs: {
+      ctaLabelB2c: "Tirar as minhas dúvidas",
+      ctaLabelB2b: "Falar connosco",
       b2c: {
         eyebrow: "Porquê Nós",
         headline: "O seu financiamento, tratado de A a Z",
