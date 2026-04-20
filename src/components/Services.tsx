@@ -15,6 +15,7 @@ import {
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
+import SectionCTA from "@/components/ui/section-cta";
 
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -175,6 +176,12 @@ export default function Services() {
             </div>
           </div>
         </motion.div>
+
+        <SectionCTA
+          label={audience === "partner" ? t.services.ctaLabelB2b : t.services.ctaLabelB2c}
+          href={audience === "partner" ? "#contact" : "#pre-qualification"}
+          source="services"
+        />
       </div>
     </section>
   );

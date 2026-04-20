@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
+import SectionCTA from "@/components/ui/section-cta";
 
 const STEP_PHOTOS = [
   "/process/step-01.jpg",
@@ -186,32 +187,11 @@ export default function Process() {
           </div>
         </div>
 
-        {/* End-of-process CTA — outside the timeline container so the
-            vertical line doesn't run through the button */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="relative mt-16 lg:mt-24 flex justify-center"
-        >
-          <a
-            href={audience === "partner" ? "#contact" : "#pre-qualification"}
-            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
-          >
-            {t.hero[audience === "partner" ? "b2b" : "b2c"].ctaPrimary}
-            <svg
-              className="w-4 h-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-        </motion.div>
+        <SectionCTA
+          label={audience === "partner" ? t.process.ctaLabelB2b : t.process.ctaLabelB2c}
+          href={audience === "partner" ? "#contact" : "#pre-qualification"}
+          source="process"
+        />
       </div>
     </section>
   );

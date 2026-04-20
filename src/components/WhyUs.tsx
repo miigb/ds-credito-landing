@@ -17,6 +17,7 @@ import {
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
+import SectionCTA from "@/components/ui/section-cta";
 
 export default function WhyUs() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -131,6 +132,12 @@ export default function WhyUs() {
             </div>
           </motion.div>
         </div>
+
+        <SectionCTA
+          label={audience === "partner" ? t.whyUs.ctaLabelB2b : t.whyUs.ctaLabelB2c}
+          href="#contact"
+          source="why-us"
+        />
       </div>
     </section>
   );

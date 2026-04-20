@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Linkedin } from "lucide-react";
+import { ArrowRight, Linkedin } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
 import { teamMembers } from "@/lib/teamData";
@@ -135,19 +135,20 @@ export default function TeamPreview() {
           ))}
         </motion.div>
 
-        {/* CTA */}
+        {/* CTA — subtle link variant; primary CTAs live in adjacent sections */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-10"
         >
           <Link
             href="/equipa"
-            className="inline-block bg-accent-700 text-white rounded-2xl px-8 py-4 font-semibold shadow-2xl shadow-accent-700/30 hover:bg-accent-600 hover:-translate-y-0.5 transition-all"
+            className="group inline-flex items-center gap-1.5 text-accent-400 text-sm font-semibold hover:text-accent-300 underline-offset-4 hover:underline transition-colors"
           >
-            {t.team.cta} →
+            {t.team.cta}
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </motion.div>
       </div>
