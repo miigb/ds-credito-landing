@@ -128,7 +128,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt" className={inter.variable} translate="no">
-      <body className="font-sans antialiased notranslate">
+      <body className="font-sans antialiased notranslate" suppressHydrationWarning>
         <StructuredData />
         <noscript>
           <div style={{ padding: "2rem", fontFamily: "system-ui" }}>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calculator, ArrowRight } from "lucide-react";
+import { Calculator, ArrowRight, Check, Lock } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -38,9 +38,8 @@ export default function MiniSimulator() {
   const [submitted, setSubmitted] = useState(false);
 
   const years = 30;
-  const rate = 3.2; // indicative average Euribor + spread
+  const rate = 3.2; // indicative average Euribor + spread (kept for analytics)
   const monthly = calculateMonthly(propertyValue, downPayment, years, rate);
-  const loanAmount = propertyValue * (1 - downPayment / 100);
 
   const handleSimulate = () => {
     setSubmitted(true);
@@ -57,7 +56,6 @@ export default function MiniSimulator() {
       downPayment,
       monthly: Math.round(monthly),
     });
-    // Store simulator values so the credit form can pre-fill them
     try {
       sessionStorage.setItem("sim_property_value", String(propertyValue));
       sessionStorage.setItem("sim_down_payment", String(downPayment));
@@ -153,26 +151,27 @@ export default function MiniSimulator() {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-3"
         >
-          <div className="text-center py-2">
-            <p className="text-xs text-white/40 mb-1">
-              {isPt ? "Prestação mensal estimada" : "Estimated monthly payment"}
+          <div className="text-center py-3">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-[10px] font-semibold uppercase tracking-wider mb-3">
+              <Check size={11} strokeWidth={3} />
+              {isPt ? "Perfil viável" : "Viable profile"}
+            </div>
+            <p className="text-base font-semibold text-white leading-snug">
+              {isPt ? "Várias soluções disponíveis" : "Several solutions available"}
             </p>
-            <p className="text-3xl font-bold text-white">
-              ~€{formatCurrency(Math.round(monthly))}
-              <span className="text-sm font-normal text-white/40">/mês</span>
-            </p>
-            <p className="text-[10px] text-white/30 mt-1">
+            <div className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-white/60 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full">
+              <Lock size={11} className="text-white/40" />
               {isPt
-                ? `Financiamento de €${formatCurrency(loanAmount)} · ${years} anos · Taxa indicativa ${rate}%`
-                : `Loan of €${formatCurrency(loanAmount)} · ${years} years · Indicative rate ${rate}%`}
-            </p>
+                ? "Simulação exata — disponível após contacto"
+                : "Exact simulation — available after contact"}
+            </div>
           </div>
 
           <button
             onClick={handleContinue}
             className="group w-full py-3 text-sm font-semibold rounded-xl bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-lg shadow-accent-700/20 flex items-center justify-center gap-2"
           >
-            {isPt ? "Continuar — verificar viabilidade" : "Continue — check eligibility"}
+            {isPt ? "Continuar — falar connosco" : "Continue — talk to us"}
             <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
           </button>
 
