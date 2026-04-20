@@ -39,13 +39,13 @@ export default function StickyBar() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed top-16 lg:top-20 left-0 right-0 z-40 bg-brand-900/95 backdrop-blur-xl border-b border-white/5"
         >
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 h-10 lg:h-12 flex items-center justify-between gap-3">
+          <div className="max-w-7xl mx-auto px-4 lg:px-8 h-14 lg:h-12 flex items-center justify-between gap-3">
             <p className="text-xs lg:text-sm text-white/60 line-clamp-1">
               {barContent.text}
             </p>
             <button
               onClick={handleClick}
-              className="px-4 py-1 lg:px-5 lg:py-1.5 text-xs lg:text-sm font-semibold rounded-lg bg-accent-700 text-white hover:bg-accent-600 transition-all duration-200 shadow-md shadow-accent-700/20 whitespace-nowrap shrink-0"
+              className="px-5 py-2 lg:py-1.5 text-sm font-semibold rounded-lg bg-accent-700 text-white hover:bg-accent-600 transition-all duration-200 shadow-md shadow-accent-700/20 whitespace-nowrap shrink-0"
             >
               {barContent.cta}
             </button>

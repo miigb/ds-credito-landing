@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
@@ -92,6 +92,7 @@ export default function CreditWizard() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Pre-fill financing value from MiniSimulator
   useEffect(() => {
@@ -210,6 +211,9 @@ export default function CreditWizard() {
           qualified: qualified ? "yes" : "no",
           operation_type: answers.operationType,
         });
+        requestAnimationFrame(() => {
+          sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -253,7 +257,7 @@ export default function CreditWizard() {
   };
 
   return (
-    <section id="pre-qualification" className="relative py-28 overflow-hidden">
+    <section ref={sectionRef} id="pre-qualification" className="relative py-28 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-brand-50 via-white to-brand-50" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
