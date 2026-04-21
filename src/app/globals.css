@@ -108,6 +108,33 @@ input[type="range"] {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
+
+  /* Infinite marquee scroll — used by BankPartnersScroll.
+     translate3d forces GPU compositing so the scroll stays smooth on mobile. */
+  @keyframes marquee-left {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes marquee-right {
+    0%   { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  .animate-marquee-left {
+    animation: marquee-left 45s linear infinite;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .animate-marquee-right {
+    animation: marquee-right 45s linear infinite;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee-left,
+    .animate-marquee-right {
+      animation: none;
+    }
+  }
 }
 
 /* Range slider styling */

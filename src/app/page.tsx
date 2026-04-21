@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import BankPartners from "@/components/BankPartners";
+import BankPartnersScroll from "@/components/BankPartnersScroll";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import VideoShowcase from "@/components/VideoShowcase";
@@ -24,7 +24,7 @@ export default function Home() {
       <StickyBar />
       <Navbar />
       <Hero />
-      <BankPartners />
+      <BankPartnersScroll />
       <Stats />
       <Services />
       {!isClient && <VideoShowcase />}
