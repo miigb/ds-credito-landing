@@ -117,7 +117,7 @@ export const teamMembers: TeamMember[] = [
     photoPosition: "center 32%",
     email: "josenobre@dsicredito.pt",
     phone: "+351 966 587 771",
-    whatsapp: "+351929113983",
+    whatsapp: "+351966587771",
     specializations: ["Crédito Habitação", "Crédito Pessoal"],
     languages: ["Português", "English"],
     featured: true,
