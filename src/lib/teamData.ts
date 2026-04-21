@@ -146,7 +146,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: "jose-januario",
-    name: "José Januário",
+    name: "José Hipólito",
     role: {
       pt: "Gestor de Crédito",
       en: "Credit Manager",
@@ -159,7 +159,7 @@ export const teamMembers: TeamMember[] = [
     photoPosition: "center 30%",
     email: "josejanuario@dsicredito.pt",
     phone: "+351 937 064 118",
-    whatsapp: "+351929113983",
+    whatsapp: "+351937064118",
     specializations: ["Crédito Habitação", "Crédito Pessoal"],
     languages: ["Português", "English"],
     featured: true,
