@@ -159,7 +159,7 @@ export default function AgentProfilePage() {
     }
   };
 
-  const usePersonalPhone = member.id === "armando-serra" || member.id === "lilia-fernandes" || member.id === "armanda-amorim" || member.id === "jose-nobre" || member.id === "jose-januario";
+  const usePersonalPhone = member.id === "armando-serra" || member.id === "lilia-fernandes" || member.id === "armanda-amorim" || member.id === "jose-nobre" || member.id === "jose-januario" || member.id === "paulo-brito";
   const displayedPhone = usePersonalPhone ? member.phone || "" : "+351 265 117 175";
   const displayPhone = displayedPhone.replace(/^\+351\s?/, "");
 
