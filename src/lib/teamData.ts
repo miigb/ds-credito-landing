@@ -157,7 +157,7 @@ export const teamMembers: TeamMember[] = [
     },
     photo: "/team/jose-januario.jpg",
     photoPosition: "center 30%",
-    email: "josehipolito@dsicredito.pt",
+    email: "josejanuario@dsicredito.pt",
     phone: "+351 937 064 118",
     whatsapp: "+351937064118",
     specializations: ["Crédito Habitação", "Crédito Pessoal"],
