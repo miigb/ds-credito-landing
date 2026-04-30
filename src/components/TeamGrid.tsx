@@ -58,7 +58,7 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
 
           <h3 className="text-white font-bold text-xl">{member.name}</h3>
           <p className="text-accent-400 text-sm font-semibold mb-4">{member.role[locale]}</p>
-          <p className="text-white/50 text-sm leading-relaxed mb-6">{member.bio[locale]}</p>
+          <p className="text-white/50 text-sm leading-relaxed mb-6">{member.bioShort?.[locale] ?? member.bio[locale]}</p>
         </div>
       </Link>
     </motion.div>
@@ -67,7 +67,6 @@ function TeamMemberCard({ member, index }: { member: (typeof teamMembers)[number
 
 export default function TeamGrid() {
   const sorted = [...teamMembers].sort((a, b) => a.order - b.order);
-  const [leader, ...agents] = sorted;
 
   return (
     <section className="py-20">
@@ -78,17 +77,9 @@ export default function TeamGrid() {
         viewport={{ once: true }}
         className="max-w-7xl mx-auto px-6 lg:px-8"
       >
-        {/* CEO — centered on top */}
-        <div className="flex justify-center mb-8">
-          <div className="w-full max-w-sm">
-            <TeamMemberCard member={leader} index={0} />
-          </div>
-        </div>
-
-        {/* Agents — 3-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {agents.map((member, index) => (
-            <TeamMemberCard key={member.id} member={member} index={index + 1} />
+          {sorted.map((member, index) => (
+            <TeamMemberCard key={member.id} member={member} index={index} />
           ))}
         </div>
       </motion.div>

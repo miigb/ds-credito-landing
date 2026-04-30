@@ -3,6 +3,7 @@ export interface TeamMember {
   name: string;
   role: { pt: string; en: string };
   bio: { pt: string; en: string };
+  bioShort?: { pt: string; en: string };
   photo: string;
   photoPosition?: string;
   email?: string;
@@ -61,27 +62,6 @@ export const teamMembers: TeamMember[] = [
     order: 2,
   },
   {
-    id: "patricia-pereira",
-    name: "Patrícia Pereira",
-    role: {
-      pt: "Gestora de Crédito",
-      en: "Credit Manager",
-    },
-    bio: {
-      pt: "Especialista em intermediação de crédito com foco no acompanhamento personalizado de clientes e na obtenção das melhores condições.",
-      en: "Credit intermediation specialist focused on personalized client support and securing the best conditions.",
-    },
-    photo: "/team/patricia-pereira.jpg",
-    photoPosition: "center 40%",
-    email: "patriciapereira@dsicredito.pt",
-    phone: "+351 932 982 787",
-    whatsapp: "+351929113983",
-    specializations: ["Crédito Habitação", "Crédito Pessoal"],
-    languages: ["Português", "English"],
-    featured: true,
-    order: 3,
-  },
-  {
     id: "lilia-fernandes",
     name: "Lília Fernandes",
     role: {
@@ -91,6 +71,10 @@ export const teamMembers: TeamMember[] = [
     bio: {
       pt: "Especialista no aconselhamento financeiro em crédito habitação, garante um acompanhamento personalizado em todas as fases do processo assegurando um serviço transparente e eficiente alargado também a clientes estrangeiros no processo de compra de imóvel em Portugal.",
       en: "Specialist in financial advisory for mortgage credit, providing personalized support at every stage of the process, ensuring a transparent and efficient service extended also to foreign clients purchasing property in Portugal.",
+    },
+    bioShort: {
+      pt: "Especialista no aconselhamento financeiro em crédito habitação, com acompanhamento personalizado e transparente. Apoia também clientes estrangeiros na compra de imóvel em Portugal.",
+      en: "Specialist in financial advisory for mortgage credit, with personalized and transparent support. Also assists foreign clients purchasing property in Portugal.",
     },
     photo: "/team/lilia-fernandes.jpg",
     photoPosition: "center 28%",
@@ -133,6 +117,10 @@ export const teamMembers: TeamMember[] = [
     bio: {
       pt: "Serviço de aconselhamento especializado e personalizado, permite às famílias poupanças de milhares de euros. Focado na análise de crédito, e no acompanhamento de processos de forma independente e gratuita junto das instituições financeiras. Qualificado, certificado e auditado pelo Banco de Portugal.",
       en: "Specialized and personalized advisory service, helping families save thousands of euros. Focused on credit analysis and independent, free process management with financial institutions. Qualified, certified and audited by Banco de Portugal.",
+    },
+    bioShort: {
+      pt: "Aconselhamento especializado e personalizado que permite às famílias poupanças de milhares de euros. Qualificado, certificado e auditado pelo Banco de Portugal.",
+      en: "Specialized and personalized advisory that helps families save thousands of euros. Qualified, certified and audited by Banco de Portugal.",
     },
     photo: "/team/armando-serra.jpg",
     photoPosition: "center 50%",

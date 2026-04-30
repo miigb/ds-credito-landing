@@ -55,7 +55,7 @@ function TeamCard({
             {member.role[locale]}
           </p>
           <p className="text-white/50 text-sm leading-relaxed">
-            {member.bio[locale]}
+            {member.bioShort?.[locale] ?? member.bio[locale]}
           </p>
         </div>
       </Link>
@@ -117,7 +117,7 @@ export default function TeamPreview() {
           </p>
         </motion.div>
 
-        {/* Team Cards — Paulo, Armanda, Patrícia */}
+        {/* Team Cards — Paulo, Armanda, Lília */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
