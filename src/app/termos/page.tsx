@@ -69,7 +69,21 @@ export default function TermosPage() {
             <p className="mt-2">
               Tipos de crédito autorizados: {siteConfig.regulation.creditTypes.join(" e ")}.
               Sem vínculo de exclusividade com qualquer instituição financeira.
-              Presta serviços de consultoria: {siteConfig.regulation.consultancyServices ? "Sim" : "Não"}.
+            </p>
+            <p className="mt-2">
+              Serviços de intermediação de crédito autorizados pelo Banco de Portugal:
+            </p>
+            <ul className="mt-2 list-disc pl-6 space-y-1">
+              <li>Apresentação ou proposta de contratos de crédito a consumidores;</li>
+              <li>
+                Assistência a consumidores, mediante a realização de atos preparatórios
+                ou de outros trabalhos de gestão pré-contratual relativamente a contratos
+                de crédito que não tenham sido por si apresentados ou propostos;
+              </li>
+              <li>Celebração de contratos de crédito com consumidores em nome dos mutuantes.</li>
+            </ul>
+            <p className="mt-2">
+              <strong>Serviços de Consultoria: {siteConfig.regulation.consultancyServices ? "SIM" : "NÃO"}.</strong>
             </p>
           </section>
 

@@ -118,30 +118,30 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Regulatory notice */}
-          <div className="text-white/20 text-[10px] text-center w-full mt-4 leading-relaxed max-w-4xl mx-auto">
+          {/* Regulatory notice — Banco de Portugal compliance disclosure */}
+          <div className="text-white/55 text-[11px] text-center w-full mt-4 leading-relaxed max-w-4xl mx-auto">
             <p>
-              A <strong className="text-white/30">LETRAPERFEIÇOADA — UNIPESSOAL LDA</strong> é um Intermediário de Crédito Vinculado, com o registo nº{" "}
+              A <strong className="text-white/80">LETRAPERFEIÇOADA — UNIPESSOAL LDA</strong> é um Intermediário de Crédito Vinculado, com o registo nº{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
+                className="text-white/70 hover:text-white/90 underline underline-offset-2 transition-colors"
               >
                 0007470
               </a>
-              , autorizado pelo Banco de Portugal para a prestação de serviços de consultoria e autorizado para a prestação de serviços de intermediação de crédito (Apresentação ou proposta de contratos de crédito a consumidores; Assistência a consumidores, mediante a realização de atos preparatórios ou de outros trabalhos de gestão pré-contratual relativamente a contratos de crédito que não tenham sido por si apresentados ou propostos). Contratos de crédito abrangidos: Crédito à Habitação e Crédito aos Consumidores. Mutuantes ou grupos de mutuantes com quem mantém contrato de vinculação: CAIXA GERAL DE DEPÓSITOS, S.A., BANCO SANTANDER TOTTA, S.A., NOVO BANCO, S.A., BANCO BPI, S.A., BANKINTER, S.A. — SUCURSAL EM PORTUGAL, BANCO CTT, S.A., ABANCA PORTUGAL, S.A., BNI EUROPA, S.A., UCI — UNIÃO DE CRÉDITOS IMOBILIÁRIOS, S.A., UNICRE — INSTITUIÇÃO FINANCEIRA DE CRÉDITO, S.A. Informação verificável em{" "}
+              , autorizado pelo Banco de Portugal para a prestação dos seguintes serviços de intermediação de crédito: (i) Apresentação ou proposta de contratos de crédito a consumidores; (ii) Assistência a consumidores, mediante a realização de atos preparatórios ou de outros trabalhos de gestão pré-contratual relativamente a contratos de crédito que não tenham sido por si apresentados ou propostos; (iii) Celebração de contratos de crédito com consumidores em nome dos mutuantes. <strong className="text-white/80">Serviços de Consultoria: SIM.</strong> Contratos de crédito abrangidos: Crédito à Habitação e Crédito aos Consumidores. Mutuantes ou grupos de mutuantes com quem mantém contrato de vinculação: CAIXA GERAL DE DEPÓSITOS, S.A., BANCO SANTANDER TOTTA, S.A., NOVO BANCO, S.A., BANCO BPI, S.A., BANKINTER, S.A. — SUCURSAL EM PORTUGAL, BANCO CTT, S.A., ABANCA PORTUGAL, S.A., BNI EUROPA, S.A., UCI — UNIÃO DE CRÉDITOS IMOBILIÁRIOS, S.A., UNICRE — INSTITUIÇÃO FINANCEIRA DE CRÉDITO, S.A. Informação verificável em{" "}
               <a
                 href={siteConfig.regulation.registryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/30 hover:text-white/50 underline underline-offset-2 transition-colors"
+                className="text-white/70 hover:text-white/90 underline underline-offset-2 transition-colors"
               >
                 bportugal.pt
               </a>
               .
             </p>
-            <p className="pt-2">
+            <p className="pt-2 text-white/60">
               &copy; {new Date().getFullYear()} {siteConfig.name}. {t.footer.rights}
             </p>
           </div>
