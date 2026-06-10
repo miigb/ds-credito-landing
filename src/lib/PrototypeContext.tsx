@@ -17,13 +17,16 @@ import {
 
 export type Direction = "cinema" | "editorial";
 export type LogoVariant = "oficial" | "sol-mont" | "monoline" | "assinatura";
+export type HeroStyle = "shader" | "video";
 
 interface PrototypeState {
   direction: Direction;
   logoVariant: LogoVariant;
+  heroStyle: HeroStyle;
   grain: boolean;
   setDirection: (d: Direction) => void;
   setLogoVariant: (v: LogoVariant) => void;
+  setHeroStyle: (h: HeroStyle) => void;
   setGrain: (g: boolean) => void;
 }
 
@@ -32,15 +35,18 @@ const STORAGE_KEY = "proto-amanhecer-2026";
 const PrototypeContext = createContext<PrototypeState>({
   direction: "cinema",
   logoVariant: "oficial",
+  heroStyle: "video",
   grain: true,
   setDirection: () => {},
   setLogoVariant: () => {},
+  setHeroStyle: () => {},
   setGrain: () => {},
 });
 
 export function PrototypeProvider({ children }: { children: ReactNode }) {
   const [direction, setDirection] = useState<Direction>("cinema");
   const [logoVariant, setLogoVariant] = useState<LogoVariant>("oficial");
+  const [heroStyle, setHeroStyle] = useState<HeroStyle>("video");
   const [grain, setGrain] = useState(true);
 
   useEffect(() => {
@@ -52,6 +58,8 @@ export function PrototypeProvider({ children }: { children: ReactNode }) {
         setDirection(saved.direction);
       if (["oficial", "sol-mont", "monoline", "assinatura"].includes(saved.logoVariant))
         setLogoVariant(saved.logoVariant);
+      if (saved.heroStyle === "shader" || saved.heroStyle === "video")
+        setHeroStyle(saved.heroStyle);
       if (typeof saved.grain === "boolean") setGrain(saved.grain);
     } catch {}
   }, []);
@@ -60,14 +68,23 @@ export function PrototypeProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ direction, logoVariant, grain })
+        JSON.stringify({ direction, logoVariant, heroStyle, grain })
       );
     } catch {}
-  }, [direction, logoVariant, grain]);
+  }, [direction, logoVariant, heroStyle, grain]);
 
   return (
     <PrototypeContext.Provider
-      value={{ direction, logoVariant, grain, setDirection, setLogoVariant, setGrain }}
+      value={{
+        direction,
+        logoVariant,
+        heroStyle,
+        grain,
+        setDirection,
+        setLogoVariant,
+        setHeroStyle,
+        setGrain,
+      }}
     >
       {children}
     </PrototypeContext.Provider>

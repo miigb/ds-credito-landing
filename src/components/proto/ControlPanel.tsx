@@ -65,8 +65,16 @@ function Chip({
 
 export default function ControlPanel() {
   const [open, setOpen] = useState(false);
-  const { direction, setDirection, logoVariant, setLogoVariant, grain, setGrain } =
-    usePrototype();
+  const {
+    direction,
+    setDirection,
+    logoVariant,
+    setLogoVariant,
+    heroStyle,
+    setHeroStyle,
+    grain,
+    setGrain,
+  } = usePrototype();
   const { audience, setAudience } = useAudience();
   const { locale, setLocale } = useLanguage();
 
@@ -114,6 +122,23 @@ export default function ControlPanel() {
                   {l.label}
                 </Chip>
               ))}
+            </Row>
+
+            <Row label="Hero · Cinema">
+              <Chip
+                active={heroStyle === "video"}
+                onClick={() => setHeroStyle("video")}
+                title="Vídeo ambiente + blur inferior + liquid glass"
+              >
+                Vídeo
+              </Chip>
+              <Chip
+                active={heroStyle === "shader"}
+                onClick={() => setHeroStyle("shader")}
+                title="Shader mesh golden-hour"
+              >
+                Shader
+              </Chip>
             </Row>
 
             <Row label="Textura">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import MeshHero from "@/components/fx/MeshHero";
@@ -13,11 +13,16 @@ import { useAudience } from "@/lib/AudienceContext";
 import { usePrototype } from "@/lib/PrototypeContext";
 
 /*
- * Hero — two art directions of the same content (see docs/redesign/DESIGN-BRIEF.md):
- *  cinema    · golden-hour mesh shader on ink, type-as-hero
- *  editorial · warm paper, dawn radial, mixed-weight ink display type
+ * Hero — three art directions of the same content (see docs/redesign/DESIGN-BRIEF.md):
+ *  cinema + video  · ambient video, bottom backdrop-blur mask (no dark gradient),
+ *                    liquid-glass pills, staggered blur-fade-up entrances
+ *  cinema + shader · golden-hour mesh shader on ink, type-as-hero
+ *  editorial       · warm paper, dawn radial, mixed-weight ink display type
  * Copy, CTAs, tracking, MiniSimulator and trust badges are identical to the
  * legacy hero — presentation only.
+ *
+ * Video source (self-hosted, gitignored): public/hero/hero-ambient.mp4 ←
+ * https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4
  */
 
 function CtaGroup({ tone }: { tone: "dark" | "light" }) {
@@ -144,7 +149,202 @@ function ScrollCue({ tone }: { tone: "dark" | "light" }) {
   );
 }
 
-export default function Hero() {
+/* ──────────────────────────────────────────────────────────────────────────
+ * Video treatment — cinematic streaming hero
+ * ────────────────────────────────────────────────────────────────────────── */
+
+/* Same trust content as TrustStrip, recomposed as a slim metadata row. */
+function VideoTrustRow() {
+  const { locale } = useLanguage();
+  const isPt = locale === "pt";
+
+  return (
+    <div
+      className="animate-blur-fade-up flex flex-wrap items-center gap-x-6 gap-y-3 mb-6 md:mb-8 text-xs sm:text-sm text-white/75"
+      style={{ animationDelay: "300ms" }}
+    >
+      <span className="flex items-baseline gap-2">
+        <span className="font-semibold text-white tabular-nums">10+</span>
+        <span>
+          {isPt
+            ? "bancos parceiros a competir pelas melhores condições"
+            : "partner banks competing for your best rates"}
+        </span>
+      </span>
+      <span className="flex items-baseline gap-2">
+        <span className="font-semibold text-white tabular-nums">€0</span>
+        <span>
+          {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
+        </span>
+      </span>
+      <span className="flex items-center gap-2">
+        <span className="w-1 h-1 rounded-full bg-accent-400" />
+        <span className="font-medium text-white/90">
+          {isPt ? "Registado" : "Registered"} · Banco de Portugal n.º 0007470
+        </span>
+      </span>
+      <a
+        href="https://anica.org.pt"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-2"
+      >
+        <span className="inline-flex items-center justify-center bg-white rounded-md px-1.5 py-1">
+          <img
+            src="/anica-logo.png"
+            alt="ANICA — Associação Nacional de Intermediários de Crédito Autorizados"
+            className="h-4 w-auto"
+          />
+        </span>
+        <span className="group-hover:underline">
+          {isPt ? "Membro Certificado" : "Certified Member"} 2025
+        </span>
+      </a>
+    </div>
+  );
+}
+
+function VideoHero() {
+  const { t } = useLanguage();
+  const { audience } = useAudience();
+  const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
+  const isClient = audience === "client";
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  return (
+    <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-ink">
+      {/* ── Backdrop: ambient video over a warm-ink fallback ── */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(160deg, #1D1D1B 0%, #2a1f12 55%, #4a3210 100%)" }}
+      >
+        {!reduced && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/hero/hero-ambient.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+        )}
+      </div>
+
+      {/* Bottom blur overlay — blur only, no dark gradient */}
+      <div
+        aria-hidden
+        className="mask-fade-bottom pointer-events-none absolute inset-0 z-[1] backdrop-blur-xl"
+      />
+
+      {/* slim top scrim so navbar chrome stays legible over bright sky */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 z-[2] h-36"
+        style={{ background: "linear-gradient(to bottom, rgba(29,29,27,0.5), transparent)" }}
+      />
+
+      {/* melt into the next ink chapter */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 z-[2] h-24"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(29,29,27,0.9))" }}
+      />
+
+      {/* ── Content — bottom-anchored ── */}
+      <div className="relative z-10 flex-1 flex flex-col justify-end max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-14 md:pb-20">
+        <div className="flex flex-col md:flex-row items-start md:items-end gap-8">
+          {/* Left */}
+          <div className="hero-video-legibility flex-1 max-w-3xl">
+            <div
+              className="animate-blur-fade-up inline-flex items-center gap-2.5 mb-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400"
+              style={{ animationDelay: "200ms" }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-accent-400"
+                style={{ boxShadow: "0 0 14px var(--color-accent-400)" }}
+              />
+              {t.hero.eyebrow}
+            </div>
+
+            <VideoTrustRow />
+
+            <h1
+              className="animate-blur-fade-up text-white font-normal mb-4 md:mb-6"
+              style={{
+                animationDelay: "400ms",
+                fontSize: "clamp(2.4rem, 6vw, 5.2rem)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.02,
+              }}
+            >
+              {heroAud.headlineStart}
+              <span className="block">{heroAud.headlineHighlight}</span>
+            </h1>
+
+            <p
+              className="animate-blur-fade-up text-base sm:text-lg md:text-xl text-white/65 leading-relaxed max-w-2xl mb-8 md:mb-10"
+              style={{ animationDelay: "500ms" }}
+            >
+              {heroAud.subheading}
+            </p>
+
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              <a
+                href={audience === "partner" ? "#contact" : "#pre-qualification"}
+                onClick={() => track("hero_cta", { type: "primary", audience })}
+                className="animate-blur-fade-up group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 text-base font-medium rounded-full bg-white text-ink hover:bg-brand-100 transition-colors duration-300"
+                style={{ animationDelay: "600ms" }}
+              >
+                {heroAud.ctaPrimary}
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a
+                href="#process"
+                className="animate-blur-fade-up liquid-glass inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 text-base font-medium rounded-full text-white hover:bg-white/[0.06] transition-colors duration-300"
+                style={{ animationDelay: "700ms" }}
+              >
+                {heroAud.ctaSecondary}
+              </a>
+            </div>
+          </div>
+
+          {/* Right — the instrument (B2C) */}
+          {isClient && (
+            <div
+              className="animate-blur-fade-up w-full max-w-md md:w-[380px] shrink-0"
+              style={{ animationDelay: "800ms" }}
+            >
+              <MiniSimulator />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <ScrollCue tone="dark" />
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Shader / editorial treatments
+ * ────────────────────────────────────────────────────────────────────────── */
+
+function ClassicHero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -293,4 +493,13 @@ export default function Hero() {
       <ScrollCue tone={tone} />
     </section>
   );
+}
+
+export default function Hero() {
+  const { direction, heroStyle } = usePrototype();
+
+  if (direction === "cinema" && heroStyle === "video") {
+    return <VideoHero />;
+  }
+  return <ClassicHero />;
 }
