@@ -25,11 +25,14 @@ export default function Navbar() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { locale, setLocale, t } = useLanguage();
   const { audience, setAudience } = useAudience();
-  const { direction } = usePrototype();
+  const { direction, heroStyle } = usePrototype();
   const reduced = useReducedMotion();
 
   const dark = direction === "cinema";
   const tone: "dark" | "light" = dark ? "dark" : "light";
+  /* Video-2 hero pairs with a liquid-glass nav pill while floating over the
+     video; reverts to standard chrome once scrolled into the page. */
+  const glassNav = dark && heroStyle === "video2" && !scrolled && !mobileOpen;
 
   const navLinks = [
     { label: t.nav.about, href: "/#about" },
@@ -102,32 +105,57 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`relative group px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${linkTone}`}
-              >
-                {link.label}
-                <span
-                  aria-hidden
-                  className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[3px] w-[3px] rounded-full opacity-0 scale-50 transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 ${hoverDot}`}
-                />
-              </a>
-            ))}
-          </div>
+          {glassNav ? (
+            <div className="hidden lg:flex items-center gap-1 liquid-glass rounded-xl px-2 py-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="px-3 py-1.5 rounded-md text-sm text-white/70 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="hidden lg:flex items-center gap-0.5">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`relative group px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${linkTone}`}
+                >
+                  {link.label}
+                  <span
+                    aria-hidden
+                    className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[3px] w-[3px] rounded-full opacity-0 scale-50 transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 ${hoverDot}`}
+                  />
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Right side: Audience toggle + Lang switcher + CTA */}
           <div className="hidden lg:flex items-center gap-3">
             {/* Audience toggle (PT only) */}
             {locale === "pt" && (
-              <div className={`flex items-center rounded-full p-0.5 text-xs ${pillShell}`} translate="no">
+              <div
+                className={`flex items-center rounded-full p-0.5 text-xs ${
+                  glassNav ? "liquid-glass" : pillShell
+                }`}
+                translate="no"
+              >
                 <button
                   onClick={() => setAudience("client")}
                   translate="no"
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
-                    audience === "client" ? pillActive : pillIdle
+                    audience === "client"
+                      ? glassNav
+                        ? "bg-white/15 text-white font-semibold"
+                        : pillActive
+                      : glassNav
+                        ? "text-white/70 hover:text-white"
+                        : pillIdle
                   }`}
                 >
                   {t.audienceToggle.client}
@@ -136,7 +164,13 @@ export default function Navbar() {
                   onClick={() => setAudience("partner")}
                   translate="no"
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
-                    audience === "partner" ? pillActive : pillIdle
+                    audience === "partner"
+                      ? glassNav
+                        ? "bg-white/15 text-white font-semibold"
+                        : pillActive
+                      : glassNav
+                        ? "text-white/70 hover:text-white"
+                        : pillIdle
                   }`}
                 >
                   {t.audienceToggle.partner}
@@ -154,9 +188,11 @@ export default function Navbar() {
                 aria-label="Change language"
                 aria-expanded={langMenuOpen}
                 className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
-                  dark
-                    ? "text-white/70 hover:text-white hover:bg-white/10"
-                    : "text-brand-500 hover:text-brand-900 hover:bg-brand-900/[0.05]"
+                  glassNav
+                    ? "liquid-glass text-white/80 hover:text-white"
+                    : dark
+                      ? "text-white/70 hover:text-white hover:bg-white/10"
+                      : "text-brand-500 hover:text-brand-900 hover:bg-brand-900/[0.05]"
                 }`}
               >
                 <Globe size={16} />
@@ -206,7 +242,11 @@ export default function Navbar() {
             {/* CTA */}
             <a
               href="/#contact"
-              className="inline-flex items-center px-6 py-2.5 text-sm font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-lg shadow-accent-700/25 hover:-translate-y-0.5"
+              className={`inline-flex items-center px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${
+                glassNav
+                  ? "bg-white text-ink hover:bg-white/90"
+                  : "bg-accent-700 text-white hover:bg-accent-600 shadow-lg shadow-accent-700/25 hover:-translate-y-0.5"
+              }`}
             >
               {t.nav.cta}
             </a>

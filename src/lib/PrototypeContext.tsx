@@ -17,7 +17,7 @@ import {
 
 export type Direction = "cinema" | "editorial";
 export type LogoVariant = "oficial" | "sol-mont" | "monoline" | "assinatura";
-export type HeroStyle = "shader" | "video";
+export type HeroStyle = "shader" | "video" | "video2";
 
 interface PrototypeState {
   direction: Direction;
@@ -35,7 +35,7 @@ const STORAGE_KEY = "proto-amanhecer-2026";
 const PrototypeContext = createContext<PrototypeState>({
   direction: "cinema",
   logoVariant: "oficial",
-  heroStyle: "video",
+  heroStyle: "video2",
   grain: true,
   setDirection: () => {},
   setLogoVariant: () => {},
@@ -46,7 +46,7 @@ const PrototypeContext = createContext<PrototypeState>({
 export function PrototypeProvider({ children }: { children: ReactNode }) {
   const [direction, setDirection] = useState<Direction>("cinema");
   const [logoVariant, setLogoVariant] = useState<LogoVariant>("oficial");
-  const [heroStyle, setHeroStyle] = useState<HeroStyle>("video");
+  const [heroStyle, setHeroStyle] = useState<HeroStyle>("video2");
   const [grain, setGrain] = useState(true);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export function PrototypeProvider({ children }: { children: ReactNode }) {
         setDirection(saved.direction);
       if (["oficial", "sol-mont", "monoline", "assinatura"].includes(saved.logoVariant))
         setLogoVariant(saved.logoVariant);
-      if (saved.heroStyle === "shader" || saved.heroStyle === "video")
+      if (["shader", "video", "video2"].includes(saved.heroStyle))
         setHeroStyle(saved.heroStyle);
       if (typeof saved.grain === "boolean") setGrain(saved.grain);
     } catch {}

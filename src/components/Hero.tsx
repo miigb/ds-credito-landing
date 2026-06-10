@@ -341,6 +341,131 @@ function VideoHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * Video treatment 2 — minimal liquid-glass ("Equilibrium" grammar)
+ * Raw ambient video (no blur mask), bottom-left content, no entrance
+ * animations — the video itself provides the motion. Pairs with the
+ * liquid-glass nav pill variant in Navbar.tsx.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+function VideoHero2() {
+  const { t } = useLanguage();
+  const { locale } = useLanguage();
+  const { audience } = useAudience();
+  const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
+  const isClient = audience === "client";
+  const isPt = locale === "pt";
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  return (
+    <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-ink">
+      {/* ── Backdrop: ambient video over a warm-ink fallback ── */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(160deg, #1D1D1B 0%, #2a1f12 55%, #4a3210 100%)" }}
+      >
+        {!reduced && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/hero/hero-ambient-2.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+        )}
+      </div>
+
+      {/* slim top scrim so navbar chrome stays legible */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 z-[2] h-32"
+        style={{ background: "linear-gradient(to bottom, rgba(29,29,27,0.45), transparent)" }}
+      />
+
+      {/* melt into the next ink chapter */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 z-[2] h-28"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(29,29,27,0.92))" }}
+      />
+
+      {/* ── Content — bottom-left, no entrance animations ── */}
+      <div className="relative z-10 flex-1 flex flex-col justify-end max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full pt-32 pb-10 sm:pb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+          {/* Left */}
+          <div className="hero-video-legibility max-w-2xl">
+            <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-medium leading-tight tracking-tight mb-4">
+              {heroAud.headlineStart}
+              <span className="block">{heroAud.headlineHighlight}</span>
+            </h1>
+
+            <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-7 max-w-md">
+              {heroAud.subheading}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={audience === "partner" ? "#contact" : "#pre-qualification"}
+                onClick={() => track("hero_cta", { type: "primary", audience })}
+                className="bg-white text-ink text-sm sm:text-base font-medium px-6 sm:px-7 py-3 rounded-full hover:bg-white/90 transition-colors"
+              >
+                {heroAud.ctaPrimary}
+              </a>
+              <a
+                href="#process"
+                className="liquid-glass text-white text-sm sm:text-base font-medium px-6 sm:px-7 py-3 rounded-full hover:bg-white/5 transition-colors"
+              >
+                {heroAud.ctaSecondary}
+              </a>
+            </div>
+
+            {/* quiet trust footnote — same content, whisper volume */}
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[11px] text-white/45">
+              <span>
+                {isPt ? "Registado" : "Registered"} · Banco de Portugal n.º 0007470
+              </span>
+              <span>
+                <span className="text-white/70 font-medium">€0</span>{" "}
+                {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
+              </span>
+              <span>
+                <span className="text-white/70 font-medium">10+</span>{" "}
+                {isPt
+                  ? "bancos parceiros a competir pelas melhores condições"
+                  : "partner banks competing for your best rates"}
+              </span>
+              <a
+                href="https://anica.org.pt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white/70 underline underline-offset-2 transition-colors"
+              >
+                ANICA · {isPt ? "Membro Certificado" : "Certified Member"} 2025
+              </a>
+            </div>
+          </div>
+
+          {/* Right — the instrument (B2C) */}
+          {isClient && (
+            <div className="w-full max-w-md md:w-[380px] shrink-0">
+              <MiniSimulator />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <ScrollCue tone="dark" />
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
  * Shader / editorial treatments
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -500,6 +625,9 @@ export default function Hero() {
 
   if (direction === "cinema" && heroStyle === "video") {
     return <VideoHero />;
+  }
+  if (direction === "cinema" && heroStyle === "video2") {
+    return <VideoHero2 />;
   }
   return <ClassicHero />;
 }

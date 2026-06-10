@@ -128,9 +128,16 @@ export default function ControlPanel() {
               <Chip
                 active={heroStyle === "video"}
                 onClick={() => setHeroStyle("video")}
-                title="Vídeo ambiente + blur inferior + liquid glass"
+                title="Vídeo ambiente + blur inferior + entradas blur-fade-up"
               >
-                Vídeo
+                Vídeo 1
+              </Chip>
+              <Chip
+                active={heroStyle === "video2"}
+                onClick={() => setHeroStyle("video2")}
+                title="Vídeo minimal + nav pill liquid-glass, sem animações de entrada"
+              >
+                Vídeo 2
               </Chip>
               <Chip
                 active={heroStyle === "shader"}
