@@ -18,7 +18,7 @@ export async function generateMetadata({
   const photoUrl = `${siteConfig.url}${member.photo}`;
 
   return {
-    title: `${member.name} — ${member.role.pt} | DS Crédito`,
+    title: `${member.name} — ${member.role.pt} | Letraperfeiçoada`,
     description: member.bio.pt,
     manifest: `/equipa/${member.id}/manifest.webmanifest`,
     openGraph: {

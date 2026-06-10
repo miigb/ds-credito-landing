@@ -1,34 +1,57 @@
 @import "tailwindcss";
 
+/*
+ * Letraperfeiçoada — Amanhecer 2026 design tokens.
+ * Token NAMES are unchanged from the legacy system (G2 token-name parity);
+ * values repoint to MANUAL DE NORMAS p.7 (Particula Digital) via the
+ * ds-leads-crm validated ramp. Sun Gold #FFEF26 is logo sun-mark ONLY.
+ */
 @theme {
-  --color-brand-900: #0F172A;
-  --color-brand-800: #1E293B;
-  --color-brand-700: #334155;
-  --color-brand-600: #475569;
-  --color-brand-500: #64748B;
-  --color-brand-400: #94A3B8;
-  --color-brand-300: #CBD5E1;
-  --color-brand-200: #E2E8F0;
-  --color-brand-100: #F1F5F9;
-  --color-brand-50: #F8FAFC;
+  /* Brand ramp — warm neutral (ink → warm paper) */
+  --color-brand-900: #1D1D1B;
+  --color-brand-800: oklch(20% 0.004 80);
+  --color-brand-700: oklch(30% 0.004 80);
+  --color-brand-600: oklch(40% 0.004 80);
+  --color-brand-500: #575756;
+  --color-brand-400: oklch(65% 0.005 80);
+  --color-brand-300: #C6C6C6;
+  --color-brand-200: oklch(90% 0.008 80);
+  --color-brand-100: oklch(95% 0.008 80);
+  --color-brand-50: #FAF7F2;
 
-  --color-accent-900: #5B0A2E;
-  --color-accent-800: #7A0D3E;
-  --color-accent-700: #A30F4F;
-  --color-accent-600: #C4135F;
-  --color-accent-500: #D9286F;
-  --color-accent-400: #E85D91;
-  --color-accent-300: #F08DB3;
-  --color-accent-200: #F7BDD5;
-  --color-accent-100: #FBE4EC;
-  --color-accent-50: #FEF1F6;
+  /* Accent ramp — ember / amber gold */
+  --color-accent-900: oklch(30% 0.07 50);
+  --color-accent-800: oklch(42% 0.10 50);
+  --color-accent-700: #F39200; /* Ember Gold — PRIMARY */
+  --color-accent-600: oklch(64% 0.15 60);
+  --color-accent-500: oklch(73% 0.175 65);
+  --color-accent-400: oklch(82% 0.175 75); /* Amber — bright UI highlight */
+  --color-accent-300: oklch(88% 0.17 85);
+  --color-accent-200: oklch(93% 0.15 92);
+  --color-accent-100: oklch(96% 0.09 95);
+  --color-accent-50: oklch(98% 0.04 95);
 
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Gold ramp — sun / ember / bronze */
+  --color-gold-50: oklch(98% 0.04 95);
+  --color-gold-100: oklch(96% 0.09 95);
+  --color-gold-200: oklch(93% 0.15 92);
+  --color-gold-300: #A07214; /* Bronze (premium depth) */
+  --color-gold-400: #FFEF26; /* Sun Gold — logo sun-mark ONLY */
+  --color-gold-500: #F39200; /* Ember alias */
+
+  /* Semantic aliases */
+  --color-ember: var(--color-accent-700);
+  --color-bronze: var(--color-gold-300);
+  --color-paper: var(--color-brand-50);
+  --color-ink: var(--color-brand-900);
+  --color-alabaster: #F2ECE3;
+
+  --font-sans: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  --font-logo: var(--font-brownsugar), serif;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -57,14 +80,9 @@
   }
 }
 
-/* Mobile: disable hover-state stickiness on touch devices.
-   On touch screens, browsers latch hover state after a tap, making
-   buttons/cards look permanently "hovered". Only apply :hover styles
-   when the device actually has a hover-capable pointer. */
+/* Mobile: disable hover-state stickiness on touch devices. */
 @media (hover: none) {
   *:hover {
-    /* Block hover states on touch devices — tailwind hover: utilities
-       still compile, but we neutralize their visual effect on touch. */
     transform: none !important;
   }
 }
@@ -80,37 +98,72 @@ input[type="range"] {
 }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-500) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Warm ink → ember sunrise. Hero (cinema) + footer horizon finale. */
+  .bg-hero-gradient {
+    background: linear-gradient(
+      160deg,
+      var(--color-brand-900) 0%,
+      oklch(0.2 0.02 60) 45%,
+      oklch(0.3 0.06 55) 75%,
+      var(--color-accent-800) 100%
+    );
   }
 
-  .bg-hero-gradient {
-    background: linear-gradient(160deg, var(--color-brand-900) 0%, #1a1f3a 40%, #2a1a2e 70%, var(--color-accent-900) 100%);
+  /* Matte ember sun rising from below the fold — light surfaces. */
+  .bg-dawn-radial {
+    background-image: radial-gradient(
+      120% 90% at 50% 112%,
+      rgba(243, 146, 0, 0.4) 0%,
+      rgba(243, 146, 0, 0.16) 38%,
+      rgba(243, 146, 0, 0.05) 58%,
+      transparent 72%
+    );
+  }
+
+  /* Dark twin of the dawn radial — ember glow on ink. */
+  .bg-dawn-radial-dark {
+    background-image: radial-gradient(
+      120% 95% at 50% 115%,
+      rgba(243, 146, 0, 0.26) 0%,
+      rgba(201, 138, 46, 0.10) 42%,
+      transparent 70%
+    );
   }
 
   .bg-section-gradient {
-    background: linear-gradient(180deg, var(--color-brand-50) 0%, white 50%, var(--color-brand-50) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--color-brand-50) 0%,
+      white 50%,
+      var(--color-brand-50) 100%
+    );
   }
 
-  .glass {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .glass-light {
-    background: rgba(255, 255, 255, 0.7);
+  /* Sticky chrome / floating UI only — never default card material. */
+  .glass-warm {
+    background: rgba(250, 247, 242, 0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
-  /* Infinite marquee scroll — used by BankPartnersScroll.
-     translate3d forces GPU compositing so the scroll stays smooth on mobile. */
+  .glass-warm-dark {
+    background: rgba(29, 29, 27, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Film grain — applied by the global <Grain /> overlay. */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  /* Warm-graded photography (golden hour, never cold stock) */
+  .img-warm {
+    filter: sepia(0.22) saturate(1.08) contrast(1.02) brightness(1.01);
+  }
+
+  /* Infinite marquee scroll — BankPartnersScroll. */
   @keyframes marquee-left {
     0%   { transform: translate3d(0, 0, 0); }
     100% { transform: translate3d(-50%, 0, 0); }
@@ -137,40 +190,37 @@ input[type="range"] {
   }
 }
 
-/* Range slider styling */
+/* Range slider styling — ember thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--color-accent-500);
+  background: var(--color-accent-700);
   cursor: pointer;
   border: 2px solid white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(29, 29, 27, 0.3);
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--color-accent-500);
+  background: var(--color-accent-700);
   cursor: pointer;
   border: 2px solid white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(29, 29, 27, 0.3);
 }
 
-/* Custom select arrows — light variant (white bg) */
-select.appearance-none {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+/* Custom select chevrons (data-URI, warm grey) */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23575756' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-  padding-right: 2.5rem;
+  background-position: right 0.875rem center;
 }
 
-/* Dark variant (dark bg — Contact form) */
-.bg-brand-900 select.appearance-none,
-[class*="bg-white/"] select.appearance-none {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+select.select-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C6C6C6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
 }
