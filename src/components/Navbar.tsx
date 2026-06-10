@@ -33,6 +33,8 @@ export default function Navbar() {
   /* Video-2 hero pairs with a liquid-glass nav pill while floating over the
      video; reverts to standard chrome once scrolled into the page. */
   const glassNav = dark && heroStyle === "video2" && !scrolled && !mobileOpen;
+  /* Video-3 hero pairs with a floating glassmorphic header slab. */
+  const glassBar = dark && heroStyle === "video3" && !scrolled && !mobileOpen;
 
   const navLinks = [
     { label: t.nav.about, href: "/#about" },
@@ -97,8 +99,15 @@ export default function Navbar() {
       transition={{ duration: reduced ? 0 : 0.6, ease: [0.25, 0.4, 0.25, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${chrome}`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <nav aria-label="Main navigation" className="flex items-center justify-between h-18 lg:h-20">
+      <div className={`max-w-7xl mx-auto px-6 lg:px-8 ${glassBar ? "pt-3" : ""}`}>
+        <nav
+          aria-label="Main navigation"
+          className={`flex items-center justify-between transition-all duration-500 ${
+            glassBar
+              ? "h-16 px-4 lg:px-6 rounded-2xl bg-white/[0.08] backdrop-blur-xl ring-1 ring-white/15 shadow-lg shadow-black/10"
+              : "h-18 lg:h-20"
+          }`}
+        >
           {/* Logo */}
           <a href="/" className="flex items-center group" translate="no">
             <Logo tone={tone} height={36} />

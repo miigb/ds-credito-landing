@@ -140,6 +140,13 @@ export default function ControlPanel() {
                 Vídeo 2
               </Chip>
               <Chip
+                active={heroStyle === "video3"}
+                onClick={() => setHeroStyle("video3")}
+                title="Stream HLS (Mux) + header glassmórfico, composição centrada"
+              >
+                Vídeo 3
+              </Chip>
+              <Chip
                 active={heroStyle === "shader"}
                 onClick={() => setHeroStyle("shader")}
                 title="Shader mesh golden-hour"

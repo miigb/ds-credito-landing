@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import MeshHero from "@/components/fx/MeshHero";
+import HlsVideo from "@/components/fx/HlsVideo";
 import { RevealLine, FadeIn } from "@/components/fx/RevealText";
 import { RayBurst } from "@/components/brand/BrandIcons";
 import MiniSimulator from "./MiniSimulator";
@@ -466,6 +467,152 @@ function VideoHero2() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * Video treatment 3 — HLS stream + glassmorphic chrome, centered composition
+ * Mux adaptive stream (hls.js where not native), floating glass header
+ * (see Navbar.tsx glassBar), gentle centered fade-in entrances.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+const HLS_SRC = "https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8";
+
+function VideoHero3() {
+  const { t, locale } = useLanguage();
+  const { audience } = useAudience();
+  const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
+  const isClient = audience === "client";
+  const isPt = locale === "pt";
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  return (
+    <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-ink">
+      {/* ── Backdrop: HLS ambient stream over a warm-ink fallback ── */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(160deg, #1D1D1B 0%, #2a1f12 55%, #4a3210 100%)" }}
+      >
+        {!reduced && (
+          <HlsVideo src={HLS_SRC} className="absolute inset-0 w-full h-full object-cover" />
+        )}
+      </div>
+
+      {/* centered vignette for copy legibility */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-[1]"
+        style={{
+          background:
+            "radial-gradient(95% 75% at 50% 52%, rgba(16,11,6,0.30) 0%, rgba(16,11,6,0.62) 100%)",
+        }}
+      />
+
+      {/* melt into the next ink chapter */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 z-[2] h-28"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(29,29,27,0.92))" }}
+      />
+
+      {/* ── Content — centered ── */}
+      <div className="hero-video-legibility relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6 w-full pt-32 pb-12 lg:pb-24">
+        <FadeIn delay={0.1} onMount>
+          <div className="inline-flex items-center gap-2.5 mb-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-accent-400"
+              style={{ boxShadow: "0 0 14px var(--color-accent-400)" }}
+            />
+            {t.hero.eyebrow}
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.25} onMount>
+          <h1
+            className="text-white font-semibold tracking-tight mb-6"
+            style={{ fontSize: "clamp(2.5rem, 5.8vw, 5.2rem)", lineHeight: 1.02 }}
+          >
+            {heroAud.headlineStart}
+            <span className="block text-accent-400">{heroAud.headlineHighlight}</span>
+          </h1>
+        </FadeIn>
+
+        <FadeIn delay={0.4} onMount>
+          <p className="text-white/65 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-9">
+            {heroAud.subheading}
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.55} onMount>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <a
+              href={audience === "partner" ? "#contact" : "#pre-qualification"}
+              onClick={() => track("hero_cta", { type: "primary", audience })}
+              className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:-translate-y-0.5"
+            >
+              {heroAud.ctaPrimary}
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="#process"
+              className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors"
+            >
+              {heroAud.ctaSecondary}
+            </a>
+          </div>
+        </FadeIn>
+
+        {/* quiet trust footnote — same content, centered */}
+        <FadeIn delay={0.7} onMount>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] text-white/45">
+            <span>
+              {isPt ? "Registado" : "Registered"} · Banco de Portugal n.º 0007470
+            </span>
+            <span>
+              <span className="text-white/70 font-medium">€0</span>{" "}
+              {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
+            </span>
+            <span>
+              <span className="text-white/70 font-medium">10+</span>{" "}
+              {isPt
+                ? "bancos parceiros a competir pelas melhores condições"
+                : "partner banks competing for your best rates"}
+            </span>
+            <a
+              href="https://anica.org.pt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 underline underline-offset-2 transition-colors"
+            >
+              ANICA · {isPt ? "Membro Certificado" : "Certified Member"} 2025
+            </a>
+          </div>
+        </FadeIn>
+      </div>
+
+      {/* ── The instrument (B2C): docked bottom-right on lg, in-flow below on mobile ── */}
+      {isClient && (
+        <div className="relative z-10 w-full max-w-md mx-auto px-6 pb-12 lg:p-0 lg:absolute lg:right-8 lg:bottom-8 lg:w-[350px] lg:max-w-none lg:mx-0">
+          <MiniSimulator />
+        </div>
+      )}
+
+      <ScrollCue tone="dark" />
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
  * Shader / editorial treatments
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -628,6 +775,9 @@ export default function Hero() {
   }
   if (direction === "cinema" && heroStyle === "video2") {
     return <VideoHero2 />;
+  }
+  if (direction === "cinema" && heroStyle === "video3") {
+    return <VideoHero3 />;
   }
   return <ClassicHero />;
 }
