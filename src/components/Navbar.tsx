@@ -30,8 +30,8 @@ export default function Navbar() {
 
   const dark = direction === "cinema";
   const tone: "dark" | "light" = dark ? "dark" : "light";
-  /* Video-2 hero pairs with a liquid-glass nav pill while floating over the
-     video; reverts to standard chrome once scrolled into the page. */
+  /* Video-2 hero pairs with a tonal glass nav pill (complete ring) while
+     floating over the video; reverts to standard chrome once scrolled. */
   const glassNav = dark && heroStyle === "video2" && !scrolled && !mobileOpen;
   /* Video-3 hero pairs with a floating glassmorphic header slab. */
   const glassBar =
@@ -116,7 +116,7 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           {glassNav ? (
-            <div className="hidden lg:flex items-center gap-1 liquid-glass rounded-xl px-2 py-2">
+            <div className="hidden lg:flex items-center gap-1 rounded-2xl bg-white/[0.06] ring-1 ring-white/15 backdrop-blur-xl px-2 py-2">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -151,7 +151,9 @@ export default function Navbar() {
             {locale === "pt" && (
               <div
                 className={`flex items-center rounded-full p-0.5 text-xs ${
-                  glassNav ? "liquid-glass" : pillShell
+                  glassNav
+                    ? "bg-white/[0.06] ring-1 ring-white/15 backdrop-blur-xl"
+                    : pillShell
                 }`}
                 translate="no"
               >
@@ -199,7 +201,7 @@ export default function Navbar() {
                 aria-expanded={langMenuOpen}
                 className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
                   glassNav
-                    ? "liquid-glass text-white/80 hover:text-white"
+                    ? "bg-white/[0.06] ring-1 ring-white/15 backdrop-blur-xl text-white/80 hover:text-white"
                     : dark
                       ? "text-white/70 hover:text-white hover:bg-white/10"
                       : "text-brand-500 hover:text-brand-900 hover:bg-brand-900/[0.05]"

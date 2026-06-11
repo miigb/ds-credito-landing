@@ -16,7 +16,7 @@ import { siteConfig } from "@/lib/siteConfig";
 /*
  * Hero — three art directions of the same content (see docs/redesign/DESIGN-BRIEF.md):
  *  cinema + video  · ambient video, bottom backdrop-blur mask (no dark gradient),
- *                    liquid-glass pills, staggered blur-fade-up entrances
+ *                    tonal glass pills, staggered blur-fade-up entrances
  *  cinema + shader · golden-hour mesh shader on ink, type-as-hero
  *  editorial       · warm paper, dawn radial, mixed-weight ink display type
  * Copy, CTAs, tracking, MiniSimulator and trust badges are identical to the
@@ -342,10 +342,10 @@ function VideoHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
- * Video treatment 2 — minimal liquid-glass ("Equilibrium" grammar)
+ * Video treatment 2 — minimal tonal glass ("Equilibrium" grammar)
  * Raw ambient video (no blur mask), bottom-left content, no entrance
  * animations — the video itself provides the motion. Pairs with the
- * liquid-glass nav pill variant in Navbar.tsx.
+ * tonal glass nav pill variant in Navbar.tsx.
  * ────────────────────────────────────────────────────────────────────────── */
 
 function VideoHero2() {

@@ -135,7 +135,7 @@ export default function ControlPanel() {
               <Chip
                 active={heroStyle === "video2"}
                 onClick={() => setHeroStyle("video2")}
-                title="Vídeo minimal + nav pill liquid-glass, sem animações de entrada"
+                title="Vídeo minimal + nav pill de vidro tonal, sem animações de entrada"
               >
                 Vídeo 2
               </Chip>
