@@ -12,6 +12,7 @@ import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 import { usePrototype } from "@/lib/PrototypeContext";
+import { siteConfig } from "@/lib/siteConfig";
 
 /*
  * Hero — three art directions of the same content (see docs/redesign/DESIGN-BRIEF.md):
@@ -474,12 +475,103 @@ function VideoHero2() {
 
 const HLS_SRC = "https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8";
 
-function VideoHero3() {
+/* Centered hero body shared by the HLS (video3) and Slides treatments. */
+function CenteredHeroBody({ highlight }: { highlight: "amber" | "ember" }) {
   const { t, locale } = useLanguage();
   const { audience } = useAudience();
   const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
-  const isClient = audience === "client";
   const isPt = locale === "pt";
+  const highlightClass = highlight === "amber" ? "text-accent-400" : "text-accent-700";
+
+  return (
+    <div className="hero-video-legibility relative z-20 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6 w-full pt-32 pb-12 lg:pb-24">
+      <FadeIn delay={0.1} onMount>
+        <div className="inline-flex items-center gap-2.5 mb-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
+          <span
+            className="w-1.5 h-1.5 rounded-full bg-accent-400"
+            style={{ boxShadow: "0 0 14px var(--color-accent-400)" }}
+          />
+          {t.hero.eyebrow}
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={0.25} onMount>
+        <h1
+          className="text-white font-semibold tracking-tight mb-6"
+          style={{ fontSize: "clamp(2.5rem, 5.8vw, 5.2rem)", lineHeight: 1.02 }}
+        >
+          {heroAud.headlineStart}
+          <span className={`block ${highlightClass}`}>{heroAud.headlineHighlight}</span>
+        </h1>
+      </FadeIn>
+
+      <FadeIn delay={0.4} onMount>
+        <p className="text-white/65 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-9">
+          {heroAud.subheading}
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={0.55} onMount>
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <a
+            href={audience === "partner" ? "#contact" : "#pre-qualification"}
+            onClick={() => track("hero_cta", { type: "primary", audience })}
+            className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:-translate-y-0.5"
+          >
+            {heroAud.ctaPrimary}
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a
+            href="#process"
+            className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors"
+          >
+            {heroAud.ctaSecondary}
+          </a>
+        </div>
+      </FadeIn>
+
+      {/* quiet trust footnote — same content, centered */}
+      <FadeIn delay={0.7} onMount>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] text-white/45">
+          <span>
+            {isPt ? "Registado" : "Registered"} · Banco de Portugal n.º 0007470
+          </span>
+          <span>
+            <span className="text-white/70 font-medium">€0</span>{" "}
+            {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
+          </span>
+          <span>
+            <span className="text-white/70 font-medium">10+</span>{" "}
+            {isPt
+              ? "bancos parceiros a competir pelas melhores condições"
+              : "partner banks competing for your best rates"}
+          </span>
+          <a
+            href="https://anica.org.pt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/70 underline underline-offset-2 transition-colors"
+          >
+            ANICA · {isPt ? "Membro Certificado" : "Certified Member"} 2025
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+  );
+}
+
+function VideoHero3() {
+  const { audience } = useAudience();
+  const isClient = audience === "client";
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -516,89 +608,7 @@ function VideoHero3() {
         style={{ background: "linear-gradient(to bottom, transparent, rgba(29,29,27,0.92))" }}
       />
 
-      {/* ── Content — centered ── */}
-      <div className="hero-video-legibility relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6 w-full pt-32 pb-12 lg:pb-24">
-        <FadeIn delay={0.1} onMount>
-          <div className="inline-flex items-center gap-2.5 mb-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-accent-400"
-              style={{ boxShadow: "0 0 14px var(--color-accent-400)" }}
-            />
-            {t.hero.eyebrow}
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.25} onMount>
-          <h1
-            className="text-white font-semibold tracking-tight mb-6"
-            style={{ fontSize: "clamp(2.5rem, 5.8vw, 5.2rem)", lineHeight: 1.02 }}
-          >
-            {heroAud.headlineStart}
-            <span className="block text-accent-400">{heroAud.headlineHighlight}</span>
-          </h1>
-        </FadeIn>
-
-        <FadeIn delay={0.4} onMount>
-          <p className="text-white/65 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-9">
-            {heroAud.subheading}
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.55} onMount>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <a
-              href={audience === "partner" ? "#contact" : "#pre-qualification"}
-              onClick={() => track("hero_cta", { type: "primary", audience })}
-              className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:-translate-y-0.5"
-            >
-              {heroAud.ctaPrimary}
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a
-              href="#process"
-              className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors"
-            >
-              {heroAud.ctaSecondary}
-            </a>
-          </div>
-        </FadeIn>
-
-        {/* quiet trust footnote — same content, centered */}
-        <FadeIn delay={0.7} onMount>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] text-white/45">
-            <span>
-              {isPt ? "Registado" : "Registered"} · Banco de Portugal n.º 0007470
-            </span>
-            <span>
-              <span className="text-white/70 font-medium">€0</span>{" "}
-              {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
-            </span>
-            <span>
-              <span className="text-white/70 font-medium">10+</span>{" "}
-              {isPt
-                ? "bancos parceiros a competir pelas melhores condições"
-                : "partner banks competing for your best rates"}
-            </span>
-            <a
-              href="https://anica.org.pt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white/70 underline underline-offset-2 transition-colors"
-            >
-              ANICA · {isPt ? "Membro Certificado" : "Certified Member"} 2025
-            </a>
-          </div>
-        </FadeIn>
-      </div>
+      <CenteredHeroBody highlight="amber" />
 
       {/* ── The instrument (B2C): docked bottom-right on lg, in-flow below on mobile ── */}
       {isClient && (
@@ -608,6 +618,315 @@ function VideoHero3() {
       )}
 
       <ScrollCue tone="dark" />
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Slides treatment — deck of ambient scenes, brand-colored
+ * All scenes stay mounted (preloaded) and crossfade through warm ink (never
+ * #000) via opacity only (0.35s easeInOut); active scene plays, inactive
+ * pause. Ember navigation dots + ←/→ keys (only while the hero is in view
+ * and no form field is focused). Pairs with the glassmorphic navbar slab.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+/* Shell each slide shares: full-bleed, opacity-only crossfade through ink,
+   active slide on top + interactive, inactive muted + non-interactive. */
+function SlideShell({
+  active,
+  children,
+  className = "",
+}: {
+  active: boolean;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={false}
+      animate={{ opacity: active ? 1 : 0 }}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      style={{ zIndex: active ? 10 : 0, pointerEvents: active ? "auto" : "none" }}
+      className={`absolute inset-0 flex flex-col ${className}`}
+      aria-hidden={!active}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* A background video that plays only while its slide is active (others stay
+   mounted+paused so HLS/mp4 preload). */
+function SlideVideo({
+  scene,
+  active,
+}: {
+  scene: { type: "hls" | "mp4"; src: string };
+  active: boolean;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (active) v.play().catch(() => {});
+    else v.pause();
+  }, [active]);
+
+  if (scene.type === "hls") {
+    return <HlsVideo src={scene.src} playing={active} className="absolute inset-0 w-full h-full object-cover" />;
+  }
+  return (
+    <video
+      ref={ref}
+      src={scene.src}
+      className="absolute inset-0 w-full h-full object-cover"
+      muted
+      loop
+      playsInline
+      preload="metadata"
+    />
+  );
+}
+
+const VIDEO_SCRIM =
+  "radial-gradient(95% 75% at 50% 52%, rgba(16,11,6,0.32) 0%, rgba(16,11,6,0.64) 100%)";
+
+/* The 5-slide brand deck. Each slide is a distinct composition — a film hero,
+   a numbers wall, a bank-competition statement, a warm-paper certificate, and
+   the simulator/CTA close — all on the Amanhecer palette. */
+function SlidesHero() {
+  const { t, locale } = useLanguage();
+  const { audience } = useAudience();
+  const heroAud = audience === "partner" ? t.hero.b2b : t.hero.b2c;
+  const isClient = audience === "client";
+  const isPt = locale === "pt";
+
+  const [reduced, setReduced] = useState(false);
+  const [idx, setIdx] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const inViewRef = useRef(true);
+
+  const TOTAL = 5;
+  const next = () => setIdx((i) => (i + 1) % TOTAL);
+  const prev = () => setIdx((i) => (i - 1 + TOTAL) % TOTAL);
+
+  useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  // Deck keys act only while the hero fills the screen and no field is focused.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = entry.intersectionRatio > 0.55;
+      },
+      { threshold: [0, 0.55, 1] }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!inViewRef.current) return;
+      const tgt = e.target as HTMLElement | null;
+      if (tgt && (/^(INPUT|TEXTAREA|SELECT)$/.test(tgt.tagName) || tgt.isContentEditable)) return;
+      const fwd = e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " " || e.code === "Space";
+      const back = e.key === "ArrowLeft" || e.key === "ArrowUp";
+      if (fwd) {
+        e.preventDefault();
+        next();
+      } else if (back) {
+        e.preventDefault();
+        prev();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const stats = siteConfig.stats;
+  const numbers = [
+    { value: `+${stats.yearsExperience}`, label: t.stats.years },
+    { value: `${stats.stores}`, label: t.stats.stores },
+    { value: `+${stats.teamMembers}`, label: t.stats.team },
+    { value: `€${stats.deedsValueMillions}M`, label: t.stats.deeds },
+  ];
+
+  const PrimaryCta = (
+    <a
+      href={audience === "partner" ? "#contact" : "#pre-qualification"}
+      onClick={() => track("hero_cta", { type: "primary", audience })}
+      className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:-translate-y-0.5"
+    >
+      {heroAud.ctaPrimary}
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  );
+
+  return (
+    <section ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-ink">
+      {/* warm-ink stage — every slide crossfades over this (never #000 / white) */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(160deg, #1D1D1B 0%, #211a12 55%, #2e2114 100%)" }}
+      />
+
+      {/* ── Slide 1 · Abertura — film hero (HLS) ── */}
+      <SlideShell active={idx === 0}>
+        {!reduced && <SlideVideo scene={{ type: "hls", src: HLS_SRC }} active={idx === 0} />}
+        <div aria-hidden className="absolute inset-0" style={{ background: VIDEO_SCRIM }} />
+        <div className="hero-video-legibility relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6 w-full pt-28 pb-24">
+          <div className="inline-flex items-center gap-2.5 mb-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-400" style={{ boxShadow: "0 0 14px var(--color-accent-400)" }} />
+            {t.hero.eyebrow}
+          </div>
+          <h1 className="text-white font-semibold tracking-tight mb-6" style={{ fontSize: "clamp(2.5rem, 5.8vw, 5.2rem)", lineHeight: 1.02 }}>
+            {heroAud.headlineStart}
+            <span className="block text-accent-700">{heroAud.headlineHighlight}</span>
+          </h1>
+          <p className="text-white/65 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-9">
+            {heroAud.subheading}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {PrimaryCta}
+            <a href="#process" className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors">
+              {heroAud.ctaSecondary}
+            </a>
+          </div>
+        </div>
+      </SlideShell>
+
+      {/* ── Slide 2 · Prova — numbers wall (ember on ink) ── */}
+      <SlideShell active={idx === 1}>
+        <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark" />
+        <div className="relative z-10 flex-1 flex flex-col justify-center max-w-6xl mx-auto px-6 lg:px-10 w-full pt-28 pb-24">
+          <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
+            {t.stats.eyebrow}
+          </div>
+          <h2 className="text-white font-semibold tracking-tight mb-12 max-w-3xl" style={{ fontSize: "clamp(1.9rem, 4vw, 3.4rem)", lineHeight: 1.05 }}>
+            {t.stats.headline}
+          </h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+            {numbers.map((n) => (
+              <div key={n.label}>
+                <div className="text-accent-700 font-extrabold tabular-nums tracking-tight leading-none" style={{ fontSize: "clamp(2.6rem, 6vw, 4.6rem)" }}>
+                  {n.value}
+                </div>
+                <div className="mt-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/45">{n.label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 inline-flex items-center gap-3 self-start rounded-full px-4 py-2 bg-accent-700/15">
+            <span className="text-accent-400 font-bold tabular-nums">+{stats.growthPercent}%</span>
+            <span className="text-xs text-white/55 max-w-sm">{t.stats.growth}</span>
+          </div>
+        </div>
+      </SlideShell>
+
+      {/* ── Slide 3 · Bancos — competition statement (monoliths video) ── */}
+      <SlideShell active={idx === 2}>
+        {!reduced && <SlideVideo scene={{ type: "mp4", src: "/hero/hero-ambient.mp4" }} active={idx === 2} />}
+        <div aria-hidden className="absolute inset-0" style={{ background: VIDEO_SCRIM }} />
+        <div className="hero-video-legibility relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6 w-full pt-28 pb-24">
+          <div className="text-accent-700 font-extrabold leading-none tracking-tight mb-5" style={{ fontSize: "clamp(4.5rem, 13vw, 11rem)" }}>
+            10+
+          </div>
+          <p className="text-white text-xl sm:text-2xl lg:text-3xl font-medium leading-snug max-w-2xl mx-auto mb-7">
+            {isPt
+              ? "bancos parceiros a competir pelas melhores condições"
+              : "partner banks competing for your best rates"}
+          </p>
+          <p className="text-white/55 text-sm sm:text-base leading-relaxed max-w-xl mx-auto mb-9">
+            {heroAud.subheading}
+          </p>
+          {PrimaryCta}
+        </div>
+      </SlideShell>
+
+      {/* ── Slide 4 · Confiança — warm-paper certificate on the ink stage ── */}
+      <SlideShell active={idx === 3} className="items-center justify-center px-6">
+        <div className="relative z-10 w-full max-w-2xl rounded-[2rem] bg-paper text-brand-900 px-8 sm:px-12 py-12 sm:py-14 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]">
+          <div aria-hidden className="absolute inset-0 rounded-[2rem] bg-dawn-radial opacity-60 pointer-events-none" />
+          <div className="relative">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-bronze mb-7">
+              {isPt ? "Registado e Certificado" : "Registered & Certified"}
+            </div>
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="text-accent-700 font-extrabold tracking-tight leading-none" style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}>
+                €0
+              </span>
+              <span className="text-brand-500 text-base sm:text-lg max-w-xs leading-snug">
+                {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
+              </span>
+            </div>
+            <div className="mt-9 grid sm:grid-cols-2 gap-6">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-400 mb-1.5">
+                  {isPt ? "Registado" : "Registered"}
+                </div>
+                <div className="text-brand-900 font-semibold">Banco de Portugal</div>
+                <div className="text-brand-500 text-sm tabular-nums">n.º 0007470</div>
+              </div>
+              <div className="sm:border-l sm:border-brand-900/10 sm:pl-6">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent-700 mb-2">
+                  {isPt ? "Membro Certificado 2025" : "Certified Member 2025"}
+                </div>
+                <a href="https://anica.org.pt" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-white rounded-lg px-3 py-2 shadow-sm">
+                  <img src="/anica-logo.png" alt="ANICA — Associação Nacional de Intermediários de Crédito Autorizados" className="h-7 w-auto" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SlideShell>
+
+      {/* ── Slide 5 · Convite — the instrument / CTA close (sphere video) ── */}
+      <SlideShell active={idx === 4} className="items-center justify-center">
+        {!reduced && <SlideVideo scene={{ type: "mp4", src: "/hero/hero-ambient-2.mp4" }} active={idx === 4} />}
+        <div aria-hidden className="absolute inset-0" style={{ background: VIDEO_SCRIM }} />
+        <div className="hero-video-legibility relative z-10 w-full max-w-md mx-auto px-6 text-center pt-28 pb-24">
+          <div className="inline-flex items-center gap-2.5 mb-6 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-400" style={{ boxShadow: "0 0 14px var(--color-accent-400)" }} />
+            {t.hero.eyebrow}
+          </div>
+          {isClient ? (
+            <div className="text-left">
+              <MiniSimulator />
+            </div>
+          ) : (
+            <>
+              <h2 className="text-white font-semibold tracking-tight mb-7" style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)", lineHeight: 1.05 }}>
+                {heroAud.headlineHighlight}
+              </h2>
+              <div className="flex justify-center">{PrimaryCta}</div>
+            </>
+          )}
+        </div>
+      </SlideShell>
+
+      {/* melt into the next ink chapter */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-[14] h-24 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, rgba(29,29,27,0.92))" }} />
+
+      {/* ── Deck dots — ember active pill ── */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+        {Array.from({ length: TOTAL }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            aria-label={`${isPt ? "Slide" : "Slide"} ${i + 1}`}
+            aria-current={i === idx}
+            className={`rounded-full transition-all duration-300 ${
+              i === idx ? "bg-accent-700 w-6 h-2" : "bg-white/40 hover:bg-white/70 w-2 h-2"
+            }`}
+          />
+        ))}
+      </div>
     </section>
   );
 }
@@ -778,6 +1097,9 @@ export default function Hero() {
   }
   if (direction === "cinema" && heroStyle === "video3") {
     return <VideoHero3 />;
+  }
+  if (direction === "cinema" && heroStyle === "slides") {
+    return <SlidesHero />;
   }
   return <ClassicHero />;
 }

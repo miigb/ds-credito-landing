@@ -34,7 +34,8 @@ export default function Navbar() {
      video; reverts to standard chrome once scrolled into the page. */
   const glassNav = dark && heroStyle === "video2" && !scrolled && !mobileOpen;
   /* Video-3 hero pairs with a floating glassmorphic header slab. */
-  const glassBar = dark && heroStyle === "video3" && !scrolled && !mobileOpen;
+  const glassBar =
+    dark && (heroStyle === "video3" || heroStyle === "slides") && !scrolled && !mobileOpen;
 
   const navLinks = [
     { label: t.nav.about, href: "/#about" },

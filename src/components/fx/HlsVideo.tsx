@@ -13,9 +13,11 @@ import type Hls from "hls.js";
 interface HlsVideoProps {
   src: string;
   className?: string;
+  /** Pause/resume externally (e.g. inactive slide in a deck). Default true. */
+  playing?: boolean;
 }
 
-export default function HlsVideo({ src, className = "" }: HlsVideoProps) {
+export default function HlsVideo({ src, className = "", playing = true }: HlsVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -25,22 +27,36 @@ export default function HlsVideo({ src, className = "" }: HlsVideoProps) {
     let hls: Hls | null = null;
     let cancelled = false;
 
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = src;
-    } else {
-      import("hls.js").then(({ default: HlsLib }) => {
-        if (cancelled || !HlsLib.isSupported()) return;
-        hls = new HlsLib({ enableWorker: true });
+    // Prefer MSE/hls.js when available (some Chromium builds claim native HLS
+    // support but fail to play it); native <video src> path is for Safari/iOS.
+    // Worker disabled: CSP script-src has no blob: for worker bootstrapping.
+    import("hls.js").then(({ default: HlsLib }) => {
+      if (cancelled) return;
+      if (HlsLib.isSupported()) {
+        hls = new HlsLib({ enableWorker: false });
         hls.loadSource(src);
         hls.attachMedia(video);
-      });
-    }
+        hls.on(HlsLib.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {});
+        });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = src;
+        video.play().catch(() => {});
+      }
+    });
 
     return () => {
       cancelled = true;
       hls?.destroy();
     };
   }, [src]);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (playing) video.play().catch(() => {});
+    else video.pause();
+  }, [playing]);
 
   return (
     <video

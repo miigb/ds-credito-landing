@@ -147,6 +147,13 @@ export default function ControlPanel() {
                 Vídeo 3
               </Chip>
               <Chip
+                active={heroStyle === "slides"}
+                onClick={() => setHeroStyle("slides")}
+                title="Deck de cenas: 3 vídeos em crossfade, dots ember + setas ←/→"
+              >
+                Slides
+              </Chip>
+              <Chip
                 active={heroStyle === "shader"}
                 onClick={() => setHeroStyle("shader")}
                 title="Shader mesh golden-hour"
