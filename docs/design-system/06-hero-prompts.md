@@ -4,6 +4,31 @@ Five production-validated hero treatments. Each prompt is self-contained:
 paste it into any build context (web app, marketing display panel, web
 presentation, kiosk loop), fill the `[PARAMETERS]`, and keep the GOTCHAS.
 
+## Asset registry — the footage in current use
+
+These are the actual videos behind the prototype's hero treatments. They are
+the house defaults for the `[VIDEO_URL]` / `[HLS_M3U8_URL]` parameters —
+**licensing is being worked out; confirm rights before any new production
+use**, then reuse freely across projects.
+
+| Asset | Local file (ds-credito-landing repo, branch `redesign/amanhecer-2026`) | Specs | Used by | Original source |
+|---|---|---|---|---|
+| **Sunrise monoliths** — sun rising between dark stone slabs, clouds | `public/hero/hero-ambient.mp4` | 1928×1072 · ~14s · 9.4MB | Ambient Film (Vídeo 1) · Brand Deck scene 3 "Bancos" | `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4` (temporary CDN link — may rot) |
+| **Orb & hand** — glass sphere with warm light streak over an open hand | `public/hero/hero-ambient-2.mp4` | 3828×2164 · ~8s · 5.8MB | Equilibrium (Vídeo 2) · Brand Deck scene 5 "Convite" | `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_230229_7c9bc431-46cf-489a-948d-e8144d8eb5d4.mp4` (temporary CDN link — may rot) |
+| **Film stream** — cinematic warm footage, adaptive bitrate | — (streamed, no local file) | HLS, adaptive (≈1620w rendition observed) | Broadcast (Vídeo 3) · Brand Deck scene 1 "Abertura" | `https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8` (Mux playback ID `NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM`) |
+
+Notes:
+- The two MP4s are committed on the prototype branch (commit `b8d62d2`) so
+  Vercel previews render them; the repo's `.gitignore` rule
+  `public/hero/*.mp4` otherwise excludes them — re-add with `git add -f` if
+  they ever drop out.
+- For production: once licensing clears, either keep self-hosting the MP4s
+  (move them out of git into proper media hosting/CDN) and re-host the HLS
+  asset under the company's own Mux account, or download the Mux source and
+  self-host it too.
+- CSP reminder for the HLS asset: `https://*.mux.com` wildcard in
+  `connect-src` + `media-src` (plus `blob:` in `media-src`).
+
 Shared vocabulary referenced by every prompt — pull from this system:
 tokens (01), button recipes (03 §1), overlays (04), motion grammar (05).
 
