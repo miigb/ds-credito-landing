@@ -39,10 +39,16 @@ export default function MeshHero({
 }: MeshHeroProps) {
   const [reduced, setReduced] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    // Phones get the static gradient: the shader's per-frame work tanks
+    // main-thread budgets on throttled mobile CPUs (TBT) for an ambience
+    // that barely reads at that size. The CSS fallback IS the designed
+    // degraded state — same palette, zero cost.
+    setMobile(window.matchMedia("(max-width: 767px)").matches);
   }, []);
 
   return (
@@ -51,7 +57,7 @@ export default function MeshHero({
       className={`absolute inset-0 overflow-hidden ${className}`}
       style={{ background: FALLBACK[palette] }}
     >
-      {mounted && (
+      {mounted && !mobile && (
         <MeshGradient
           colors={[...PALETTES[palette]]}
           speed={reduced ? 0 : 0.28}
