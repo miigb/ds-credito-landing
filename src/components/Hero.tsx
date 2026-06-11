@@ -706,6 +706,9 @@ function SlidesHero() {
   const inViewRef = useRef(true);
   // Last manual interaction — the auto-advance backs off for a while after it.
   const interactRef = useRef(0);
+  // Armed by any interaction inside the simulator: the deck then parks on the
+  // simulator slide instead of rotating away mid-simulation.
+  const simEngagedRef = useRef(false);
 
   const TOTAL = 5;
   const next = () => {
@@ -721,6 +724,11 @@ function SlidesHero() {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
+  // Leaving the simulator slide (manually or otherwise) re-arms the carousel.
+  useEffect(() => {
+    if (idx !== TOTAL - 1) simEngagedRef.current = false;
+  }, [idx]);
+
   // Carousel auto-advance: every 7s while the deck fills the screen. Backs off
   // for 14s after any manual nav, and never advances while the visitor is in a
   // form field (e.g. the simulator on the last slide) or the tab is hidden.
@@ -731,7 +739,8 @@ function SlidesHero() {
       if (Date.now() - interactRef.current < 14000) return;
       const ae = document.activeElement as HTMLElement | null;
       if (ae && (/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) || ae.isContentEditable)) return;
-      setIdx((i) => (i + 1) % TOTAL);
+      // Park on the simulator slide while the visitor is mid-simulation.
+      setIdx((i) => (i === TOTAL - 1 && simEngagedRef.current ? i : (i + 1) % TOTAL));
     }, 7000);
     return () => clearInterval(id);
   }, [reduced]);
@@ -918,7 +927,15 @@ function SlidesHero() {
             {t.hero.eyebrow}
           </div>
           {isClient ? (
-            <div className="text-left">
+            <div
+              className="text-left"
+              onPointerDownCapture={() => {
+                simEngagedRef.current = true;
+              }}
+              onKeyDownCapture={() => {
+                simEngagedRef.current = true;
+              }}
+            >
               <MiniSimulator />
             </div>
           ) : (
