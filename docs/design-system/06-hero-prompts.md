@@ -11,6 +11,13 @@ the house defaults for the `[VIDEO_URL]` / `[HLS_M3U8_URL]` parameters —
 **licensing is being worked out; confirm rights before any new production
 use**, then reuse freely across projects.
 
+**Master archive (since the Shader hero was approved, Jun 2026):**
+`~/Development/LetraPerfeicoada/Style Guide 2026/hero-videos/` — all three
+files + README. They were removed from git tracking (back under the
+`public/hero/*.mp4` gitignore) so the production merge ships no video weight;
+the parked video heroes fall back to the warm-ink gradient unless the files
+are restored locally from the archive.
+
 | Asset | Local file (ds-credito-landing repo, branch `redesign/amanhecer-2026`) | Specs | Used by | Original source |
 |---|---|---|---|---|
 | **Sunrise monoliths** — sun rising between dark stone slabs, clouds | `public/hero/hero-ambient.mp4` | 1928×1072 · ~14s · 9.4MB | Ambient Film (Vídeo 1) · Brand Deck scene 3 "Bancos" | `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4` (temporary CDN link — may rot) |

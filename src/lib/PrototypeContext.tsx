@@ -1,19 +1,17 @@
 "use client";
 
 /*
- * PROTOTYPE ONLY — review-time switches for the Amanhecer 2026 redesign.
- * Removal for production: delete this file + src/components/proto/ and the
- * <PrototypeProvider>/<ControlPanel> lines in layout.tsx, then hardcode the
- * approved direction/logoVariant where `usePrototype()` is consumed.
+ * Design-direction context — pinned to the approved choices (Jun 2026):
+ * Cinema direction · Shader hero · Oficial logo lockup · grain on.
+ *
+ * The other hero treatments (video/video2/video3/slides) and logo variants
+ * remain implemented in the tree but PARKED — unreachable in production.
+ * To review them again, re-mount <ControlPanel /> from src/components/proto/
+ * in layout.tsx and restore the switchable version of this file from git
+ * history (it kept the state in useState + localStorage "proto-amanhecer-2026").
  */
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, type ReactNode } from "react";
 
 export type Direction = "cinema" | "editorial";
 export type LogoVariant = "oficial" | "sol-mont" | "monoline" | "assinatura";
@@ -30,62 +28,22 @@ interface PrototypeState {
   setGrain: (g: boolean) => void;
 }
 
-const STORAGE_KEY = "proto-amanhecer-2026";
-
-const PrototypeContext = createContext<PrototypeState>({
+const APPROVED: PrototypeState = {
   direction: "cinema",
   logoVariant: "oficial",
-  heroStyle: "slides",
+  heroStyle: "shader",
   grain: true,
   setDirection: () => {},
   setLogoVariant: () => {},
   setHeroStyle: () => {},
   setGrain: () => {},
-});
+};
+
+const PrototypeContext = createContext<PrototypeState>(APPROVED);
 
 export function PrototypeProvider({ children }: { children: ReactNode }) {
-  const [direction, setDirection] = useState<Direction>("cinema");
-  const [logoVariant, setLogoVariant] = useState<LogoVariant>("oficial");
-  const [heroStyle, setHeroStyle] = useState<HeroStyle>("slides");
-  const [grain, setGrain] = useState(true);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const saved = JSON.parse(raw);
-      if (saved.direction === "cinema" || saved.direction === "editorial")
-        setDirection(saved.direction);
-      if (["oficial", "sol-mont", "monoline", "assinatura"].includes(saved.logoVariant))
-        setLogoVariant(saved.logoVariant);
-      if (["shader", "video", "video2", "video3", "slides"].includes(saved.heroStyle))
-        setHeroStyle(saved.heroStyle);
-      if (typeof saved.grain === "boolean") setGrain(saved.grain);
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ direction, logoVariant, heroStyle, grain })
-      );
-    } catch {}
-  }, [direction, logoVariant, heroStyle, grain]);
-
   return (
-    <PrototypeContext.Provider
-      value={{
-        direction,
-        logoVariant,
-        heroStyle,
-        grain,
-        setDirection,
-        setLogoVariant,
-        setHeroStyle,
-        setGrain,
-      }}
-    >
+    <PrototypeContext.Provider value={APPROVED}>
       {children}
     </PrototypeContext.Provider>
   );

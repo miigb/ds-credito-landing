@@ -5,7 +5,6 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { AudienceProvider } from "@/lib/AudienceContext";
 import { PrototypeProvider } from "@/lib/PrototypeContext";
-import ControlPanel from "@/components/proto/ControlPanel";
 import Grain from "@/components/fx/Grain";
 import SmoothScroll from "@/components/fx/SmoothScroll";
 import StructuredData from "@/components/StructuredData";
@@ -165,11 +164,12 @@ export default function RootLayout({
         </noscript>
         <LanguageProvider>
           <AudienceProvider>
-            {/* PROTOTYPE wrapper — remove PrototypeProvider/ControlPanel/Grain for production */}
+            {/* Design direction pinned to the approved choices; the review
+                panel stays parked in src/components/proto/ (see
+                PrototypeContext.tsx for how to re-enable it). */}
             <PrototypeProvider>
               <SmoothScroll>{children}</SmoothScroll>
               <Grain />
-              <ControlPanel />
             </PrototypeProvider>
           </AudienceProvider>
           <CookieConsent />
