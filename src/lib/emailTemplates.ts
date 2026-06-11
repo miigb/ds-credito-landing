@@ -1,13 +1,11 @@
 import { siteConfig } from "./siteConfig";
 
-const ACCENT = "#A30F4F";
-const HEADER_BG = "#1E293B";
-const DARK = "#334155";
-const MUTED = "#64748B";
-const LIGHT_BG = "#F8FAFC";
-const BORDER = "#E2E8F0";
-// Absolute URL for email clients — must be the live domain
-const LOGO_URL = "https://meuintermediario.com/ds-credito-logo.png";
+const ACCENT = "#F39200"; /* Ember */
+const HEADER_BG = "#1D1D1B"; /* Ink */
+const DARK = "#1D1D1B";
+const MUTED = "#575756";
+const LIGHT_BG = "#FAF7F2"; /* Warm paper */
+const BORDER = "#EAE3D8";
 
 function layout(content: string) {
   return `<!DOCTYPE html>
@@ -25,28 +23,28 @@ function layout(content: string) {
     .subtitle{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;margin-top:6px}
     .body{padding:40px}
     .greeting{font-size:20px;font-weight:700;color:${DARK};margin:0 0 16px 0}
-    .text{font-size:15px;color:#334155;line-height:1.7;margin:0 0 16px 0}
-    .divider{height:2px;background:linear-gradient(90deg,${ACCENT},#D9286F);border-radius:1px;width:80px;margin:24px 0}
+    .text{font-size:15px;color:#454442;line-height:1.7;margin:0 0 16px 0}
+    .divider{height:2px;background:linear-gradient(90deg,#F39200,#FFB100);border-radius:1px;width:80px;margin:24px 0}
     .steps{margin:0;padding:0;list-style:none}
-    .steps li{font-size:14px;color:#475569;line-height:1.6;padding:8px 0 8px 28px;position:relative}
+    .steps li{font-size:14px;color:#575756;line-height:1.6;padding:8px 0 8px 28px;position:relative}
     .steps li::before{content:attr(data-n);position:absolute;left:0;top:8px;width:20px;height:20px;border-radius:50%;background:${ACCENT};color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:20px}
     .cta-box{background:${HEADER_BG};border-radius:12px;padding:28px 32px;text-align:center;margin:28px 0}
     .cta-title{font-size:16px;font-weight:700;color:#ffffff;margin:0 0 8px 0}
     .cta-text{font-size:13px;color:rgba(255,255,255,0.6);margin:0 0 16px 0}
-    .cta-btn{display:inline-block;background:${ACCENT};color:#ffffff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none}
+    .cta-btn{display:inline-block;background:${ACCENT};color:#ffffff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:12px;text-decoration:none}
     .footer{background:${LIGHT_BG};padding:28px 40px;border-top:1px solid ${BORDER}}
     .footer-name{font-size:13px;font-weight:600;color:${DARK};margin:0 0 4px 0}
     .footer-text{font-size:12px;color:${MUTED};line-height:1.6;margin:0}
     .footer-text a{color:${ACCENT};text-decoration:none}
-    .footer-reg{font-size:11px;color:#94A3B8;margin-top:12px}
-    .footer-reg a{color:#94A3B8;text-decoration:underline}
+    .footer-reg{font-size:11px;color:#8A8A87;margin-top:12px}
+    .footer-reg a{color:#8A8A87;text-decoration:underline}
   </style>
 </head>
 <body>
   <div class="wrapper">
     <div class="header">
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
-      <div style="font-size:12px;color:#E85D91;letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
+      <div style="font-size:12px;color:#F39200;letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
       <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-top:8px">Intermediários de Crédito</div>
     </div>
     <div class="body">
@@ -355,13 +353,7 @@ function _header(s: SchemeColors) {
   const border = s.headerBg === "#ffffff" ? `border-bottom:1px solid ${s.borderColor};` : "";
   return `    <div style="background:${s.headerBg};padding:24px 32px;text-align:center;${border}">
       <div style="font-size:20px;letter-spacing:1.5px;color:${s.headerText}"><b>LETRA</b><span style="font-weight:300">PERFEI&Ccedil;OADA</span></div>
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 0 auto">
-        <tr>
-          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Intermediários de Crédito</td>
-          <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="18" height="18" style="border-radius:3px;display:block" /></td>
-          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-left:4px;vertical-align:middle">DS Cr&eacute;dito</td>
-        </tr>
-      </table>
+      <div style="font-size:10px;color:${subColor};letter-spacing:0.5px;margin-top:8px">Intermediários de Crédito</div>
     </div>`;
 }
 

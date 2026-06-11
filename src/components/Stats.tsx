@@ -1,11 +1,22 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { useInView, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
+import { usePrototype } from "@/lib/PrototypeContext";
 import { siteConfig } from "@/lib/siteConfig";
+import { RevealLine, FadeIn } from "@/components/fx/RevealText";
 import SectionCTA from "@/components/ui/section-cta";
+
+/*
+ * Stats — the numbers are the heroes (see docs/redesign/DESIGN-BRIEF.md §6).
+ * Asymmetric editorial composition: display-XL count-up numerals over thin
+ * hairline rules, tiny wide-tracked labels.
+ *  cinema    · ember numerals on warm ink, bg-dawn-radial-dark whisper
+ *  editorial · ink numerals on paper, thin bronze hairline rules
+ * Count-up logic, stats data, growth pill, ANICA link, copy and section id
+ * are identical to the legacy component — presentation only.
+ */
 
 function AnimatedCounter({
   value,
@@ -18,11 +29,19 @@ function AnimatedCounter({
   prefix?: string;
   inView: boolean;
 }) {
+  const reduced = useReducedMotion();
   const [current, setCurrent] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     if (hasAnimated) return;
+
+    // Reduced motion: render the final value instantly, no count-up.
+    if (reduced) {
+      setCurrent(value);
+      setHasAnimated(true);
+      return;
+    }
 
     // Fallback: if inView hasn't triggered after 3s (e.g. in-app browsers
     // where IntersectionObserver misbehaves), show the final value anyway.
@@ -34,25 +53,25 @@ function AnimatedCounter({
     if (!inView) return () => clearTimeout(fallbackTimer);
 
     clearTimeout(fallbackTimer);
-    let start = 0;
-    const end = value;
     const duration = 2000;
-    const increment = end / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCurrent(end);
-        setHasAnimated(true);
-        clearInterval(timer);
+    const startTs = performance.now();
+    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min((now - startTs) / duration, 1);
+      setCurrent(Math.round(value * easeOutQuart(t)));
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
       } else {
-        setCurrent(Math.floor(start));
+        setHasAnimated(true);
       }
-    }, 16);
+    };
+    raf = requestAnimationFrame(tick);
     return () => {
-      clearInterval(timer);
+      cancelAnimationFrame(raf);
       clearTimeout(fallbackTimer);
     };
-  }, [inView, value, hasAnimated]);
+  }, [inView, value, hasAnimated, reduced]);
 
   return (
     <span>
@@ -63,10 +82,13 @@ function AnimatedCounter({
   );
 }
 
+
 export default function Stats() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const { t } = useLanguage();
+  const { direction } = usePrototype();
+  const dark = direction === "cinema";
 
   const stats = [
     { id: "years", value: siteConfig.stats.yearsExperience, suffix: "+", label: t.stats.years },
@@ -76,48 +98,55 @@ export default function Stats() {
   ];
 
   return (
-    <section id="about" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-50 via-white to-brand-50" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
+    <section
+      id="about"
+      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${dark ? "bg-ink" : "bg-paper"}`}
+    >
+      {/* ── Canvas ── */}
+      {dark ? (
+        <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark opacity-60" />
+      ) : (
+        <div
+          aria-hidden
+          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/35 to-transparent"
+        />
+      )}
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="text-center mb-16"
-        >
-          <motion.p
-            variants={fadeUp}
-            className="text-accent-700 text-sm font-semibold tracking-widest uppercase mb-4"
-          >
-            {t.stats.eyebrow}
-          </motion.p>
-          <motion.h2
-            variants={fadeUp}
-            className="text-3xl lg:text-5xl font-bold text-brand-900 tracking-tight"
-          >
-            {t.stats.headline}
-          </motion.h2>
-        </motion.div>
-
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.id}
-              variants={fadeUp}
-              custom={i}
-              className="relative group"
+        {/* ── Header — left-set, editorial ── */}
+        <div className="max-w-3xl mb-8 lg:mb-10">
+          <FadeIn>
+            <p
+              className={`mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
+                dark ? "text-accent-400" : "text-bronze-deep"
+              }`}
             >
-              <div className="relative bg-white rounded-2xl p-8 border border-brand-100 shadow-sm hover:shadow-lg hover:border-accent-200 transition-all duration-500 hover:-translate-y-1">
-                <div className="text-3xl lg:text-4xl font-bold text-brand-900 mb-2 tabular-nums">
+              {t.stats.eyebrow}
+            </p>
+          </FadeIn>
+          <h2
+            className={`text-4xl lg:text-6xl font-bold tracking-tight text-balance ${
+              dark ? "text-white" : "text-brand-900"
+            }`}
+          >
+            <RevealLine>{t.stats.headline}</RevealLine>
+          </h2>
+        </div>
+
+        {/* ── Numbers — display-XL over hairline rules, one aligned rank ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-10 gap-y-10">
+          {stats.map((stat, i) => (
+            <FadeIn key={stat.id} delay={0.1 + i * 0.1}>
+              <div
+                className={`border-t pt-5 lg:pt-6 ${
+                  dark ? "border-white/10" : "border-bronze/40"
+                }`}
+              >
+                <div
+                  className={`text-[clamp(2.5rem,3.6vw,3.75rem)] font-extrabold tabular-nums tracking-tight leading-none whitespace-nowrap ${
+                    dark ? "text-accent-700" : "text-brand-900"
+                  }`}
+                >
                   <AnimatedCounter
                     value={stat.value}
                     suffix={stat.suffix}
@@ -125,51 +154,77 @@ export default function Stats() {
                     inView={inView}
                   />
                 </div>
-                <p className="text-sm text-brand-500 leading-relaxed">
+                <p
+                  className={`mt-3 text-[11px] font-semibold uppercase tracking-[0.15em] ${
+                    dark ? "text-white/60" : "text-bronze-deep"
+                  }`}
+                >
                   {stat.label}
                 </p>
-                <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-accent-700 to-accent-400 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
               </div>
-            </motion.div>
+            </FadeIn>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
+        {/* ── Growth pill + ANICA membership ── */}
+        <FadeIn
+          delay={0.2}
+          className="mt-10 lg:mt-12 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent-50 border border-accent-100">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-700 text-white text-xs font-bold" aria-label={`${siteConfig.stats.growthPercent}% growth`}>
+          <div
+            className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full self-start border ${
+              dark
+                ? "bg-accent-400/10 border-accent-400/25"
+                : "bg-accent-50 border-accent-200/80"
+            }`}
+          >
+            <span
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-700 text-white text-xs font-bold tabular-nums shrink-0"
+              aria-label={`${siteConfig.stats.growthPercent}% growth`}
+            >
               {siteConfig.stats.growthPercent}%
             </span>
-            <span className="text-sm font-medium text-brand-700">
+            <span
+              className={`text-sm font-medium ${dark ? "text-white/80" : "text-brand-700"}`}
+            >
               {t.stats.growth}
             </span>
           </div>
 
-          {/* ANICA membership badge */}
+          {/* ANICA membership badge — same quiet pill as the footer */}
           <a
             href="https://anica.org.pt"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white border border-brand-200 hover:border-accent-200 hover:shadow-md transition-all duration-300 group"
+            className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full self-start border transition-all duration-300 ${
+              dark
+                ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
+                : "bg-brand-900/[0.04] border-brand-900/10 hover:bg-brand-900/[0.06] hover:border-brand-900/20"
+            }`}
           >
             <img
               src="/anica-logo.png"
               alt="ANICA - Associação Nacional de Intermediários de Crédito Autorizados"
-              className="h-8 w-auto"
+              className={`h-6 w-auto ${
+                dark ? "brightness-0 invert opacity-60" : "opacity-80"
+              }`}
             />
-            <div className="flex flex-col">
-              <span className="text-[10px] font-semibold text-brand-500 uppercase tracking-wider">Membro</span>
-              <span className="text-xs font-bold text-brand-800 group-hover:text-accent-700 transition-colors">ANICA</span>
-            </div>
+            <span
+              className={`text-[10px] uppercase tracking-[0.2em] font-semibold ${
+                dark ? "text-white/50" : "text-brand-600"
+              }`}
+            >
+              Membro ANICA
+            </span>
           </a>
-        </motion.div>
+        </FadeIn>
 
-        <SectionCTA label={t.stats.ctaLabel} href="#contact" source="stats" />
+        <SectionCTA
+          label={t.stats.ctaLabel}
+          href="#contact"
+          source="stats"
+          tone={dark ? "dark" : "light"}
+        />
       </div>
     </section>
   );

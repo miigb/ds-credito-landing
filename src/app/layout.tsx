@@ -1,17 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { AudienceProvider } from "@/lib/AudienceContext";
+import { PrototypeProvider } from "@/lib/PrototypeContext";
+import Grain from "@/components/fx/Grain";
+import SmoothScroll from "@/components/fx/SmoothScroll";
 import StructuredData from "@/components/StructuredData";
 import CookieConsent from "@/components/CookieConsent";
 import { siteConfig } from "@/lib/siteConfig";
 import { Analytics } from '@vercel/analytics/next';
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-montserrat",
   display: "swap",
+});
+
+/* Brown Sugar — licensed logo-wordmark face. LOGO USE ONLY (var(--font-logo)). */
+const brownSugar = localFont({
+  src: "../../public/fonts/Brown-Sugar-Regular.woff2",
+  variable: "--font-brownsugar",
+  display: "swap",
+  preload: false,
 });
 
 export const viewport = {
@@ -20,8 +32,8 @@ export const viewport = {
   maximumScale: 5,
   viewportFit: "cover" as const,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0F172A" },
+    { media: "(prefers-color-scheme: light)", color: "#FAF7F2" },
+    { media: "(prefers-color-scheme: dark)", color: "#1D1D1B" },
   ],
 };
 
@@ -127,7 +139,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt" className={inter.variable} translate="no">
+    <html
+      lang="pt"
+      className={`${montserrat.variable} ${brownSugar.variable}`}
+      translate="no"
+    >
       <body className="font-sans antialiased notranslate" suppressHydrationWarning>
         <StructuredData />
         <noscript>
@@ -147,7 +163,15 @@ export default function RootLayout({
           </div>
         </noscript>
         <LanguageProvider>
-          <AudienceProvider>{children}</AudienceProvider>
+          <AudienceProvider>
+            {/* Design direction pinned to the approved choices; the review
+                panel stays parked in src/components/proto/ (see
+                PrototypeContext.tsx for how to re-enable it). */}
+            <PrototypeProvider>
+              <SmoothScroll>{children}</SmoothScroll>
+              <Grain />
+            </PrototypeProvider>
+          </AudienceProvider>
           <CookieConsent />
         </LanguageProvider>
         <Analytics />

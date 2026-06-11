@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
 import {
   Phone,
@@ -168,12 +168,14 @@ export default function AgentProfilePage() {
   )}`;
 
   return (
+    <MotionConfig reducedMotion="user">
     <main className={`relative min-h-screen bg-brand-900 ${isFullscreen ? "fixed inset-0 z-50 overflow-y-auto" : ""}`}>
       {!isFullscreen && <Navbar />}
 
       <div className={`relative ${isFullscreen ? "pt-4 pb-8" : "pt-28 pb-20"}`}>
-        {/* Background glow */}
+        {/* Background — ember dawn rising behind the card */}
         <div className="absolute inset-0 overflow-hidden">
+          <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark" />
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent-700/10 blur-[120px]" />
         </div>
 
@@ -272,9 +274,9 @@ export default function AgentProfilePage() {
               <p className="text-accent-400 font-semibold text-sm mt-1">
                 {member.role[locale]}
               </p>
-              <p className="text-white/40 text-xs mt-1 uppercase tracking-wider">
+              <p className="text-white/40 text-xs mt-1 uppercase tracking-[0.2em]">
                 <span className="font-bold">LETRA</span>
-                <span className="font-normal">PERFEIÇOADA</span>
+                <span className="font-light">PERFEIÇOADA</span>
               </p>
               {/* Availability badge */}
               {member.showAvailability !== false && (
@@ -300,7 +302,7 @@ export default function AgentProfilePage() {
             >
               <a
                 href={`tel:${displayedPhone}`}
-                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-2xl hover:bg-white/5 transition-colors min-w-0"
               >
                 <div className="w-10 h-10 rounded-full bg-accent-700/20 flex items-center justify-center">
                   <Phone size={18} className="text-accent-400" />
@@ -312,7 +314,7 @@ export default function AgentProfilePage() {
                   href={`https://wa.me/${member.whatsapp.replace(/\+/g, "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                  className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-2xl hover:bg-white/5 transition-colors min-w-0"
                 >
                   <div className="w-10 h-10 rounded-full bg-green-600/20 flex items-center justify-center">
                     <MessageCircle size={18} className="text-green-400" />
@@ -323,7 +325,7 @@ export default function AgentProfilePage() {
               {member.email && (
                 <a
                   href={`mailto:${member.email}`}
-                  className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                  className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-2xl hover:bg-white/5 transition-colors min-w-0"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent-700/20 flex items-center justify-center">
                     <Mail size={18} className="text-accent-400" />
@@ -335,7 +337,7 @@ export default function AgentProfilePage() {
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-2xl hover:bg-white/5 transition-colors min-w-0"
               >
                 <div className="w-10 h-10 rounded-full bg-accent-700/20 flex items-center justify-center">
                   <MapPin size={18} className="text-accent-400" />
@@ -344,7 +346,7 @@ export default function AgentProfilePage() {
               </a>
               <button
                 onClick={handleShare}
-                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-xl hover:bg-white/5 transition-colors min-w-0"
+                className="flex flex-col items-center gap-1.5 py-3 px-2 sm:px-4 rounded-2xl hover:bg-white/5 transition-colors min-w-0"
               >
                 <div className="w-10 h-10 rounded-full bg-accent-700/20 flex items-center justify-center">
                   <Share2 size={18} className="text-accent-400" />
@@ -357,7 +359,7 @@ export default function AgentProfilePage() {
             <motion.div variants={fadeUp} className="px-6 pb-6">
               <button
                 onClick={() => downloadVCard(member)}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-accent-700 text-white rounded-xl font-semibold hover:bg-accent-600 transition-colors shadow-lg shadow-accent-700/30"
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-accent-700 text-white rounded-full font-semibold hover:bg-accent-600 transition-colors shadow-lg shadow-accent-700/30"
               >
                 <UserPlus size={18} />
                 {t.profile.saveContact}
@@ -480,11 +482,12 @@ export default function AgentProfilePage() {
                     size={160}
                     level="M"
                     imageSettings={{
-                      src: "/ds-credito-logo.png",
+                      src: "/brand-2026/png/qr-logo@2x.png",
                       x: undefined,
                       y: undefined,
-                      height: 30,
-                      width: 30,
+                      // native 491x287 — keep the lockup's aspect so it never squishes
+                      height: 35,
+                      width: 60,
                       excavate: true,
                     }}
                   />
@@ -504,11 +507,12 @@ export default function AgentProfilePage() {
 
       {/* Share toast */}
       {showShareToast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl text-white text-sm flex items-center gap-2 animate-fade-in">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 glass-warm-dark border border-white/15 rounded-full text-white text-sm flex items-center gap-2 animate-fade-in">
           <Check size={14} className="text-green-400" />
           {t.profile.copied}
         </div>
       )}
     </main>
+    </MotionConfig>
   );
 }
