@@ -129,12 +129,14 @@ export default function Logo({
   const scale = height / 34;
 
   if (v === "oficial") {
+    /* Horizontal lockup recomposed from the flat-ember stacked asset
+       (var-dark-4 / var-light-4): sun left, lettering as-is to the right. */
     return (
       <img
         src={
           tone === "dark"
-            ? "/brand-2026/svg/logo-horizontal-dark.svg"
-            : "/brand-2026/svg/logo-horizontal-light.svg"
+            ? "/brand-2026/svg/logo-horizontal-white.svg"
+            : "/brand-2026/svg/logo-horizontal-ink.svg"
         }
         alt="Letraperfeiçoada — Intermediários de Crédito"
         style={{ height }}
@@ -198,7 +200,7 @@ export default function Logo({
   );
 }
 
-/* Stacked lockup for footer / hero moments — always the official asset. */
+/* Stacked lockup for footer / hero moments — flat-ember official asset. */
 export function LogoStacked({
   tone = "dark",
   height = 110,
@@ -210,7 +212,7 @@ export function LogoStacked({
 }) {
   return (
     <img
-      src={tone === "dark" ? "/brand-2026/svg/var-dark-1.svg" : "/brand-2026/svg/logo-principal.svg"}
+      src={tone === "dark" ? "/brand-2026/svg/var-dark-4.svg" : "/brand-2026/svg/var-light-4.svg"}
       alt="Letraperfeiçoada — Intermediários de Crédito"
       style={{ height }}
       className={`w-auto ${className}`}

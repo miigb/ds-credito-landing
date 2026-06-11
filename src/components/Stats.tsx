@@ -82,9 +82,6 @@ function AnimatedCounter({
   );
 }
 
-/* Asymmetric grid spans + sunrise stagger — wide/narrow alternation per row. */
-const SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
-const LIFTS = ["", "lg:mt-12", "", "lg:mt-12"];
 
 export default function Stats() {
   const ref = useRef<HTMLDivElement>(null);
@@ -136,21 +133,17 @@ export default function Stats() {
           </h2>
         </div>
 
-        {/* ── Numbers — display-XL over hairline rules, staggered ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-8 lg:gap-y-12">
+        {/* ── Numbers — display-XL over hairline rules, one aligned rank ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-10 gap-y-10">
           {stats.map((stat, i) => (
-            <FadeIn
-              key={stat.id}
-              delay={0.1 + i * 0.1}
-              className={`${SPANS[i]} ${LIFTS[i]}`}
-            >
+            <FadeIn key={stat.id} delay={0.1 + i * 0.1}>
               <div
-                className={`border-t pt-6 lg:pt-7 ${
+                className={`border-t pt-5 lg:pt-6 ${
                   dark ? "border-white/10" : "border-bronze/40"
                 }`}
               >
                 <div
-                  className={`text-[clamp(3.5rem,6vw,6rem)] font-extrabold tabular-nums tracking-tight leading-none ${
+                  className={`text-[clamp(2.5rem,3.6vw,3.75rem)] font-extrabold tabular-nums tracking-tight leading-none whitespace-nowrap ${
                     dark ? "text-accent-700" : "text-brand-900"
                   }`}
                 >
@@ -162,7 +155,7 @@ export default function Stats() {
                   />
                 </div>
                 <p
-                  className={`mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] ${
+                  className={`mt-3 text-[11px] font-semibold uppercase tracking-[0.25em] ${
                     dark ? "text-white/45" : "text-brand-500"
                   }`}
                 >

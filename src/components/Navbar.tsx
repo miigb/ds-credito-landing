@@ -110,8 +110,8 @@ export default function Navbar() {
           }`}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center group" translate="no">
-            <Logo tone={tone} height={36} />
+          <a href="/" className="flex items-center shrink-0 group" translate="no">
+            <Logo tone={tone} height={42} className="-my-1" />
           </a>
 
           {/* Desktop nav */}
@@ -252,10 +252,10 @@ export default function Navbar() {
             {/* CTA */}
             <a
               href="/#contact"
-              className={`inline-flex items-center px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${
+              className={`inline-flex items-center whitespace-nowrap px-4.5 py-2 text-[13px] font-semibold rounded-full transition-all duration-300 ${
                 glassNav
                   ? "bg-white text-ink hover:bg-white/90"
-                  : "bg-accent-700 text-white hover:bg-accent-600 shadow-lg shadow-accent-700/25 hover:-translate-y-0.5"
+                  : "bg-accent-700 text-white hover:bg-accent-600 shadow-md shadow-accent-700/20"
               }`}
             >
               {t.nav.cta}

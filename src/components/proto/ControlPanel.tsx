@@ -20,7 +20,7 @@ const DIRECTIONS: { id: Direction; label: string; hint: string }[] = [
 ];
 
 const LOGOS: { id: LogoVariant; label: string; hint: string }[] = [
-  { id: "oficial", label: "Oficial", hint: "Lockup Particula (sol gradiente)" },
+  { id: "oficial", label: "Oficial", hint: "Sol ember flat + lettering oficial (horizontal)" },
   { id: "sol-mont", label: "Sol + Mont", hint: "Sol oficial + wordmark Montserrat" },
   { id: "monoline", label: "Monoline", hint: "Sol redesenhado em traço" },
   { id: "assinatura", label: "Assinatura", hint: "Brown Sugar + sol ember" },

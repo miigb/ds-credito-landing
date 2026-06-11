@@ -151,7 +151,7 @@ function PinnedDeck({
   return (
     <div
       ref={trackRef}
-      className="hidden lg:block relative"
+      className="hidden lg:block relative lg:-mt-[12vh]"
       style={{ height: `${steps.length * 90}vh` }}
     >
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
