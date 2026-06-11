@@ -50,11 +50,13 @@ class="group w-full text-left rounded-2xl px-5 py-4 sm:px-6 sm:py-5
 <!-- + state -->
 selected:      dark → "bg-accent-400/10 text-white ring-2 ring-accent-400"
                light → "bg-accent-50 text-brand-900 ring-2 ring-accent-400"
-idle (dark):   "bg-white/[0.04] text-white/85 ring-1 ring-white/10
-                hover:bg-white/[0.07] hover:ring-white/25 hover:-translate-y-0.5"
-idle (light):  "bg-paper text-brand-900 ring-1 ring-brand-900/[0.06]
+idle (dark):   "bg-white/[0.06] text-white/85 ring-1 ring-white/20
+                hover:bg-white/[0.09] hover:ring-white/30 hover:-translate-y-0.5"
+idle (light):  "bg-paper text-brand-900 ring-1 ring-brand-900/10
                 hover:ring-accent-400/70 hover:-translate-y-0.5
                 hover:shadow-[0_10px_30px_rgba(29,29,27,0.07)]"
+NB: on large slabs (full-width rows), rings below white/20 on ink visually
+dissolve at the sides and the row reads as clipped — /20 is the floor.
 ```
 
 Leading letter chip: `w-8 h-8 rounded-full border text-xs font-bold`
