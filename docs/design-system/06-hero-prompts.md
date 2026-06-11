@@ -15,7 +15,7 @@ use**, then reuse freely across projects.
 |---|---|---|---|---|
 | **Sunrise monoliths** — sun rising between dark stone slabs, clouds | `public/hero/hero-ambient.mp4` | 1928×1072 · ~14s · 9.4MB | Ambient Film (Vídeo 1) · Brand Deck scene 3 "Bancos" | `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4` (temporary CDN link — may rot) |
 | **Orb & hand** — glass sphere with warm light streak over an open hand | `public/hero/hero-ambient-2.mp4` | 3828×2164 · ~8s · 5.8MB | Equilibrium (Vídeo 2) · Brand Deck scene 5 "Convite" | `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_230229_7c9bc431-46cf-489a-948d-e8144d8eb5d4.mp4` (temporary CDN link — may rot) |
-| **Film stream** — cinematic warm footage, adaptive bitrate | — (streamed, no local file) | HLS, adaptive (≈1620w rendition observed) | Broadcast (Vídeo 3) · Brand Deck scene 1 "Abertura" | `https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8` (Mux playback ID `NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM`) |
+| **Film stream** — cinematic warm footage, adaptive bitrate | `public/hero/hero-film.mp4` (archive of the top HLS rendition, stream-copied, decode-verified) | 1620×1080 · ~10s · 1.4MB | Broadcast (Vídeo 3) · Brand Deck scene 1 "Abertura" — both still STREAM from Mux at runtime; the local file is the preservation master | `https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8` (Mux playback ID `NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM`) |
 
 Notes:
 - The two MP4s are committed on the prototype branch (commit `b8d62d2`) so
