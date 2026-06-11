@@ -63,6 +63,13 @@ Abrir http://localhost:3000. No canto inferior esquerdo há um botão **"Opçõe
 - Cartões digitais /equipa (QR, vCard, PWA, WhatsApp) — funcionalidade intacta; cores PWA atualizadas para a marca nova.
 - SEO/JSON-LD/sitemap/robots/CSP — sem alterações estruturais; sem novos hosts externos.
 
+## Design system portátil
+
+O sistema extraído deste redesign (tokens, regras, receitas de componentes,
+overlays, motion e os 5 prompts de hero transferíveis) vive em
+`docs/design-system/` — pensado para reutilizar noutros projetos
+(apps, painéis de marketing, apresentações web).
+
 ## Screenshots
 
 `docs/redesign/screens/` (não commitado, ~51MB local; regenerável com `/tmp/shotbot/shoot.js`).
