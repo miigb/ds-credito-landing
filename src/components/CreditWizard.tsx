@@ -719,14 +719,14 @@ function Choice({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`group w-full text-left rounded-2xl px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-medium transition-all duration-200 flex items-center gap-4 ${
+      className={`group w-full text-left rounded-2xl border px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-medium transition-all duration-200 flex items-center gap-4 ${
         selected
           ? dark
-            ? "bg-accent-400/10 text-white ring-2 ring-accent-400"
-            : "bg-accent-50 text-brand-900 ring-2 ring-accent-400"
+            ? "bg-accent-400/10 text-white border-accent-400 ring-1 ring-accent-400"
+            : "bg-accent-50 text-brand-900 border-accent-400 ring-1 ring-accent-400"
           : dark
-            ? "bg-white/[0.07] text-white/85 ring-1 ring-white/25 shadow-[0_4px_16px_rgba(0,0,0,0.25)] hover:bg-white/[0.1] hover:ring-white/35 hover:-translate-y-0.5"
-            : "bg-paper text-brand-900 ring-1 ring-brand-900/15 shadow-[0_4px_14px_rgba(29,29,27,0.06)] hover:ring-accent-400/70 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(29,29,27,0.07)]"
+            ? "bg-white/[0.07] text-white/85 border-white/25 shadow-[0_4px_16px_rgba(0,0,0,0.25)] hover:bg-white/[0.1] hover:border-white/40 hover:-translate-y-0.5"
+            : "bg-paper text-brand-900 border-brand-900/15 shadow-[0_4px_14px_rgba(29,29,27,0.06)] hover:border-accent-400/70 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(29,29,27,0.07)]"
       }`}
     >
       <span
