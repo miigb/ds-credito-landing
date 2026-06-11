@@ -17,7 +17,7 @@ Abrir http://localhost:3000. No canto inferior esquerdo há um botão **"Opçõe
 |---|---|---|
 | **Direção de design** | Cinema · Editorial | A direção de arte completa da página |
 | **Logótipo** | Oficial · Sol + Mont · Monoline · Assinatura | Variante do logo em todo o site |
-| **Hero · Cinema** | Vídeo 1 · Vídeo 2 · Vídeo 3 · Shader | Tratamento do hero na direção Cinema: **Vídeo 1** = vídeo ambiente (sol entre monólitos) com blur inferior em máscara e entradas blur-fade-up escalonadas; **Vídeo 2** = minimal liquid-glass (vídeo da esfera, conteúdo em baixo-esquerda, sem animações de entrada, navbar vira pill de vidro central); **Vídeo 3** = stream HLS adaptativo (Mux, via hls.js fora do Safari), header glassmórfico flutuante, composição centrada, simulador ancorado em baixo-direita; **Shader** = mesh gradient golden-hour |
+| **Hero · Cinema** | Vídeo 1 · Vídeo 2 · Vídeo 3 · Slides · Shader | Tratamento do hero na direção Cinema: **Vídeo 1** = vídeo ambiente (sol entre monólitos) com blur inferior em máscara e entradas blur-fade-up escalonadas; **Vídeo 2** = minimal liquid-glass (vídeo da esfera, conteúdo em baixo-esquerda, sem animações de entrada, navbar vira pill de vidro central); **Vídeo 3** = stream HLS adaptativo (Mux, via hls.js fora do Safari), header glassmórfico flutuante, composição centrada, simulador ancorado em baixo-direita; **Slides** = deck cinematográfico de 5 cenas em crossfade pela ink (nunca branco), navegação por teclado (←/→/↑/↓/Espaço) e dots ember — Abertura (hero de filme) → Prova (parede de números ember: +22, 170, +1400, €545M) → Bancos ("10+" gigante) → Confiança (cartão-certificado em papel quente sobre palco ink: €0, Banco de Portugal n.º 0007470, ANICA) → Convite (simulador rápido ao vivo); **Shader** = mesh gradient golden-hour |
 | **Textura** | Grão on/off | Grão de filme global |
 | **Vista** | Cliente/Parceiro + PT/EN | Atalhos de audiência e idioma |
 
@@ -26,8 +26,13 @@ Abrir http://localhost:3000. No canto inferior esquerdo há um botão **"Opçõe
 > `curl -o public/hero/hero-ambient.mp4 "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4"` (Vídeo 1, 9,4 MB)
 > `curl -o public/hero/hero-ambient-2.mp4 "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_230229_7c9bc431-46cf-489a-948d-e8144d8eb5d4.mp4"` (Vídeo 2, 5,8 MB)
 > Sem o ficheiro, o hero mostra o gradiente warm-ink de fallback (igual ao reduced-motion).
-> O **Vídeo 3** faz stream de `stream.mux.com` (HLS) — exigiu adicionar `stream.mux.com`
-> a `connect-src` e `media-src` (+ `blob:`) no CSP em `next.config.ts`, e a dependência `hls.js`.
+> O **Vídeo 3** e a 1.ª/3.ª cena do **Slides** fazem stream de Mux (HLS). O Mux
+> redireciona `stream.mux.com` para subdomínios de edge (`*.edgemv.mux.com`), por isso
+> o CSP em `next.config.ts` usa o wildcard `*.mux.com` em `connect-src` e `media-src`
+> (+ `blob:` para o MediaSource do hls.js). O `HlsVideo` prefere o caminho hls.js/MSE
+> mesmo quando o browser diz suportar HLS nativo (alguns Chromium afirmam suporte mas
+> não reproduzem); o Safari/iOS cai no `<video src>` nativo. Worker do hls.js desligado
+> (o `script-src` do CSP não inclui `blob:`).
 > Para produção: comprimir/recortar o vídeo escolhido, gerar poster, verificar licença
 > (são assets de demonstração) e servi-lo do próprio domínio ou manter Mux com conta própria.
 
