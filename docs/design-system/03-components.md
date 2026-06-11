@@ -50,13 +50,17 @@ class="group w-full text-left rounded-2xl px-5 py-4 sm:px-6 sm:py-5
 <!-- + state -->
 selected:      dark → "bg-accent-400/10 text-white ring-2 ring-accent-400"
                light → "bg-accent-50 text-brand-900 ring-2 ring-accent-400"
-idle (dark):   "bg-white/[0.06] text-white/85 ring-1 ring-white/20
-                hover:bg-white/[0.09] hover:ring-white/30 hover:-translate-y-0.5"
-idle (light):  "bg-paper text-brand-900 ring-1 ring-brand-900/10
+idle (dark):   "bg-white/[0.07] text-white/85 ring-1 ring-white/25
+                shadow-[0_4px_16px_rgba(0,0,0,0.25)]
+                hover:bg-white/[0.1] hover:ring-white/35 hover:-translate-y-0.5"
+idle (light):  "bg-paper text-brand-900 ring-1 ring-brand-900/15
+                shadow-[0_4px_14px_rgba(29,29,27,0.06)]
                 hover:ring-accent-400/70 hover:-translate-y-0.5
                 hover:shadow-[0_10px_30px_rgba(29,29,27,0.07)]"
-NB: on large slabs (full-width rows), rings below white/20 on ink visually
-dissolve at the sides and the row reads as clipped — /20 is the floor.
+NB: on large slabs, hairlines alone are not enough — a 1px ring's VERTICAL
+edges get no contrast assist from a section's vertical gradient and read as
+clipped even at white/20. Pair the ring (/25 floor) with a soft resting
+drop shadow so the side edges are defined by depth, not just the hairline.
 ```
 
 Leading letter chip: `w-8 h-8 rounded-full border text-xs font-bold`
