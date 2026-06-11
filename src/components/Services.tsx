@@ -4,12 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { FadeIn, RevealLine } from "@/components/fx/RevealText";
-import {
-  BrandIcon,
-  RayBurst,
-  CornerRay,
-  type BrandIconName,
-} from "@/components/brand/BrandIcons";
+import { BrandIcon, type BrandIconName } from "@/components/brand/BrandIcons";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 import { usePrototype } from "@/lib/PrototypeContext";
@@ -79,7 +74,7 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className={`relative py-24 lg:py-32 overflow-hidden ${
+      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${
         editorial ? "bg-alabaster" : "bg-paper"
       }`}
     >
@@ -92,30 +87,25 @@ export default function Services() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header ── */}
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end mb-14 lg:mb-20">
-          <div className="max-w-2xl lg:col-span-8">
-            <FadeIn>
-              <p className="inline-flex items-center gap-3 mb-6 text-xs lg:text-sm font-semibold uppercase tracking-[0.3em] text-bronze">
-                <span aria-hidden className="h-px w-8 bg-bronze/60" />
-                {svcAud.eyebrow}
-              </p>
-            </FadeIn>
-            <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-brand-900 mb-6 text-balance">
-              <RevealLine>{svcAud.headline}</RevealLine>
-            </h2>
-            <FadeIn delay={0.2}>
-              <p className="text-lg text-brand-500 leading-relaxed">
-                {svcAud.subheading}
-              </p>
-            </FadeIn>
-          </div>
-          <div className="hidden lg:flex lg:col-span-4 justify-end pb-3">
-            <RayBurst aria-hidden width={190} height={127} className="text-bronze/25" />
-          </div>
+        <div className="max-w-2xl mb-10 lg:mb-14">
+          <FadeIn>
+            <p className="inline-flex items-center gap-3 mb-5 text-xs lg:text-sm font-semibold uppercase tracking-[0.3em] text-bronze">
+              <span aria-hidden className="h-px w-8 bg-bronze/60" />
+              {svcAud.eyebrow}
+            </p>
+          </FadeIn>
+          <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-brand-900 mb-5 text-balance">
+            <RevealLine>{svcAud.headline}</RevealLine>
+          </h2>
+          <FadeIn delay={0.2}>
+            <p className="text-lg text-brand-500 leading-relaxed">
+              {svcAud.subheading}
+            </p>
+          </FadeIn>
         </div>
 
         {/* ── Service cards — editorial asymmetric grid ── */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 mb-16 lg:mb-24">
+        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 mb-12 lg:mb-16">
           {services.map((s, i) => {
             const featured = i === 0;
             return (
@@ -125,14 +115,6 @@ export default function Services() {
                     featured ? "p-8 lg:p-10" : "p-7 lg:p-8"
                   }`}
                 >
-                  {featured && (
-                    <CornerRay
-                      aria-hidden
-                      size={130}
-                      className="absolute -right-5 -bottom-5 rotate-180 text-accent-700/10 hidden sm:block"
-                    />
-                  )}
-
                   <div className="flex items-start justify-between mb-6 lg:mb-7">
                     <div
                       className={`flex items-center justify-center rounded-2xl bg-accent-700/10 transition-all duration-500 group-hover:bg-accent-700/15 group-hover:shadow-[0_0_32px_rgba(243,146,0,0.28)] ${
@@ -180,13 +162,6 @@ export default function Services() {
               aria-hidden
               className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-accent-700/15 blur-[100px]"
             />
-            <RayBurst
-              aria-hidden
-              width={220}
-              height={147}
-              className="absolute -bottom-10 -left-8 text-accent-400/10 hidden md:block"
-            />
-
             <div className="relative grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
                 <p className="inline-flex items-center gap-2.5 mb-5 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] text-accent-400">

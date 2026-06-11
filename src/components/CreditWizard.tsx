@@ -7,8 +7,7 @@ import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
 import { usePrototype } from "@/lib/PrototypeContext";
 import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-import { BrandIcon, RayBurst, type BrandIconName } from "@/components/brand/BrandIcons";
-import { MonolineSun } from "@/components/brand/Logo";
+import { BrandIcon, type BrandIconName } from "@/components/brand/BrandIcons";
 import ProgressIndicator from "@/components/ui/progress-indicator";
 import { Slider } from "@/components/ui/slider";
 
@@ -793,14 +792,10 @@ function SuccessCard({ title, message }: { title: string; message: string }) {
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/60 to-transparent"
       />
       <div className="relative">
-        <RayBurst width={104} height={70} className="mx-auto text-accent-700 mb-7" />
         <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white text-balance mb-4">
           {title}
         </h3>
         <p className="text-white/65 leading-relaxed max-w-md mx-auto">{message}</p>
-        <div className="mt-10 pt-7 border-t border-dashed border-white/15 flex justify-center">
-          <MonolineSun size={26} strokeWidth={2} className="text-accent-400" />
-        </div>
       </div>
     </motion.div>
   );

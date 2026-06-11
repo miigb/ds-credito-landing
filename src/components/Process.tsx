@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
-  useInView,
+  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -17,11 +17,13 @@ import SectionCTA from "@/components/ui/section-cta";
 
 /*
  * Process — the scroll-telling centerpiece (see docs/redesign/DESIGN-BRIEF.md).
- * Desktop: a cinematic chapter scroll — sticky photo + giant numeral on the
- * left, the five step chapters scrolling on the right; the photo crossfades
- * as each chapter takes the center of the viewport. A thin ember rail tracks
- * section progress. Mobile: a vertical timeline with the same ember line.
- * Copy, section id, photos and CTA are identical to the legacy component.
+ * Desktop: the whole section PINS to the viewport and the five step chapters
+ * advance in place as you scroll — a scroll-driven deck. A tall outer track
+ * provides the scroll budget; a sticky h-screen stage holds the photo + giant
+ * numeral on the left and the active chapter copy on the right, both crossfading
+ * per step. A thin ember rail tracks scroll progress. Mobile (and reduced
+ * motion): a vertical timeline. Copy, section id, photos and CTA are identical
+ * to the legacy component.
  */
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -40,186 +42,6 @@ type Step = {
   description: string;
   detail: string;
 };
-
-/* ── Right-column chapter block (desktop) — drives the shared activeStep ── */
-function ChapterBlock({
-  step,
-  index,
-  active,
-  dark,
-  stepLabel,
-  onActive,
-}: {
-  step: Step;
-  index: number;
-  active: boolean;
-  dark: boolean;
-  stepLabel: string;
-  onActive: (i: number) => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  // Activates when the block crosses the center band of the viewport.
-  const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
-
-  useEffect(() => {
-    if (inView) onActive(index);
-  }, [inView, index, onActive]);
-
-  return (
-    <div
-      ref={ref}
-      className={`flex flex-col justify-center py-10 ${
-        index === 0 ? "lg:min-h-[52vh]" : "lg:min-h-[58vh]"
-      }`}
-    >
-      <motion.div
-        animate={{ opacity: active ? 1 : 0.3 }}
-        transition={{ duration: reduced ? 0 : 0.45, ease: EASE }}
-      >
-        <p
-          className={`text-[11px] font-semibold uppercase tracking-[0.3em] mb-4 ${
-            dark ? "text-accent-400" : "text-bronze"
-          }`}
-        >
-          {stepLabel} {step.number}
-        </p>
-        <h3
-          className={`text-2xl lg:text-3xl font-bold tracking-tight mb-4 ${
-            dark ? "text-white" : "text-brand-900"
-          }`}
-        >
-          {step.title}
-        </h3>
-        <p
-          className={`leading-relaxed mb-5 max-w-md ${
-            dark ? "text-white/65" : "text-brand-600"
-          }`}
-        >
-          {step.description}
-        </p>
-        <p
-          className={`text-sm italic pl-4 max-w-md border-l-2 ${
-            dark
-              ? "text-white/40 border-accent-700/40"
-              : "text-brand-400 border-gold-300/50"
-          }`}
-        >
-          {step.detail}
-        </p>
-      </motion.div>
-    </div>
-  );
-}
-
-/* ── Sticky photo + giant numeral (desktop left column) ── */
-function StickyPanel({
-  steps,
-  activeStep,
-  dark,
-  stepLabel,
-}: {
-  steps: Step[];
-  activeStep: number;
-  dark: boolean;
-  stepLabel: string;
-}) {
-  const reduced = useReducedMotion();
-  const fade = { duration: reduced ? 0 : 0.6, ease: EASE };
-
-  return (
-    <div className="sticky top-24 h-[70vh] flex flex-col">
-      {/* Photo frame — editorial gets a white mat, cinema sits raw on ink */}
-      <div className="relative flex-1 min-h-0">
-        <div
-          className={`h-full rounded-2xl ${
-            dark
-              ? "overflow-hidden ring-1 ring-white/10"
-              : "p-2 bg-white shadow-[0_18px_50px_rgba(29,29,27,0.10)]"
-          }`}
-        >
-          <div
-            className={`relative h-full overflow-hidden ${
-              dark ? "" : "rounded-xl"
-            }`}
-          >
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={activeStep}
-                className="absolute inset-0"
-                initial={{ opacity: 0, scale: reduced ? 1 : 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={fade}
-              >
-                <img
-                  src={STEP_PHOTOS[activeStep]}
-                  alt=""
-                  className="w-full h-full object-cover img-warm"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Giant overlapping numeral — ember outlined on ink, low-opacity ember on paper */}
-        <div
-          aria-hidden
-          className="absolute -bottom-9 -left-2 lg:-left-5 z-10 grid pointer-events-none"
-        >
-          <AnimatePresence initial={false}>
-            <motion.span
-              key={activeStep}
-              className={`[grid-area:1/1] font-extrabold tabular-nums leading-none tracking-tight select-none ${
-                dark ? "" : "text-accent-700/30"
-              }`}
-              style={{
-                fontSize: "clamp(6rem, 8vw, 9rem)",
-                ...(dark
-                  ? {
-                      color: "transparent",
-                      WebkitTextStroke: "2px var(--color-accent-700)",
-                    }
-                  : {}),
-              }}
-              initial={{ opacity: 0, y: reduced ? 0 : 26 }}
-              animate={{ opacity: dark ? 0.8 : 1, y: 0 }}
-              exit={{ opacity: 0, y: reduced ? 0 : -18 }}
-              transition={fade}
-            >
-              {steps[activeStep].number}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Caption + progress ticks */}
-      <div className="mt-6 flex items-center justify-between pl-40">
-        <span
-          className={`text-[11px] font-semibold uppercase tracking-[0.3em] ${
-            dark ? "text-accent-400" : "text-bronze"
-          }`}
-        >
-          {stepLabel} {steps[activeStep].number}
-        </span>
-        <div className="flex gap-1.5" aria-hidden>
-          {steps.map((s, i) => (
-            <span
-              key={s.number}
-              className={`h-[2px] w-7 rounded-full transition-colors duration-500 ${
-                i <= activeStep
-                  ? "bg-accent-700"
-                  : dark
-                  ? "bg-white/15"
-                  : "bg-brand-900/10"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ── Mobile timeline step — numeral over photo, copy below ── */
 function MobileStep({
@@ -300,21 +122,186 @@ function MobileStep({
   );
 }
 
+/* ── Desktop pinned deck — sticky stage, scroll drives the active step ── */
+function PinnedDeck({
+  steps,
+  dark,
+  stepLabel,
+}: {
+  steps: Step[];
+  dark: boolean;
+  stepLabel: string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(0);
+
+  // Pinned travel: progress 0→1 spans the whole track minus one viewport.
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const idx = Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length)));
+    setActiveStep(idx);
+  });
+  const railFill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const active = steps[activeStep];
+
+  return (
+    <div
+      ref={trackRef}
+      className="hidden lg:block relative"
+      style={{ height: `${steps.length * 90}vh` }}
+    >
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-[auto_1fr_1fr] gap-x-12 xl:gap-x-20 items-center">
+            {/* Ember scroll-progress rail */}
+            <div
+              aria-hidden
+              className={`relative h-[60vh] w-[2px] rounded-full ${
+                dark ? "bg-white/10" : "bg-brand-900/10"
+              }`}
+            >
+              <motion.div
+                style={{ height: railFill }}
+                className="absolute top-0 left-0 w-full rounded-full bg-gradient-to-b from-accent-700 to-accent-400 origin-top"
+              />
+            </div>
+
+            {/* Photo + giant numeral (crossfade per step) */}
+            <div className="relative h-[60vh]">
+              <div
+                className={`h-full rounded-2xl ${
+                  dark
+                    ? "overflow-hidden ring-1 ring-white/10"
+                    : "p-2 bg-white shadow-[0_18px_50px_rgba(29,29,27,0.10)]"
+                }`}
+              >
+                <div
+                  className={`relative h-full overflow-hidden ${dark ? "" : "rounded-xl"}`}
+                >
+                  <AnimatePresence initial={false}>
+                    <motion.img
+                      key={activeStep}
+                      src={STEP_PHOTOS[activeStep]}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover img-warm"
+                      initial={{ opacity: 0, scale: 1.04 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6, ease: EASE }}
+                    />
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Giant overlapping numeral */}
+              <div
+                aria-hidden
+                className="absolute -bottom-9 -left-2 z-10 grid pointer-events-none"
+              >
+                <AnimatePresence initial={false}>
+                  <motion.span
+                    key={activeStep}
+                    className={`[grid-area:1/1] font-extrabold tabular-nums leading-none tracking-tight select-none ${
+                      dark ? "" : "text-accent-700/30"
+                    }`}
+                    style={{
+                      fontSize: "clamp(6rem, 8vw, 9rem)",
+                      ...(dark
+                        ? {
+                            color: "transparent",
+                            WebkitTextStroke: "2px var(--color-accent-700)",
+                          }
+                        : {}),
+                    }}
+                    initial={{ opacity: 0, y: 26 }}
+                    animate={{ opacity: dark ? 0.8 : 1, y: 0 }}
+                    exit={{ opacity: 0, y: -18 }}
+                    transition={{ duration: 0.6, ease: EASE }}
+                  >
+                    {active.number}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Active chapter copy (crossfade per step) */}
+            <div className="relative min-h-[44vh] flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                >
+                  <p
+                    className={`text-[11px] font-semibold uppercase tracking-[0.3em] mb-4 ${
+                      dark ? "text-accent-400" : "text-bronze"
+                    }`}
+                  >
+                    {stepLabel} {active.number}
+                  </p>
+                  <h3
+                    className={`text-3xl xl:text-4xl font-bold tracking-tight mb-5 ${
+                      dark ? "text-white" : "text-brand-900"
+                    }`}
+                  >
+                    {active.title}
+                  </h3>
+                  <p
+                    className={`text-lg leading-relaxed mb-6 max-w-md ${
+                      dark ? "text-white/65" : "text-brand-600"
+                    }`}
+                  >
+                    {active.description}
+                  </p>
+                  <p
+                    className={`text-sm italic pl-4 max-w-md border-l-2 ${
+                      dark
+                        ? "text-white/40 border-accent-700/40"
+                        : "text-brand-400 border-gold-300/50"
+                    }`}
+                  >
+                    {active.detail}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Step ticks */}
+              <div className="mt-10 flex gap-2" aria-hidden>
+                {steps.map((s, i) => (
+                  <span
+                    key={s.number}
+                    className={`h-[3px] rounded-full transition-all duration-500 ${
+                      i === activeStep ? "w-10" : "w-6"
+                    } ${
+                      i <= activeStep
+                        ? "bg-accent-700"
+                        : dark
+                        ? "bg-white/15"
+                        : "bg-brand-900/10"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Process() {
-  const railRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { t } = useLanguage();
   const { audience } = useAudience();
   const { direction } = usePrototype();
   const dark = direction === "cinema";
-
-  const [activeStep, setActiveStep] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: railRef,
-    offset: ["start 0.75", "end 0.55"],
-  });
-  const railFill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const procAud = audience === "partner" ? t.process.b2b : t.process.b2c;
   const procSteps =
@@ -353,14 +340,10 @@ export default function Process() {
     },
   ];
 
-  const railTrack = dark ? "bg-white/10" : "bg-brand-900/10";
-
   return (
     <section
       id="process"
-      className={`relative py-28 lg:py-36 overflow-hidden ${
-        dark ? "bg-ink" : "bg-paper"
-      }`}
+      className={`relative py-20 md:py-24 lg:py-28 ${dark ? "bg-ink" : "bg-paper"}`}
     >
       {/* hairline frame */}
       <div
@@ -370,7 +353,7 @@ export default function Process() {
         }`}
       />
 
-      {/* preload all chapter photos so the sticky crossfade never flashes */}
+      {/* preload all chapter photos so the deck crossfade never flashes */}
       <div aria-hidden className="hidden">
         {STEP_PHOTOS.map((src) => (
           <img key={src} src={src} alt="" />
@@ -379,7 +362,7 @@ export default function Process() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header ── */}
-        <div className="mb-16 lg:mb-24 max-w-3xl">
+        <div className="mb-12 lg:mb-16 max-w-3xl">
           <FadeIn>
             <p
               className={`text-[11px] lg:text-sm font-semibold uppercase tracking-[0.3em] mb-5 ${
@@ -406,61 +389,29 @@ export default function Process() {
             </p>
           </FadeIn>
         </div>
+      </div>
 
-        {/* ── Chapters ── */}
-        <div id="process-steps" ref={railRef} className="relative">
-          {/* Ember progress rail — far left, fills with section scroll */}
-          <div
-            aria-hidden
-            className={`absolute left-[5px] lg:left-0 top-1 bottom-1 w-[2px] rounded-full ${railTrack}`}
-          >
-            {reduced ? (
-              <div className="w-full h-full rounded-full bg-gradient-to-b from-accent-700 to-accent-400" />
-            ) : (
-              <motion.div
-                style={{ height: railFill }}
-                className="w-full rounded-full bg-gradient-to-b from-accent-700 to-accent-400 origin-top"
-              />
-            )}
-          </div>
+      {/* Desktop: pinned scroll-deck (skipped under reduced motion) */}
+      {!reduced && (
+        <PinnedDeck steps={steps} dark={dark} stepLabel={t.process.step} />
+      )}
 
-          {/* Desktop: sticky photo left · scrolling chapters right */}
-          <div className="hidden lg:grid lg:grid-cols-[1fr_1fr] lg:gap-20 lg:pl-16">
-            <div>
-              <StickyPanel
-                steps={steps}
-                activeStep={activeStep}
-                dark={dark}
-                stepLabel={t.process.step}
-              />
-            </div>
-            <div>
-              {steps.map((step, i) => (
-                <ChapterBlock
-                  key={step.number}
-                  step={step}
-                  index={i}
-                  active={i === activeStep}
-                  dark={dark}
-                  stepLabel={t.process.step}
-                  onActive={setActiveStep}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile: vertical timeline */}
-          <div className="lg:hidden pl-9 space-y-20">
-            {steps.map((step, i) => (
-              <MobileStep
-                key={step.number}
-                step={step}
-                index={i}
-                dark={dark}
-                stepLabel={t.process.step}
-              />
-            ))}
-          </div>
+      {/* Mobile timeline — also the desktop fallback under reduced motion */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <div
+          className={`${reduced ? "" : "lg:hidden"} pl-9 space-y-16 ${
+            reduced ? "lg:max-w-2xl lg:mx-auto" : ""
+          }`}
+        >
+          {steps.map((step, i) => (
+            <MobileStep
+              key={step.number}
+              step={step}
+              index={i}
+              dark={dark}
+              stepLabel={t.process.step}
+            />
+          ))}
         </div>
 
         <SectionCTA

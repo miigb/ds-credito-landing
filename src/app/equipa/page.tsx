@@ -6,7 +6,6 @@ import SuccessStories from "@/components/SuccessStories";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/lib/LanguageContext";
 import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-import { RayBurst } from "@/components/brand/BrandIcons";
 import Link from "next/link";
 
 /*
@@ -40,12 +39,6 @@ export default function EquipaPage() {
       {/* Hero band — ink, dawn rising from the fold */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-brand-900">
         <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark" />
-        <RayBurst
-          aria-hidden
-          className="absolute -top-4 right-[6%] text-accent-700/20 hidden lg:block rotate-180"
-          width={260}
-          height={173}
-        />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
           <div className="text-center">

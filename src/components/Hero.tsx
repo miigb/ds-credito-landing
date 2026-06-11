@@ -6,7 +6,6 @@ import { ArrowDown } from "lucide-react";
 import MeshHero from "@/components/fx/MeshHero";
 import HlsVideo from "@/components/fx/HlsVideo";
 import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-import { RayBurst } from "@/components/brand/BrandIcons";
 import MiniSimulator from "./MiniSimulator";
 import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -986,13 +985,6 @@ function ClassicHero() {
       ) : (
         <>
           <div aria-hidden className="absolute inset-0 bg-dawn-radial" />
-          {/* faint ray ornament, sun-cast from the top-right */}
-          <RayBurst
-            aria-hidden
-            className="absolute -top-6 right-[4%] text-bronze/25 hidden lg:block rotate-180"
-            width={300}
-            height={200}
-          />
         </>
       )}
 
@@ -1062,20 +1054,12 @@ function ClassicHero() {
           </div>
 
           {/* ── Right: instrument (client) / negative space (partner) ── */}
-          {isClient ? (
+          {isClient && (
             <div className="w-full max-w-md lg:justify-self-end">
               <MiniSimulator />
               <div className="lg:hidden">
                 <TrustStrip tone={tone} />
               </div>
-            </div>
-          ) : (
-            <div aria-hidden className="hidden lg:flex items-end justify-end pb-6">
-              <RayBurst
-                width={220}
-                height={147}
-                className={tone === "dark" ? "text-accent-700/40" : "text-bronze/30"}
-              />
             </div>
           )}
         </div>

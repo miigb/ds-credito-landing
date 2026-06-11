@@ -119,7 +119,7 @@ export default function TeamPreview() {
   return (
     <section
       id="team"
-      className={`relative py-24 lg:py-32 overflow-hidden ${
+      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${
         dark ? "bg-ink" : "bg-alabaster"
       }`}
     >
@@ -129,7 +129,7 @@ export default function TeamPreview() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header — oversized type left, supporting copy right ── */}
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-16 items-end mb-14 lg:mb-20">
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-12 items-end mb-10 lg:mb-14">
           <div>
             <FadeIn>
               <div

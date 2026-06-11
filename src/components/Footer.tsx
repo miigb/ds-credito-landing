@@ -1,14 +1,12 @@
 "use client";
 
 import { FadeIn } from "@/components/fx/RevealText";
-import { RayBurstReveal } from "@/components/brand/RayBurstReveal";
 import { LogoStacked } from "@/components/brand/Logo";
 import { useLanguage } from "@/lib/LanguageContext";
 import { siteConfig } from "@/lib/siteConfig";
 
 /*
- * Footer — the horizon finale. The page's single signature moment lives here:
- * the RayBurst sun-arc draws itself over the stacked lockup on a warm
+ * Footer — the horizon finale. The stacked lockup fades in over a warm
  * ink→ember gradient. Every link, the social icons, ANICA badge and the
  * Banco de Portugal regulatory paragraph are verbatim from the legacy footer.
  */
@@ -27,10 +25,9 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-hero-gradient">
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 lg:pt-28 pb-10">
-        {/* ── The signature moment: sunrise draw + stacked lockup ── */}
+        {/* ── The signature moment: the stacked lockup at the horizon ── */}
         <div className="flex flex-col items-center text-center">
-          <RayBurstReveal width={180} height={120} className="text-accent-400/70" />
-          <FadeIn delay={0.35} className="mt-6">
+          <FadeIn delay={0.1}>
             <LogoStacked tone="dark" height={120} />
           </FadeIn>
         </div>

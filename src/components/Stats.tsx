@@ -103,7 +103,7 @@ export default function Stats() {
   return (
     <section
       id="about"
-      className={`relative py-24 lg:py-32 overflow-hidden ${dark ? "bg-ink" : "bg-paper"}`}
+      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${dark ? "bg-ink" : "bg-paper"}`}
     >
       {/* ── Canvas ── */}
       {dark ? (
@@ -117,7 +117,7 @@ export default function Stats() {
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header — left-set, editorial ── */}
-        <div className="max-w-3xl mb-16 lg:mb-20">
+        <div className="max-w-3xl mb-12 lg:mb-16">
           <FadeIn>
             <p
               className={`mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
@@ -137,7 +137,7 @@ export default function Stats() {
         </div>
 
         {/* ── Numbers — display-XL over hairline rules, staggered ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-12 lg:gap-y-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-8 lg:gap-y-12">
           {stats.map((stat, i) => (
             <FadeIn
               key={stat.id}
@@ -176,7 +176,7 @@ export default function Stats() {
         {/* ── Growth pill + ANICA membership ── */}
         <FadeIn
           delay={0.2}
-          className="mt-14 lg:mt-16 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6"
+          className="mt-10 lg:mt-12 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6"
         >
           <div
             className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full self-start border ${

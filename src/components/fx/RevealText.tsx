@@ -28,8 +28,13 @@ export function RevealLine({
   onMount = false,
 }: RevealLineProps) {
   const reduced = useReducedMotion();
-  const target = { y: "0%", opacity: 1 };
-  const initial = reduced ? target : { y: "112%", opacity: 1 };
+  // The trigger lives on the OUTER mask span — it never moves, so its
+  // IntersectionObserver fires reliably. The inner span (translated out of the
+  // mask) only consumes the propagated variant, never observes itself.
+  const variants = {
+    hidden: { y: reduced ? "0%" : "112%" },
+    shown: { y: "0%" },
+  };
   const transition = {
     duration: reduced ? 0 : 0.85,
     delay: reduced ? 0 : base + index * 0.11,
@@ -37,18 +42,21 @@ export function RevealLine({
   };
 
   return (
-    <span className={`block overflow-hidden ${className}`}>
+    <motion.span
+      className={`block overflow-hidden ${className}`}
+      initial="hidden"
+      {...(onMount
+        ? { animate: "shown" }
+        : { whileInView: "shown", viewport: { once: true, amount: 0.4 } })}
+    >
       <motion.span
         className="block will-change-transform"
-        initial={initial}
-        {...(onMount
-          ? { animate: target }
-          : { whileInView: target, viewport: { once: true, amount: 0.6 } })}
+        variants={variants}
         transition={transition}
       >
         {children}
       </motion.span>
-    </span>
+    </motion.span>
   );
 }
 

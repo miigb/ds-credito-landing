@@ -85,7 +85,7 @@ export default function VideoShowcase() {
   };
 
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-ink">
+    <section className="relative py-20 md:py-24 lg:py-28 overflow-hidden bg-ink">
       {/* cinema: a faint dawn wash behind the screening room */}
       {direction === "cinema" && (
         <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark opacity-50" />

@@ -7,7 +7,6 @@ import { track } from "@vercel/analytics";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 import { usePrototype } from "@/lib/PrototypeContext";
-import { MonolineSun } from "@/components/brand/Logo";
 
 function formatCurrency(value: number): string {
   return value.toLocaleString("pt-PT", { maximumFractionDigits: 0 });
@@ -97,7 +96,6 @@ export default function MiniSimulator() {
         >
           {isPt ? "Simulação Rápida" : "Quick Estimate"}
         </span>
-        <MonolineSun size={22} strokeWidth={2.2} className="text-accent-700" />
       </div>
 
       {!submitted ? (

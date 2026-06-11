@@ -4,8 +4,8 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useAudience } from "@/lib/AudienceContext";
 import { usePrototype } from "@/lib/PrototypeContext";
+import { Check } from "lucide-react";
 import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-import { MonolineSun } from "@/components/brand/Logo";
 import SectionCTA from "@/components/ui/section-cta";
 
 /*
@@ -51,8 +51,8 @@ function BenefitList({
     >
       {items.map((b) => (
         <motion.li key={b.id} variants={line} className="flex items-start gap-3.5">
-          <span className="w-[22px] shrink-0 pt-[7px]">
-            <MonolineSun size={18} strokeWidth={2.4} className={glyph} />
+          <span className="w-[22px] shrink-0 pt-[5px]">
+            <Check size={17} strokeWidth={2.6} className={glyph} />
           </span>
           <p className={`leading-relaxed ${text}`}>{b.text}</p>
         </motion.li>
@@ -115,13 +115,13 @@ export default function WhyUs() {
   return (
     <section
       id="why-us"
-      className={`relative py-24 lg:py-32 overflow-hidden ${
+      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${
         dark ? "bg-ink" : "bg-paper"
       }`}
     >
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Section header — left-set editorial type ── */}
-        <div className="max-w-3xl mb-14 lg:mb-20">
+        <div className="max-w-3xl mb-10 lg:mb-14">
           <FadeIn>
             <div
               className={`inline-flex items-center gap-3 mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
