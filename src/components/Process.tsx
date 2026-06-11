@@ -82,6 +82,7 @@ function MobileStep({
             alt=""
             className="w-full h-full object-cover img-warm"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

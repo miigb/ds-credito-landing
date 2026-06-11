@@ -46,7 +46,10 @@ Abrir http://localhost:3000. No canto inferior esquerdo há um botão **"Opçõe
 
 ## Variantes de logótipo
 
-1. **Oficial** — lockup horizontal da Particula Digital (sol gradiente + Brown Sugar). Zero risco.
+1. **Oficial** — lockup horizontal recomposto do asset oficial flat-ember (var-dark-4 /
+   var-light-4): sol ember à esquerda, lettering oficial tal-e-qual à direita
+   (`logo-horizontal-white.svg` / `logo-horizontal-ink.svg`, escolha do Paulo, Jun 2026).
+   O footer usa o empilhado flat-ember correspondente.
 2. **Sol + Mont** — sol oficial + wordmark Montserrat LETRA(bold)PERFEIÇOADA(light). Moderno, mantém o sol.
 3. **Monoline** — sol redesenhado em traço (stroke, adapta a qualquer fundo) + Montserrat. O mais "novo".
 4. **Assinatura** — wordmark Brown Sugar (fonte licenciada do logo) + sol ember flat. O mais pessoal.

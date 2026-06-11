@@ -28,7 +28,7 @@ export default function Footer() {
         {/* ── The signature moment: the stacked lockup at the horizon ── */}
         <div className="flex flex-col items-center text-center">
           <FadeIn delay={0.1}>
-            <LogoStacked tone="dark" height={120} />
+            <LogoStacked tone="dark" height={120} className="-mb-1" />
           </FadeIn>
         </div>
 

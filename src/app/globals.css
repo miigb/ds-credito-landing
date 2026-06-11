@@ -42,6 +42,7 @@
   /* Semantic aliases */
   --color-ember: var(--color-accent-700);
   --color-bronze: var(--color-gold-300);
+  --color-bronze-deep: #8A6311; /* AA bronze for small caps on paper — 5.1:1 */
   --color-paper: var(--color-brand-50);
   --color-ink: var(--color-brand-900);
   --color-alabaster: #F2ECE3;

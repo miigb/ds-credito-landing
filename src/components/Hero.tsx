@@ -36,7 +36,7 @@ function CtaGroup({ tone }: { tone: "dark" | "light" }) {
       <a
         href={audience === "partner" ? "#contact" : "#pre-qualification"}
         onClick={() => track("hero_cta", { type: "primary", audience })}
-        className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
+        className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 text-base font-semibold rounded-full bg-accent-700 text-white hover:bg-accent-600 transition-all duration-300 shadow-2xl shadow-accent-700/30 hover:shadow-accent-600/40 hover:-translate-y-0.5"
       >
         {heroAud.ctaPrimary}
         <svg
@@ -52,7 +52,7 @@ function CtaGroup({ tone }: { tone: "dark" | "light" }) {
       </a>
       <a
         href="#process"
-        className={`inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full transition-all duration-300 ${
+        className={`inline-flex items-center justify-center px-6 sm:px-8 py-3.5 text-base font-semibold rounded-full transition-all duration-300 ${
           tone === "dark"
             ? "text-white border border-white/20 hover:border-white/40 hover:bg-white/[0.06]"
             : "text-brand-900 border border-brand-900/20 hover:border-brand-900/45 hover:bg-brand-900/[0.04]"

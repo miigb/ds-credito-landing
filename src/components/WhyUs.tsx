@@ -120,30 +120,32 @@ export default function WhyUs() {
       }`}
     >
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* ── Section header — left-set editorial type ── */}
-        <div className="max-w-3xl mb-10 lg:mb-14">
-          <FadeIn>
-            <div
-              className={`inline-flex items-center gap-3 mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
-                dark ? "text-accent-400" : "text-bronze"
+        {/* ── Section header — headline left, supporting copy right ── */}
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-12 items-end mb-10 lg:mb-14">
+          <div>
+            <FadeIn>
+              <div
+                className={`inline-flex items-center gap-3 mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
+                  dark ? "text-accent-400" : "text-bronze"
+                }`}
+              >
+                <span aria-hidden className="h-px w-8 bg-current opacity-60" />
+                {whyAud.eyebrow}
+              </div>
+            </FadeIn>
+
+            <h2
+              className={`text-4xl lg:text-6xl font-bold tracking-tight leading-[1.04] ${
+                dark ? "text-white" : "text-brand-900"
               }`}
             >
-              <span aria-hidden className="h-px w-8 bg-current opacity-60" />
-              {whyAud.eyebrow}
-            </div>
-          </FadeIn>
-
-          <h2
-            className={`text-4xl lg:text-6xl font-bold tracking-tight leading-[1.04] mb-6 ${
-              dark ? "text-white" : "text-brand-900"
-            }`}
-          >
-            <RevealLine>{whyAud.headline}</RevealLine>
-          </h2>
+              <RevealLine>{whyAud.headline}</RevealLine>
+            </h2>
+          </div>
 
           <FadeIn delay={0.25}>
             <p
-              className={`text-lg max-w-2xl ${
+              className={`text-lg lg:pb-1.5 ${
                 dark ? "text-white/60" : "text-brand-500"
               }`}
             >

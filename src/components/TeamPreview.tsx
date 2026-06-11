@@ -58,13 +58,21 @@ function TeamCard({
               {initials}
             </div>
           ) : (
-            <img
-              src={member.photo}
-              alt={member.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700 ease-out"
-              style={{ objectPosition: member.photoPosition || "center" }}
-              onError={() => setImgError(true)}
-            />
+            <picture>
+              <source
+                srcSet={member.photo.replace(".jpg", ".webp")}
+                type="image/webp"
+              />
+              <img
+                src={member.photo}
+                alt={member.name}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-300 ease-out"
+                style={{ objectPosition: member.photoPosition || "center" }}
+                loading="lazy"
+                decoding="async"
+                onError={() => setImgError(true)}
+              />
+            </picture>
           )}
         </div>
 
@@ -78,7 +86,7 @@ function TeamCard({
             {member.name}
           </h3>
           <p
-            className={`mt-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] ${
+            className={`mt-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] ${
               dark ? "text-accent-400" : "text-bronze"
             }`}
           >

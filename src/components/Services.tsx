@@ -68,7 +68,7 @@ export default function Services() {
   const cardSurface = editorial
     ? "bg-white shadow-[0_6px_30px_rgba(29,29,27,0.06)] hover:shadow-[0_22px_55px_rgba(29,29,27,0.12)]"
     : "bg-white ring-1 ring-brand-900/[0.04] shadow-[0_10px_40px_rgba(29,29,27,0.05)] hover:shadow-[0_24px_60px_rgba(29,29,27,0.11)]";
-  const numeral = editorial ? "text-bronze/80" : "text-brand-300";
+  const numeral = editorial ? "text-bronze" : "text-brand-400";
 
   return (
     <section
@@ -86,19 +86,21 @@ export default function Services() {
       />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* ── Header ── */}
-        <div className="max-w-2xl mb-10 lg:mb-14">
-          <FadeIn>
-            <p className="inline-flex items-center gap-3 mb-5 text-xs lg:text-sm font-semibold uppercase tracking-[0.3em] text-bronze">
-              <span aria-hidden className="h-px w-8 bg-bronze/60" />
-              {svcAud.eyebrow}
-            </p>
-          </FadeIn>
-          <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-brand-900 mb-5 text-balance">
-            <RevealLine>{svcAud.headline}</RevealLine>
-          </h2>
+        {/* ── Header — headline left, supporting copy right (TeamPreview pattern) ── */}
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-12 items-end mb-10 lg:mb-14">
+          <div>
+            <FadeIn>
+              <p className="inline-flex items-center gap-3 mb-5 text-xs lg:text-sm font-semibold uppercase tracking-[0.3em] text-bronze">
+                <span aria-hidden className="h-px w-8 bg-bronze/60" />
+                {svcAud.eyebrow}
+              </p>
+            </FadeIn>
+            <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-brand-900 text-balance">
+              <RevealLine>{svcAud.headline}</RevealLine>
+            </h2>
+          </div>
           <FadeIn delay={0.2}>
-            <p className="text-lg text-brand-500 leading-relaxed">
+            <p className="text-lg text-brand-500 leading-relaxed lg:pb-1.5">
               {svcAud.subheading}
             </p>
           </FadeIn>
@@ -117,7 +119,7 @@ export default function Services() {
                 >
                   <div className="flex items-start justify-between mb-6 lg:mb-7">
                     <div
-                      className={`flex items-center justify-center rounded-2xl bg-accent-700/10 transition-all duration-500 group-hover:bg-accent-700/15 group-hover:shadow-[0_0_32px_rgba(243,146,0,0.28)] ${
+                      className={`flex items-center justify-center rounded-2xl bg-accent-700/15 transition-all duration-500 group-hover:bg-accent-700/20 group-hover:shadow-[0_0_32px_rgba(243,146,0,0.28)] ${
                         featured ? "w-[4.5rem] h-[4.5rem]" : "w-16 h-16"
                       }`}
                     >

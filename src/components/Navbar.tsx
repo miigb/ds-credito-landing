@@ -111,7 +111,7 @@ export default function Navbar() {
         >
           {/* Logo */}
           <a href="/" className="flex items-center shrink-0 group" translate="no">
-            <Logo tone={tone} height={42} className="-my-1" />
+            <Logo tone={tone} height={42} />
           </a>
 
           {/* Desktop nav */}
@@ -133,7 +133,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative group px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${linkTone}`}
+                  className={`relative group px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${linkTone}`}
                 >
                   {link.label}
                   <span
@@ -311,12 +311,12 @@ export default function Navbar() {
               {locale === "pt" && (
                 <FadeIn onMount delay={0.05}>
                   <div
-                    className={`inline-flex items-center self-start rounded-full p-0.5 text-xs mb-8 ${pillShell}`}
+                    className={`inline-flex items-center self-start rounded-full p-1 gap-1 text-xs mb-8 ${pillShell}`}
                     translate="no"
                   >
                     <button
                       onClick={() => setAudience("client")}
-                      className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                      className={`px-4 py-3 rounded-full transition-all duration-300 ${
                         audience === "client" ? pillActive : pillIdle
                       }`}
                     >
@@ -324,7 +324,7 @@ export default function Navbar() {
                     </button>
                     <button
                       onClick={() => setAudience("partner")}
-                      className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                      className={`px-4 py-3 rounded-full transition-all duration-300 ${
                         audience === "partner" ? pillActive : pillIdle
                       }`}
                     >

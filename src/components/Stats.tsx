@@ -53,22 +53,22 @@ function AnimatedCounter({
     if (!inView) return () => clearTimeout(fallbackTimer);
 
     clearTimeout(fallbackTimer);
-    let start = 0;
-    const end = value;
     const duration = 2000;
-    const increment = end / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCurrent(end);
-        setHasAnimated(true);
-        clearInterval(timer);
+    const startTs = performance.now();
+    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min((now - startTs) / duration, 1);
+      setCurrent(Math.round(value * easeOutQuart(t)));
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
       } else {
-        setCurrent(Math.floor(start));
+        setHasAnimated(true);
       }
-    }, 16);
+    };
+    raf = requestAnimationFrame(tick);
     return () => {
-      clearInterval(timer);
+      cancelAnimationFrame(raf);
       clearTimeout(fallbackTimer);
     };
   }, [inView, value, hasAnimated, reduced]);
@@ -114,11 +114,11 @@ export default function Stats() {
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header — left-set, editorial ── */}
-        <div className="max-w-3xl mb-12 lg:mb-16">
+        <div className="max-w-3xl mb-8 lg:mb-10">
           <FadeIn>
             <p
               className={`mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
-                dark ? "text-accent-400" : "text-bronze"
+                dark ? "text-accent-400" : "text-bronze-deep"
               }`}
             >
               {t.stats.eyebrow}
@@ -155,8 +155,8 @@ export default function Stats() {
                   />
                 </div>
                 <p
-                  className={`mt-3 text-[11px] font-semibold uppercase tracking-[0.25em] ${
-                    dark ? "text-white/45" : "text-brand-500"
+                  className={`mt-3 text-[11px] font-semibold uppercase tracking-[0.15em] ${
+                    dark ? "text-white/60" : "text-bronze-deep"
                   }`}
                 >
                   {stat.label}
@@ -211,8 +211,8 @@ export default function Stats() {
             </span>
             <span className="flex flex-col">
               <span
-                className={`text-[9px] font-semibold uppercase tracking-[0.25em] ${
-                  dark ? "text-white/40" : "text-brand-500"
+                className={`text-[9px] font-semibold uppercase tracking-[0.15em] ${
+                  dark ? "text-white/55" : "text-brand-500"
                 }`}
               >
                 Membro

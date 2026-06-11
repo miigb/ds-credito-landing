@@ -26,7 +26,7 @@ const fieldCls =
   "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/25 text-base focus:outline-none focus:border-accent-700/50 focus:ring-1 focus:ring-accent-700/30 transition-all";
 
 const labelCls =
-  "block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/45 mb-2";
+  "block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/60 mb-2";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -165,7 +165,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="group block py-6 border-b border-white/10"
                   >
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-2">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/55 mb-2">
                       {t.contact.location}
                     </p>
                     <p className="flex items-baseline gap-2.5 text-xl lg:text-2xl font-semibold tracking-tight text-white/85 transition-all duration-300 group-hover:text-accent-400 group-hover:[text-shadow:0_0_28px_rgba(255,177,0,0.35)]">
@@ -179,7 +179,7 @@ export default function Contact() {
                   </a>
 
                   <div className="py-6 border-b border-white/10">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-2">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/55 mb-2">
                       {t.contact.email}
                     </p>
                     <a
@@ -191,7 +191,7 @@ export default function Contact() {
                   </div>
 
                   <div className="py-6 border-b border-white/10">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-2">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/55 mb-2">
                       {t.contact.phone}
                     </p>
                     <a
