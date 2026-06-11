@@ -19,7 +19,7 @@ export const translations = {
         headlineStart: "Where international buyers meet ",
         headlineHighlight: "effortless financing",
         subheading:
-          "Independent credit brokerage for international property buyers in Portugal. We compare offers across partner banks, handle all documentation, and support you from pre-check to deed signing — at no direct cost.",
+          "Tied credit intermediary for international property buyers in Portugal. We compare offers across partner banks, handle all documentation, and support you from pre-check to deed signing — at no direct cost.",
         ctaPrimary: "Start Your Pre-Check",
         ctaSecondary: "See How It Works",
       },

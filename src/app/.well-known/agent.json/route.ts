@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const agentCard = {
   name: "Letraperfeiçoada",
   description:
-    "Independent credit brokerage in Setúbal, Portugal. Part of Decisões e Soluções group. We compare mortgage offers across 10 partner banks, handle all documentation, and support buyers from pre-check to deed signing — at no cost to the client.",
+    "Tied credit intermediary in Setúbal, Portugal. Part of Decisões e Soluções group. We compare mortgage offers across 10 partner banks, handle all documentation, and support buyers from pre-check to deed signing — at no cost to the client.",
   url: "https://meuintermediario.com",
   provider: {
     organization: "Letraperfeiçoada - Unipessoal Lda",

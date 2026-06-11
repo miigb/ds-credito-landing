@@ -54,7 +54,7 @@ export const siteConfig = {
   },
 
   description: {
-    en: "Independent credit brokerage supporting international buyers with end-to-end financing in Portugal. Part of Decisões e Soluções group with 22+ years of experience and 170+ stores nationwide. No cost to the client.",
-    pt: "Intermediário de crédito independente em Setúbal, parte do grupo Decisões e Soluções. Mais de 22 anos de experiência, 170 lojas em Portugal. Sem custo para o cliente.",
+    en: "Tied credit intermediary supporting international buyers with end-to-end financing in Portugal. Part of Decisões e Soluções group with 22+ years of experience and 170+ stores nationwide. No cost to the client.",
+    pt: "Intermediário de crédito vinculado em Setúbal, parte do grupo Decisões e Soluções. Mais de 22 anos de experiência, 170 lojas em Portugal. Sem custo para o cliente.",
   },
 } as const;

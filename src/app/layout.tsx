@@ -151,7 +151,7 @@ export default function RootLayout({
           <div style={{ padding: "2rem", fontFamily: "system-ui" }}>
             <h1>Letraperfeiçoada</h1>
             <p>
-              Independent credit brokerage in Setúbal, Portugal. Part of
+              Tied credit intermediary in Setúbal, Portugal. Part of
               Decisões e Soluções group.
             </p>
             <p>

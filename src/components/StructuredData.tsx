@@ -155,7 +155,7 @@ const faqSchema = {
       name: "What is Letraperfeiçoada?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Letraperfeiçoada is an independent credit brokerage in Setúbal, Portugal, part of the Decisões e Soluções group. We help international property buyers and Portuguese clients secure the best mortgage terms by comparing offers across multiple partner banks, managing all documentation, and providing end-to-end support from pre-check to deed signing — at no cost to the buyer.",
+        text: "Letraperfeiçoada is a tied credit intermediary in Setúbal, Portugal, part of the Decisões e Soluções group. We help international property buyers and Portuguese clients secure the best mortgage terms by comparing offers across multiple partner banks, managing all documentation, and providing end-to-end support from pre-check to deed signing — at no cost to the buyer.",
       },
     },
     {
