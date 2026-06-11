@@ -482,11 +482,12 @@ export default function AgentProfilePage() {
                     size={160}
                     level="M"
                     imageSettings={{
-                      src: "/brand-2026/png/icon-sol@4x.png",
+                      src: "/brand-2026/png/qr-logo@2x.png",
                       x: undefined,
                       y: undefined,
-                      height: 30,
-                      width: 30,
+                      // native 491x287 — keep the lockup's aspect so it never squishes
+                      height: 35,
+                      width: 60,
                       excavate: true,
                     }}
                   />

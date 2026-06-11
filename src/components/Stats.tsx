@@ -191,41 +191,30 @@ export default function Stats() {
             </span>
           </div>
 
-          {/* ANICA membership badge */}
+          {/* ANICA membership badge — same quiet pill as the footer */}
           <a
             href="https://anica.org.pt"
             target="_blank"
             rel="noopener noreferrer"
-            className={`group inline-flex items-center gap-3 px-4 py-2.5 rounded-full self-start border transition-all duration-300 ${
+            className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full self-start border transition-all duration-300 ${
               dark
-                ? "bg-white/[0.04] border-white/10 hover:bg-white/[0.08] hover:border-white/20"
-                : "bg-white border-brand-900/10 shadow-[0_6px_30px_rgba(29,29,27,0.05)] hover:border-bronze/40 hover:shadow-[0_10px_40px_rgba(29,29,27,0.08)]"
+                ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
+                : "bg-brand-900/[0.04] border-brand-900/10 hover:bg-brand-900/[0.06] hover:border-brand-900/20"
             }`}
           >
-            <span className="inline-flex items-center justify-center bg-white rounded-lg px-2 py-1.5">
-              <img
-                src="/anica-logo.png"
-                alt="ANICA - Associação Nacional de Intermediários de Crédito Autorizados"
-                className="h-7 w-auto"
-              />
-            </span>
-            <span className="flex flex-col">
-              <span
-                className={`text-[9px] font-semibold uppercase tracking-[0.15em] ${
-                  dark ? "text-white/55" : "text-brand-500"
-                }`}
-              >
-                Membro
-              </span>
-              <span
-                className={`text-xs font-bold transition-colors ${
-                  dark
-                    ? "text-white/85 group-hover:text-accent-400"
-                    : "text-brand-800 group-hover:text-accent-700"
-                }`}
-              >
-                ANICA
-              </span>
+            <img
+              src="/anica-logo.png"
+              alt="ANICA - Associação Nacional de Intermediários de Crédito Autorizados"
+              className={`h-6 w-auto ${
+                dark ? "brightness-0 invert opacity-60" : "opacity-80"
+              }`}
+            />
+            <span
+              className={`text-[10px] uppercase tracking-[0.2em] font-semibold ${
+                dark ? "text-white/50" : "text-brand-600"
+              }`}
+            >
+              Membro ANICA
             </span>
           </a>
         </FadeIn>

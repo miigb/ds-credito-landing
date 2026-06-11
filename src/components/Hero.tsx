@@ -52,10 +52,10 @@ function CtaGroup({ tone }: { tone: "dark" | "light" }) {
       </a>
       <a
         href="#process"
-        className={`inline-flex items-center justify-center px-6 sm:px-8 py-3.5 text-base font-semibold rounded-full transition-all duration-300 ${
+        className={`inline-flex items-center justify-center px-6 sm:px-8 py-3.5 text-base font-semibold rounded-2xl transition-all duration-300 ${
           tone === "dark"
-            ? "text-white border border-white/20 hover:border-white/40 hover:bg-white/[0.06]"
-            : "text-brand-900 border border-brand-900/20 hover:border-brand-900/45 hover:bg-brand-900/[0.04]"
+            ? "text-white bg-white/[0.05] ring-1 ring-white/15 hover:bg-white/[0.08] hover:ring-white/25"
+            : "text-brand-900 bg-brand-900/[0.04] ring-1 ring-brand-900/10 hover:bg-brand-900/[0.06] hover:ring-brand-900/20"
         }`}
       >
         {heroAud.ctaSecondary}
@@ -316,7 +316,7 @@ function VideoHero() {
               </a>
               <a
                 href="#process"
-                className="animate-blur-fade-up liquid-glass inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 text-base font-medium rounded-full text-white hover:bg-white/[0.06] transition-colors duration-300"
+                className="animate-blur-fade-up inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 text-base font-medium rounded-2xl text-white bg-white/[0.05] ring-1 ring-white/15 hover:bg-white/[0.08] hover:ring-white/25 transition-all duration-300"
                 style={{ animationDelay: "700ms" }}
               >
                 {heroAud.ctaSecondary}
@@ -420,7 +420,7 @@ function VideoHero2() {
               </a>
               <a
                 href="#process"
-                className="liquid-glass text-white text-sm sm:text-base font-medium px-6 sm:px-7 py-3 rounded-full hover:bg-white/5 transition-colors"
+                className="text-white text-sm sm:text-base font-medium px-6 sm:px-7 py-3 rounded-2xl bg-white/[0.05] ring-1 ring-white/15 hover:bg-white/[0.08] hover:ring-white/25 transition-all"
               >
                 {heroAud.ctaSecondary}
               </a>
@@ -531,7 +531,7 @@ function CenteredHeroBody({ highlight }: { highlight: "amber" | "ember" }) {
           </a>
           <a
             href="#process"
-            className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors"
+            className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-2xl text-white bg-white/[0.05] ring-1 ring-white/15 hover:bg-white/[0.08] hover:ring-white/25 transition-all"
           >
             {heroAud.ctaSecondary}
           </a>
@@ -704,14 +704,37 @@ function SlidesHero() {
   const [idx, setIdx] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const inViewRef = useRef(true);
+  // Last manual interaction — the auto-advance backs off for a while after it.
+  const interactRef = useRef(0);
 
   const TOTAL = 5;
-  const next = () => setIdx((i) => (i + 1) % TOTAL);
-  const prev = () => setIdx((i) => (i - 1 + TOTAL) % TOTAL);
+  const next = () => {
+    interactRef.current = Date.now();
+    setIdx((i) => (i + 1) % TOTAL);
+  };
+  const prev = () => {
+    interactRef.current = Date.now();
+    setIdx((i) => (i - 1 + TOTAL) % TOTAL);
+  };
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
+
+  // Carousel auto-advance: every 7s while the deck fills the screen. Backs off
+  // for 14s after any manual nav, and never advances while the visitor is in a
+  // form field (e.g. the simulator on the last slide) or the tab is hidden.
+  useEffect(() => {
+    if (reduced) return;
+    const id = setInterval(() => {
+      if (!inViewRef.current || document.hidden) return;
+      if (Date.now() - interactRef.current < 14000) return;
+      const ae = document.activeElement as HTMLElement | null;
+      if (ae && (/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) || ae.isContentEditable)) return;
+      setIdx((i) => (i + 1) % TOTAL);
+    }, 7000);
+    return () => clearInterval(id);
+  }, [reduced]);
 
   // Deck keys act only while the hero fills the screen and no field is focused.
   useEffect(() => {
@@ -794,7 +817,7 @@ function SlidesHero() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {PrimaryCta}
-            <a href="#process" className="liquid-glass inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-full text-white hover:bg-white/5 transition-colors">
+            <a href="#process" className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium rounded-2xl text-white bg-white/[0.05] ring-1 ring-white/15 hover:bg-white/[0.08] hover:ring-white/25 transition-all">
               {heroAud.ctaSecondary}
             </a>
           </div>
@@ -853,10 +876,10 @@ function SlidesHero() {
         <div className="relative z-10 w-full max-w-2xl rounded-[2rem] bg-paper text-brand-900 px-8 sm:px-12 py-12 sm:py-14 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]">
           <div aria-hidden className="absolute inset-0 rounded-[2rem] bg-dawn-radial opacity-60 pointer-events-none" />
           <div className="relative">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-bronze mb-7">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-bronze-deep mb-8">
               {isPt ? "Registado e Certificado" : "Registered & Certified"}
             </div>
-            <div className="flex items-baseline gap-3 mb-2">
+            <div className="flex items-center gap-x-5 gap-y-2 flex-wrap">
               <span className="text-accent-700 font-extrabold tracking-tight leading-none" style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}>
                 €0
               </span>
@@ -864,19 +887,19 @@ function SlidesHero() {
                 {isPt ? "Serviço gratuito — sem custo para o cliente" : "Free service — no cost to the client"}
               </span>
             </div>
-            <div className="mt-9 grid sm:grid-cols-2 gap-6">
+            <div className="mt-10 pt-8 border-t border-brand-900/10 grid sm:grid-cols-2 gap-6">
               <div>
-                <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-400 mb-1.5">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-brand-400 mb-2.5">
                   {isPt ? "Registado" : "Registered"}
                 </div>
-                <div className="text-brand-900 font-semibold">Banco de Portugal</div>
-                <div className="text-brand-500 text-sm tabular-nums">n.º 0007470</div>
+                <div className="text-brand-900 font-semibold leading-tight">Banco de Portugal</div>
+                <div className="text-brand-500 text-sm tabular-nums mt-0.5">n.º 0007470</div>
               </div>
               <div className="sm:border-l sm:border-brand-900/10 sm:pl-6">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent-700 mb-2">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-bronze-deep mb-2.5">
                   {isPt ? "Membro Certificado 2025" : "Certified Member 2025"}
                 </div>
-                <a href="https://anica.org.pt" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-white rounded-lg px-3 py-2 shadow-sm">
+                <a href="https://anica.org.pt" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-white rounded-lg px-3 py-1.5 shadow-sm ring-1 ring-brand-900/[0.06]">
                   <img src="/anica-logo.png" alt="ANICA — Associação Nacional de Intermediários de Crédito Autorizados" className="h-7 w-auto" />
                 </a>
               </div>
@@ -917,7 +940,10 @@ function SlidesHero() {
         {Array.from({ length: TOTAL }).map((_, i) => (
           <button
             key={i}
-            onClick={() => setIdx(i)}
+            onClick={() => {
+              interactRef.current = Date.now();
+              setIdx(i);
+            }}
             aria-label={`${isPt ? "Slide" : "Slide"} ${i + 1}`}
             aria-current={i === idx}
             className={`rounded-full transition-all duration-300 ${

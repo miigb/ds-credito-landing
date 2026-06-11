@@ -211,6 +211,27 @@ input[type="range"] {
     }
   }
 
+  /* Subtle breathing ember glow for the brand lockup (navbar). The soft halo
+     also masks SVG ray aliasing at small sizes. Static under reduced motion. */
+  @keyframes logoGlimmer {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 6px rgba(243, 146, 0, 0.16));
+    }
+    50% {
+      filter: drop-shadow(0 0 13px rgba(243, 146, 0, 0.38));
+    }
+  }
+  .logo-glimmer {
+    filter: drop-shadow(0 0 8px rgba(243, 146, 0, 0.25));
+    animation: logoGlimmer 5.5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-glimmer {
+      animation: none;
+    }
+  }
+
   /* Bottom-only backdrop blur for the video hero (no dark gradient). */
   .mask-fade-bottom {
     mask-image: linear-gradient(to top, black 0%, transparent 45%);

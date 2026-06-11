@@ -207,19 +207,11 @@ function PinnedDeck({
                   <motion.span
                     key={activeStep}
                     className={`[grid-area:1/1] font-extrabold tabular-nums leading-none tracking-tight select-none ${
-                      dark ? "" : "text-accent-700/30"
+                      dark ? "text-accent-700" : "text-accent-700/30"
                     }`}
-                    style={{
-                      fontSize: "clamp(6rem, 8vw, 9rem)",
-                      ...(dark
-                        ? {
-                            color: "transparent",
-                            WebkitTextStroke: "2px var(--color-accent-700)",
-                          }
-                        : {}),
-                    }}
+                    style={{ fontSize: "clamp(6rem, 8vw, 9rem)" }}
                     initial={{ opacity: 0, y: 26 }}
-                    animate={{ opacity: dark ? 0.8 : 1, y: 0 }}
+                    animate={{ opacity: dark ? 0.9 : 1, y: 0 }}
                     exit={{ opacity: 0, y: -18 }}
                     transition={{ duration: 0.6, ease: EASE }}
                   >

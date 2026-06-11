@@ -111,7 +111,7 @@ export default function Navbar() {
         >
           {/* Logo */}
           <a href="/" className="flex items-center shrink-0 group" translate="no">
-            <Logo tone={tone} height={42} />
+            <Logo tone={tone} height={42} className="logo-glimmer" />
           </a>
 
           {/* Desktop nav */}
