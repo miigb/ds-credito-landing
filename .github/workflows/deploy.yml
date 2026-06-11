@@ -1,0 +1,18 @@
+# Bridge: trigger a Vercel production deployment on every push to main.
+#
+# Exists because the Vercel GitHub App stopped delivering push events for
+# this repo (re-linking didn't revive it). If the app is ever reinstalled
+# and starts deploying on push again (github.com/apps/vercel → Configure),
+# DELETE this workflow to avoid double deployments.
+name: Deploy to Vercel
+on:
+  push:
+    branches: [main]
+jobs:
+  trigger-vercel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel deploy hook
+        run: curl -sf -X POST "$DEPLOY_HOOK" > /dev/null && echo "deployment triggered"
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
