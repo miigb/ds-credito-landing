@@ -13,13 +13,13 @@ export async function GET(
   }
 
   const manifest = {
-    name: `${member.name} — Letraperfeiçoada`,
+    name: `${member.name} — DS Crédito`,
     short_name: member.name,
     description: member.role.pt,
     start_url: `/equipa/${member.id}`,
     display: "standalone",
-    background_color: "#1D1D1B",
-    theme_color: "#F39200",
+    background_color: "#0F172A",
+    theme_color: "#A30F4F",
     icons: [
       {
         src: "/icon-192.png",

@@ -2,32 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Linkedin } from "lucide-react";
+import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
-import { usePrototype } from "@/lib/PrototypeContext";
 import { teamMembers } from "@/lib/teamData";
-import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-
-/*
- * TeamPreview — editorial portrait row: three large warm-duotone portraits
- * (grayscale + warm grade → full colour on hover), captioned in big
- * tracking-tight type. Oversized section headline with the highlight in ember.
- *  cinema    · ink canvas with a faint dawn glow
- *  editorial · alabaster canvas, white portrait frames with warm shadows
- * First-3-by-order logic, initials fallback, /equipa links and all t.team
- * copy are unchanged.
- */
 
 function TeamCard({
   member,
   index,
   locale,
-  dark,
 }: {
   member: (typeof teamMembers)[number];
   index: number;
   locale: "pt" | "en";
-  dark: boolean;
 }) {
   const [imgError, setImgError] = useState(false);
   const initials = member.name
@@ -38,82 +26,50 @@ function TeamCard({
     .slice(0, 2);
 
   return (
-    <FadeIn delay={index * 0.12}>
-      <Link href={`/equipa/${member.id}`} className="group block">
-        {/* Portrait — .img-warm on the frame so the warm grade composes with
-            the grayscale filter on the img (duotone → colour on hover). */}
-        <div
-          className={`aspect-[3/4] w-full overflow-hidden rounded-2xl img-warm ${
-            dark
-              ? "bg-white/[0.04]"
-              : "bg-white shadow-[0_18px_60px_rgba(29,29,27,0.10)]"
-          }`}
-        >
+    <motion.div variants={fadeUp} custom={index}>
+      <Link
+        href={`/equipa/${member.id}`}
+        className="block bg-white/5 border border-white/10 rounded-2xl overflow-hidden group hover:bg-white/10 transition-all duration-300 cursor-pointer"
+      >
+        {/* Photo */}
+        <div className="aspect-[3/4] w-full overflow-hidden">
           {imgError ? (
-            <div
-              className={`w-full h-full flex items-center justify-center font-bold text-4xl tracking-tight ${
-                dark ? "text-white/80" : "text-brand-900/70"
-              }`}
-            >
+            <div className="w-full h-full bg-accent-700/20 flex items-center justify-center text-white font-bold text-3xl">
               {initials}
             </div>
           ) : (
-            <picture>
-              <source
-                srcSet={member.photo.replace(".jpg", ".webp")}
-                type="image/webp"
-              />
-              <img
-                src={member.photo}
-                alt={member.name}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-300 ease-out"
-                style={{ objectPosition: member.photoPosition || "center" }}
-                loading="lazy"
-                decoding="async"
-                onError={() => setImgError(true)}
-              />
-            </picture>
+            <img
+              src={member.photo}
+              alt={member.name}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              style={{ objectPosition: member.photoPosition || 'center' }}
+              onError={() => setImgError(true)}
+            />
           )}
         </div>
 
-        {/* Caption — big name, tiny wide-tracked role */}
-        <div className="mt-5 lg:mt-6">
-          <h3
-            className={`text-xl lg:text-2xl font-bold tracking-tight ${
-              dark ? "text-white" : "text-brand-900"
-            }`}
-          >
-            {member.name}
-          </h3>
-          <p
-            className={`mt-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] ${
-              dark ? "text-accent-400" : "text-bronze"
-            }`}
-          >
+        {/* Info */}
+        <div className="p-6">
+          <h3 className="text-white font-bold text-lg mb-1">{member.name}</h3>
+          <p className="text-accent-400 text-sm font-semibold mb-3">
             {member.role[locale]}
           </p>
-          <p
-            className={`mt-3 text-sm leading-relaxed ${
-              dark ? "text-white/50" : "text-brand-500"
-            }`}
-          >
+          <p className="text-white/50 text-sm leading-relaxed">
             {member.bioShort?.[locale] ?? member.bio[locale]}
           </p>
         </div>
       </Link>
-    </FadeIn>
+    </motion.div>
   );
 }
 
 export default function TeamPreview() {
   const { locale, t } = useLanguage();
-  const { direction } = usePrototype();
-  const dark = direction === "cinema";
 
   const sorted = [...teamMembers].sort((a, b) => a.order - b.order);
   const previewMembers = sorted.slice(0, 3);
 
-  // Split headline around the highlight
+  // Split headline
   const headline = t.team.headline;
   const highlight = t.team.headlineHighlight;
   const idx = headline.toLowerCase().indexOf(highlight.toLowerCase());
@@ -125,85 +81,76 @@ export default function TeamPreview() {
   }
 
   return (
-    <section
-      id="team"
-      className={`relative py-20 md:py-24 lg:py-28 overflow-hidden ${
-        dark ? "bg-ink" : "bg-alabaster"
-      }`}
-    >
-      {dark && (
-        <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark opacity-60" />
-      )}
+    <section id="team" className="relative py-28 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-brand-900">
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, white 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent-700/10 blur-[120px]" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* ── Header — oversized type left, supporting copy right ── */}
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-12 items-end mb-10 lg:mb-14">
-          <div>
-            <FadeIn>
-              <div
-                className={`inline-flex items-center gap-3 mb-6 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.3em] ${
-                  dark ? "text-accent-400" : "text-bronze"
-                }`}
-              >
-                <span aria-hidden className="h-px w-8 bg-current opacity-60" />
-                {t.team.eyebrow}
-              </div>
-            </FadeIn>
+      <div className="relative max-w-5xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <p className="text-xs font-semibold tracking-widest text-accent-400 uppercase mb-4">
+            {t.team.eyebrow}
+          </p>
+          <h2 className="text-4xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+            {before}
+            <span className="text-accent-400">{highlight}</span>
+            {after}
+          </h2>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            {t.team.subheading}
+          </p>
+        </motion.div>
 
-            <h2
-              className={`text-4xl lg:text-6xl font-bold tracking-tight leading-[1.04] ${
-                dark ? "text-white" : "text-brand-900"
-              }`}
-            >
-              <RevealLine>
-                {before}
-                <span className="text-accent-700">{highlight}</span>
-                {after}
-              </RevealLine>
-            </h2>
-          </div>
-
-          <FadeIn delay={0.25}>
-            <p
-              className={`text-lg leading-relaxed lg:pb-1.5 ${
-                dark ? "text-white/60" : "text-brand-500"
-              }`}
-            >
-              {t.team.subheading}
-            </p>
-          </FadeIn>
-        </div>
-
-        {/* ── Portrait row — Paulo, Armanda, Lília ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        {/* Team Cards — Paulo, Armanda, Lília */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {previewMembers.map((member, index) => (
             <TeamCard
               key={member.id}
               member={member}
               index={index}
               locale={locale}
-              dark={dark}
             />
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA — subtle link variant; primary CTAs live in adjacent sections */}
-        <FadeIn delay={0.1} className="text-center mt-12 lg:mt-16">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mt-10"
+        >
           <Link
             href="/equipa"
-            className={`group inline-flex items-center gap-2 text-sm font-semibold transition-colors ${
-              dark
-                ? "text-accent-400 hover:text-accent-300"
-                : "text-bronze hover:text-brand-900"
-            }`}
+            className="group inline-flex items-center gap-1.5 text-accent-400 text-sm font-semibold hover:text-accent-300 underline-offset-4 hover:underline transition-colors"
           >
             {t.team.cta}
-            <ArrowRight
-              size={15}
-              className="transition-transform group-hover:translate-x-1"
-            />
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
-        </FadeIn>
+        </motion.div>
       </div>
     </section>
   );

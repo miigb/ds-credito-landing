@@ -16,9 +16,8 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://img.logo.dev",
       "font-src 'self' https://fonts.gstatic.com",
-      // *.mux.com: HLS manifest/segments (stream.mux.com redirects to edge subdomains) — prototype video hero 3
-      "connect-src 'self' https://api.web3forms.com https://ipapi.co https://va.vercel-scripts.com https://vitals.vercel-insights.com https://*.mux.com",
-      "media-src 'self' blob: https://*.mux.com",
+      "connect-src 'self' https://api.web3forms.com https://ipapi.co https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+      "media-src 'self'",
       "frame-src 'self' https://www.google.com https://maps.google.com",
       "frame-ancestors 'none'",
     ].join("; "),

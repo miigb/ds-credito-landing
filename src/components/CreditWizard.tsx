@@ -1,24 +1,27 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Loader2, AlertCircle, ArrowLeft, ArrowRight, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Briefcase,
+  PiggyBank,
+  MapPin,
+  Wallet,
+  Building2,
+  Coins,
+  User,
+  CheckCircle,
+  Loader2,
+  AlertCircle,
+  ArrowLeft,
+  ArrowRight,
+  Send,
+} from "lucide-react";
 import { track } from "@vercel/analytics";
+import { fadeUp } from "@/lib/animations";
 import { useLanguage } from "@/lib/LanguageContext";
-import { usePrototype } from "@/lib/PrototypeContext";
-import { RevealLine, FadeIn } from "@/components/fx/RevealText";
-import { BrandIcon, type BrandIconName } from "@/components/brand/BrandIcons";
 import ProgressIndicator from "@/components/ui/progress-indicator";
 import { Slider } from "@/components/ui/slider";
-
-/*
- * CreditWizard — the conversion centerpiece, re-skinned for Amanhecer 2026.
- * Same 7 steps, qualification logic, endpoints, analytics and copy as the
- * legacy wizard — presentation only. One question per view, rising-sun arc
- * progress, golden-ticket success artifact. Branches on prototype direction:
- *   cinema    · ink canvas, dawn-radial whisper, tonal white/[0.04] surface
- *   editorial · paper canvas, white card with a soft ember halo behind it
- */
 
 function parseNumber(s: string): number {
   return Number(s.replace(/[^\d]/g, "")) || 0;
@@ -77,23 +80,14 @@ const slideVariants = {
   exit: (dir: number) => ({ x: dir > 0 ? -60 : 60, opacity: 0 }),
 };
 
-const staticVariants = {
-  enter: { x: 0, opacity: 1 },
-  center: { x: 0, opacity: 1 },
-  exit: { x: 0, opacity: 1 },
-};
-
 export default function CreditWizard() {
   const { locale, t } = useLanguage();
-  const { direction } = usePrototype();
-  const reduced = useReducedMotion();
   const pq = t.preQualification;
   const cf = t.creditForm;
   const isPt = locale === "pt";
-  const dark = direction === "cinema";
 
   const [step, setStep] = useState(0);
-  const [slideDir, setSlideDir] = useState(1);
+  const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<Answers>(INITIAL);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -114,12 +108,12 @@ export default function CreditWizard() {
   }, []);
 
   const goNext = useCallback(() => {
-    setSlideDir(1);
+    setDirection(1);
     setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1));
   }, []);
 
   const goBack = useCallback(() => {
-    setSlideDir(-1);
+    setDirection(-1);
     setStep((s) => Math.max(0, s - 1));
   }, []);
 
@@ -263,136 +257,104 @@ export default function CreditWizard() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      id="pre-qualification"
-      className={`relative py-28 lg:py-36 overflow-hidden ${dark ? "bg-ink" : "bg-paper"}`}
-    >
-      {/* ── Canvas ── */}
-      {dark ? (
-        <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark opacity-70" />
-      ) : null}
+    <section ref={sectionRef} id="pre-qualification" className="relative py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-50 via-white to-brand-50" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* ── Header ── */}
-        <div className="text-center mb-12 lg:mb-16">
-          <FadeIn>
-            <p
-              className={`text-xs lg:text-sm font-semibold uppercase tracking-[0.3em] mb-5 ${
-                dark ? "text-accent-400" : "text-bronze"
-              }`}
-            >
-              {pq.eyebrow}
-            </p>
-          </FadeIn>
-          <h2
-            className={`text-4xl lg:text-6xl font-bold tracking-tight text-balance ${
-              dark ? "text-white" : "text-brand-900"
-            }`}
-          >
-            <RevealLine>{pq.headline}</RevealLine>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <p className="text-accent-700 text-sm font-semibold tracking-widest uppercase mb-4">
+            {pq.eyebrow}
+          </p>
+          <h2 className="text-3xl lg:text-5xl font-bold text-brand-900 tracking-tight mb-5">
+            {pq.headline}
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="relative max-w-2xl mx-auto">
-          {/* Editorial: soft ember halo behind the white card */}
-          {!dark && !submitted && (
-            <div
-              aria-hidden
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[105%] rounded-[4rem] bg-accent-700/10 blur-[90px]"
-            />
-          )}
-
+        <div className="max-w-2xl mx-auto">
           {submitted ? (
-            <SuccessCard title={cf.successTitle} message={cf.successMessage} />
+            <SuccessCard
+              title={cf.successTitle}
+              message={cf.successMessage}
+            />
           ) : (
-            <FadeIn delay={0.1}>
-              <div
-                className={`relative rounded-3xl p-6 sm:p-10 lg:p-12 ${
-                  dark
-                    ? "bg-white/[0.04] border border-white/[0.08]"
-                    : "bg-white shadow-[0_30px_90px_rgba(29,29,27,0.10)]"
-                }`}
-              >
-                {/* Rising-sun arc progress */}
-                <div className="flex justify-center mb-8 lg:mb-10">
-                  <ProgressIndicator step={step + 1} totalSteps={TOTAL_STEPS} dark={dark} />
-                </div>
+            <>
+              {/* Progress dots */}
+              <div className="flex justify-center mb-8">
+                <ProgressIndicator
+                  step={step + 1}
+                  totalSteps={TOTAL_STEPS}
+                />
+              </div>
 
-                {/* Step stack — clip horizontal slide inside the surface */}
-                <div className="relative overflow-x-clip">
-                  <AnimatePresence mode="wait" custom={slideDir}>
-                    <motion.div
-                      key={step}
-                      custom={slideDir}
-                      variants={reduced ? staticVariants : slideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{ duration: reduced ? 0 : 0.35, ease: [0.25, 0.4, 0.25, 1] }}
-                    >
-                      {renderStep(step, answers, answerCard, selectOperation, update, pq, cf, dark)}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+              {/* Card stack — no overflow here; section already clips. */}
+              <div className="relative">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.div
+                    key={step}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+                  >
+                    {renderStep(step, answers, answerCard, selectOperation, update, pq, cf)}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
-                {/* Footer buttons */}
-                <div className="mt-9 flex items-center justify-between gap-3">
+              {/* Footer buttons */}
+              <div className="mt-8 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={goBack}
+                  disabled={step === 0}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-brand-600 font-semibold hover:bg-brand-100 transition-colors disabled:opacity-0 disabled:pointer-events-none"
+                >
+                  <ArrowLeft size={16} />
+                  {isPt ? "Voltar" : "Back"}
+                </button>
+
+                {!isCardStep && (
                   <button
                     type="button"
-                    onClick={goBack}
-                    disabled={step === 0}
-                    className={`inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold transition-colors disabled:opacity-0 disabled:pointer-events-none ${
-                      dark
-                        ? "text-white/55 hover:text-white hover:bg-white/[0.06]"
-                        : "text-brand-600 hover:bg-brand-100"
-                    }`}
+                    onClick={isLastStep ? handleSubmit : goNext}
+                    disabled={!canContinue() || sending}
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-accent-700 text-white font-semibold hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-accent-700/25"
                   >
-                    <ArrowLeft size={16} />
-                    {isPt ? "Voltar" : "Back"}
+                    {sending ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" />
+                        {cf.sending}
+                      </>
+                    ) : isLastStep ? (
+                      <>
+                        <Send size={16} />
+                        {cf.submit}
+                      </>
+                    ) : (
+                      <>
+                        {isPt ? "Continuar" : "Continue"}
+                        <ArrowRight size={16} />
+                      </>
+                    )}
                   </button>
-
-                  {!isCardStep && (
-                    <button
-                      type="button"
-                      onClick={isLastStep ? handleSubmit : goNext}
-                      disabled={!canContinue() || sending}
-                      className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-accent-700 text-white font-semibold hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-700/25 hover:shadow-accent-600/30 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-accent-700/25 disabled:hover:translate-y-0"
-                    >
-                      {sending ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          {cf.sending}
-                        </>
-                      ) : isLastStep ? (
-                        <>
-                          <Send size={16} />
-                          {cf.submit}
-                        </>
-                      ) : (
-                        <>
-                          {isPt ? "Continuar" : "Continue"}
-                          <ArrowRight size={16} />
-                        </>
-                      )}
-                    </button>
-                  )}
-                </div>
-
-                {error && (
-                  <div
-                    className={`mt-4 flex items-center gap-2 text-sm rounded-xl px-4 py-3 border ${
-                      dark
-                        ? "text-red-400 bg-red-500/10 border-red-500/25"
-                        : "text-red-600 bg-red-50 border-red-200"
-                    }`}
-                  >
-                    <AlertCircle size={16} className="shrink-0" />
-                    <span>{cf.errorMessage}</span>
-                  </div>
                 )}
               </div>
-            </FadeIn>
+
+              {error && (
+                <div className="mt-4 flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                  <AlertCircle size={16} className="shrink-0" />
+                  <span>{cf.errorMessage}</span>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -402,7 +364,6 @@ export default function CreditWizard() {
 
 // ----- Step renderer -----
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 function renderStep(
   step: number,
   a: Answers,
@@ -410,98 +371,84 @@ function renderStep(
   selectOperation: (v: string) => void,
   update: (f: keyof Answers, v: string) => void,
   pq: any,
-  cf: any,
-  dark: boolean
+  cf: any
 ) {
-  const inputCls = dark
-    ? "w-full border border-white/15 rounded-xl px-4 py-3.5 bg-white/[0.05] text-white placeholder-white/30 focus:border-accent-400 focus:ring-1 focus:ring-accent-400/40 outline-none text-base"
-    : "w-full border border-brand-200 rounded-xl px-4 py-3.5 bg-white text-brand-900 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-base";
-  const selectCls = dark
-    ? "select-dark w-full border border-white/15 rounded-xl px-4 py-3.5 bg-white/[0.05] text-white [&>option]:text-brand-900 focus:border-accent-400 focus:ring-1 focus:ring-accent-400/40 outline-none appearance-none text-base"
-    : "w-full border border-brand-200 rounded-xl px-4 py-3.5 bg-white text-brand-900 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none appearance-none text-base";
-  const valueCls = `text-2xl sm:text-3xl font-bold tabular-nums tracking-tight ${
-    dark ? "text-white" : "text-brand-900"
-  }`;
-  const minmaxCls = `text-xs ${dark ? "text-white/35" : "text-brand-400"}`;
-
   switch (step) {
     case 0:
       return (
-        <CardShell icon="solidity" title={pq.q1Title} desc={pq.q1Desc} dark={dark}>
-          <Choice letter="A" text={pq.q1a} onClick={() => answerCard("q1", "A", true)} selected={a.q1 === "A"} dark={dark} />
-          <Choice letter="B" text={pq.q1b} onClick={() => answerCard("q1", "B", true)} selected={a.q1 === "B"} dark={dark} />
-          <Choice letter="C" text={pq.q1c} onClick={() => answerCard("q1", "C", true)} selected={a.q1 === "C"} dark={dark} />
-          <Choice letter="D" text={pq.q1d} onClick={() => answerCard("q1", "D", false)} selected={a.q1 === "D"} dark={dark} />
+        <CardShell icon={Briefcase} title={pq.q1Title} desc={pq.q1Desc}>
+          <Choice letter="A" text={pq.q1a} onClick={() => answerCard("q1", "A", true)} selected={a.q1 === "A"} />
+          <Choice letter="B" text={pq.q1b} onClick={() => answerCard("q1", "B", true)} selected={a.q1 === "B"} />
+          <Choice letter="C" text={pq.q1c} onClick={() => answerCard("q1", "C", true)} selected={a.q1 === "C"} />
+          <Choice letter="D" text={pq.q1d} onClick={() => answerCard("q1", "D", false)} selected={a.q1 === "D"} />
         </CardShell>
       );
     case 1:
       return (
-        <CardShell icon="investment" title={pq.q2Title} desc={pq.q2Desc} dark={dark}>
-          <Choice letter="A" text={pq.q2a} onClick={() => answerCard("q2", "A", true)} selected={a.q2 === "A"} dark={dark} />
-          <Choice letter="B" text={pq.q2b} onClick={() => answerCard("q2", "B", true)} selected={a.q2 === "B"} dark={dark} />
-          <Choice letter="C" text={pq.q2c} onClick={() => answerCard("q2", "C", false)} selected={a.q2 === "C"} dark={dark} />
+        <CardShell icon={PiggyBank} title={pq.q2Title} desc={pq.q2Desc}>
+          <Choice letter="A" text={pq.q2a} onClick={() => answerCard("q2", "A", true)} selected={a.q2 === "A"} />
+          <Choice letter="B" text={pq.q2b} onClick={() => answerCard("q2", "B", true)} selected={a.q2 === "B"} />
+          <Choice letter="C" text={pq.q2c} onClick={() => answerCard("q2", "C", false)} selected={a.q2 === "C"} />
         </CardShell>
       );
     case 2:
       return (
-        <CardShell icon="reach" title={pq.q3Title} desc={pq.q3Desc} dark={dark}>
-          <Choice letter="A" text={pq.q3a} onClick={() => answerCard("q3", "A", true)} selected={a.q3 === "A"} dark={dark} />
-          <Choice letter="B" text={pq.q3b} onClick={() => answerCard("q3", "B", true)} selected={a.q3 === "B"} dark={dark} />
-          <Choice letter="C" text={pq.q3c} onClick={() => answerCard("q3", "C", false)} selected={a.q3 === "C"} dark={dark} />
-          <Choice letter="D" text={pq.q3d} onClick={() => answerCard("q3", "D", false)} selected={a.q3 === "D"} dark={dark} />
+        <CardShell icon={MapPin} title={pq.q3Title} desc={pq.q3Desc}>
+          <Choice letter="A" text={pq.q3a} onClick={() => answerCard("q3", "A", true)} selected={a.q3 === "A"} />
+          <Choice letter="B" text={pq.q3b} onClick={() => answerCard("q3", "B", true)} selected={a.q3 === "B"} />
+          <Choice letter="C" text={pq.q3c} onClick={() => answerCard("q3", "C", false)} selected={a.q3 === "C"} />
+          <Choice letter="D" text={pq.q3d} onClick={() => answerCard("q3", "D", false)} selected={a.q3 === "D"} />
         </CardShell>
       );
     case 3:
       return (
-        <CardShell icon="protection" title={pq.q4Title} desc={pq.q4Desc} dark={dark}>
-          <Choice letter="A" text={pq.q4a} onClick={() => answerCard("q4", "A", true)} selected={a.q4 === "A"} dark={dark} />
-          <Choice letter="B" text={pq.q4b} onClick={() => answerCard("q4", "B", true)} selected={a.q4 === "B"} dark={dark} />
-          <Choice letter="C" text={pq.q4c} onClick={() => answerCard("q4", "C", false)} selected={a.q4 === "C"} dark={dark} />
+        <CardShell icon={Wallet} title={pq.q4Title} desc={pq.q4Desc}>
+          <Choice letter="A" text={pq.q4a} onClick={() => answerCard("q4", "A", true)} selected={a.q4 === "A"} />
+          <Choice letter="B" text={pq.q4b} onClick={() => answerCard("q4", "B", true)} selected={a.q4 === "B"} />
+          <Choice letter="C" text={pq.q4c} onClick={() => answerCard("q4", "C", false)} selected={a.q4 === "C"} />
         </CardShell>
       );
     case 4:
       return (
-        <CardShell icon="credit" title={cf.group1Title} dark={dark}>
-          <Choice letter="A" text={cf.optAquisicao} onClick={() => selectOperation("aquisicao")} selected={a.operationType === "aquisicao"} dark={dark} />
-          <Choice letter="B" text={cf.optTransferencia} onClick={() => selectOperation("transferencia")} selected={a.operationType === "transferencia"} dark={dark} />
-          <Choice letter="C" text={cf.optPessoal} onClick={() => selectOperation("pessoal")} selected={a.operationType === "pessoal"} dark={dark} />
-          <Choice letter="D" text={cf.optConsolidacao} onClick={() => selectOperation("consolidacao")} selected={a.operationType === "consolidacao"} dark={dark} />
+        <CardShell icon={Building2} title={cf.group1Title}>
+          <Choice letter="A" text={cf.optAquisicao} onClick={() => selectOperation("aquisicao")} selected={a.operationType === "aquisicao"} />
+          <Choice letter="B" text={cf.optTransferencia} onClick={() => selectOperation("transferencia")} selected={a.operationType === "transferencia"} />
+          <Choice letter="C" text={cf.optPessoal} onClick={() => selectOperation("pessoal")} selected={a.operationType === "pessoal"} />
+          <Choice letter="D" text={cf.optConsolidacao} onClick={() => selectOperation("consolidacao")} selected={a.operationType === "consolidacao"} />
         </CardShell>
       );
     case 5:
       return (
-        <CardShell icon="growth" title={cf.group2Title} dark={dark}>
+        <CardShell icon={Coins} title={cf.group2Title}>
           <div className="space-y-7">
-            <Field label={cf.financingValue} required dark={dark}>
+            <Field label={cf.financingValue} required>
               <div className="flex items-baseline justify-between mb-3">
-                <span className={valueCls}>
+                <span className="text-2xl font-bold text-brand-900 tabular-nums">
                   €{formatEuro(parseNumber(a.financingValue) || 200000)}
                 </span>
-                <span className={minmaxCls}>€50k – €800k</span>
+                <span className="text-xs text-brand-400">€50k – €800k</span>
               </div>
               <Slider
                 min={50000}
                 max={800000}
                 step={10000}
-                tone={dark ? "dark" : "light"}
                 value={[parseNumber(a.financingValue) || 200000]}
                 onValueChange={(v) => update("financingValue", String(v[0]))}
                 aria-label={cf.financingValue}
               />
             </Field>
 
-            <Field label={cf.income} hint={cf.incomeHint} required dark={dark}>
+            <Field label={cf.income} hint={cf.incomeHint} required>
               <div className="flex items-baseline justify-between mb-3">
-                <span className={valueCls}>
+                <span className="text-2xl font-bold text-brand-900 tabular-nums">
                   €{formatEuro(parseNumber(a.income) || 2000)}
                 </span>
-                <span className={minmaxCls}>€500 – €15k</span>
+                <span className="text-xs text-brand-400">€500 – €15k</span>
               </div>
               <Slider
                 min={500}
                 max={15000}
                 step={100}
-                tone={dark ? "dark" : "light"}
                 value={[parseNumber(a.income) || 2000]}
                 onValueChange={(v) => update("income", String(v[0]))}
                 aria-label={cf.income}
@@ -509,21 +456,21 @@ function renderStep(
             </Field>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <Field label={cf.propertyChoice} dark={dark}>
+              <Field label={cf.propertyChoice}>
                 <select
                   value={a.propertyChoice}
                   onChange={(e) => update("propertyChoice", e.target.value)}
-                  className={selectCls}
+                  className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                 >
                   <option value="escolhido">{cf.propertyChosen}</option>
                   <option value="procura">{cf.propertySearching}</option>
                 </select>
               </Field>
-              <Field label={cf.proponents} dark={dark}>
+              <Field label={cf.proponents}>
                 <select
                   value={a.proponents}
                   onChange={(e) => update("proponents", e.target.value)}
-                  className={selectCls}
+                  className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                 >
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -532,7 +479,7 @@ function renderStep(
             </div>
 
             {a.operationType === "transferencia" && (
-              <Field label={cf.sellCurrent} dark={dark}>
+              <Field label={cf.sellCurrent}>
                 <div className="flex items-center gap-6 h-[50px]">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -543,7 +490,7 @@ function renderStep(
                       onChange={() => update("sellProperty", "sim")}
                       className="w-5 h-5 accent-accent-700"
                     />
-                    <span className={`font-medium ${dark ? "text-white" : "text-brand-900"}`}>{cf.yes}</span>
+                    <span className="text-brand-900 font-medium">{cf.yes}</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -554,7 +501,7 @@ function renderStep(
                       onChange={() => update("sellProperty", "nao")}
                       className="w-5 h-5 accent-accent-700"
                     />
-                    <span className={`font-medium ${dark ? "text-white" : "text-brand-900"}`}>{cf.no}</span>
+                    <span className="text-brand-900 font-medium">{cf.no}</span>
                   </label>
                 </div>
               </Field>
@@ -564,10 +511,10 @@ function renderStep(
       );
     case 6:
       return (
-        <CardShell icon="support" title={cf.group3Title} dark={dark}>
+        <CardShell icon={User} title={cf.group3Title}>
           <div className="space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <Field label={cf.firstName} required dark={dark}>
+              <Field label={cf.firstName} required>
                 <input
                   type="text"
                   autoCapitalize="words"
@@ -575,10 +522,10 @@ function renderStep(
                   placeholder={cf.firstNamePlaceholder}
                   value={a.firstName}
                   onChange={(e) => update("firstName", e.target.value)}
-                  className={inputCls}
+                  className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                 />
               </Field>
-              <Field label={cf.lastName} required dark={dark}>
+              <Field label={cf.lastName} required>
                 <input
                   type="text"
                   autoCapitalize="words"
@@ -586,12 +533,12 @@ function renderStep(
                   placeholder={cf.lastNamePlaceholder}
                   value={a.lastName}
                   onChange={(e) => update("lastName", e.target.value)}
-                  className={inputCls}
+                  className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
                 />
               </Field>
             </div>
 
-            <Field label={cf.email} required dark={dark}>
+            <Field label={cf.email} required>
               <input
                 type="email"
                 inputMode="email"
@@ -601,26 +548,14 @@ function renderStep(
                 placeholder={cf.emailPlaceholder}
                 value={a.email}
                 onChange={(e) => update("email", e.target.value)}
-                className={inputCls}
+                className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none text-brand-900 text-base"
               />
             </Field>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <Field label={cf.phone} required dark={dark}>
-                <div
-                  className={`flex border rounded-xl overflow-hidden ${
-                    dark
-                      ? "border-white/15 bg-white/[0.05] focus-within:border-accent-400 focus-within:ring-1 focus-within:ring-accent-400/40"
-                      : "border-brand-200 focus-within:border-accent-700 focus-within:ring-1 focus-within:ring-accent-700/30"
-                  }`}
-                >
-                  <span
-                    className={`flex items-center gap-1.5 px-3 text-sm border-r shrink-0 ${
-                      dark
-                        ? "bg-white/[0.06] text-white/60 border-white/15"
-                        : "bg-brand-50 text-brand-600 border-brand-200"
-                    }`}
-                  >
+              <Field label={cf.phone} required>
+                <div className="flex border border-brand-200 rounded-xl overflow-hidden focus-within:border-accent-700 focus-within:ring-1 focus-within:ring-accent-700/30">
+                  <span className="flex items-center gap-1.5 bg-brand-50 px-3 text-sm text-brand-600 border-r border-brand-200 shrink-0">
                     <span className="text-base leading-none">{"\u{1F1F5}\u{1F1F9}"}</span>
                     <span className="font-medium">+351</span>
                   </span>
@@ -631,17 +566,15 @@ function renderStep(
                     placeholder={cf.phonePlaceholder}
                     value={a.phone}
                     onChange={(e) => update("phone", e.target.value)}
-                    className={`w-full px-4 py-3.5 outline-none text-base bg-transparent ${
-                      dark ? "text-white placeholder-white/30" : "text-brand-900"
-                    }`}
+                    className="w-full px-4 py-3.5 outline-none text-brand-900 text-base"
                   />
                 </div>
               </Field>
-              <Field label={cf.schedule} dark={dark}>
+              <Field label={cf.schedule}>
                 <select
                   value={a.schedule}
                   onChange={(e) => update("schedule", e.target.value)}
-                  className={selectCls}
+                  className="w-full border border-brand-200 rounded-xl px-4 py-3.5 focus:border-accent-700 focus:ring-1 focus:ring-accent-700/30 outline-none bg-white text-brand-900 appearance-none text-base"
                 >
                   <option value="qualquer">{cf.scheduleAny}</option>
                   <option value="manha">{cf.scheduleMorning}</option>
@@ -653,7 +586,7 @@ function renderStep(
 
             <label className="flex items-start gap-3 cursor-pointer pt-2">
               <input type="checkbox" required className="mt-0.5 w-5 h-5 accent-accent-700 shrink-0" />
-              <span className={`text-sm ${dark ? "text-white/55" : "text-brand-500"}`}>
+              <span className="text-brand-500 text-sm">
                 {cf.disclaimer}
               </span>
             </label>
@@ -664,38 +597,25 @@ function renderStep(
       return null;
   }
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // ----- Sub-components -----
 
 function CardShell({
-  icon,
+  icon: Icon,
   title,
   desc,
-  dark,
   children,
 }: {
-  icon: BrandIconName;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   title: string;
   desc?: string;
-  dark: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <BrandIcon name={icon} size={44} className="text-accent-700 mb-5" />
-      <h3
-        className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-balance ${
-          desc ? "mb-3" : "mb-8"
-        } ${dark ? "text-white" : "text-brand-900"}`}
-      >
-        {title}
-      </h3>
-      {desc && (
-        <p className={`mb-8 leading-relaxed ${dark ? "text-white/55" : "text-brand-500"}`}>
-          {desc}
-        </p>
-      )}
+    <div className="bg-white rounded-2xl shadow-lg border border-brand-100 p-8 lg:p-10">
+      <Icon size={40} className="text-accent-700 mb-4" />
+      <h3 className="text-2xl font-bold text-brand-900 mb-3">{title}</h3>
+      {desc && <p className="text-brand-500 mb-8">{desc}</p>}
       <div className="space-y-3">{children}</div>
     </div>
   );
@@ -706,36 +626,27 @@ function Choice({
   text,
   onClick,
   selected,
-  dark,
 }: {
   letter: string;
   text: string;
   onClick: () => void;
   selected: boolean;
-  dark: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-pressed={selected}
-      className={`group w-full text-left rounded-2xl border px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-medium transition-all duration-200 flex items-center gap-4 ${
+      className={`w-full text-left border rounded-xl px-5 py-4 text-sm font-medium transition-all duration-200 flex items-center gap-3 group ${
         selected
-          ? dark
-            ? "bg-accent-400/10 text-white border-accent-400 ring-1 ring-accent-400"
-            : "bg-accent-50 text-brand-900 border-accent-400 ring-1 ring-accent-400"
-          : dark
-            ? "bg-white/[0.07] text-white/85 border-white/25 shadow-[0_4px_16px_rgba(0,0,0,0.25)] hover:bg-white/[0.1] hover:border-white/40 hover:-translate-y-0.5"
-            : "bg-paper text-brand-900 border-brand-900/15 shadow-[0_4px_14px_rgba(29,29,27,0.06)] hover:border-accent-400/70 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(29,29,27,0.07)]"
+          ? "border-accent-700 bg-accent-50 text-brand-900"
+          : "border-brand-200 text-brand-900 hover:border-accent-700 hover:bg-accent-50"
       }`}
     >
       <span
-        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
+        className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-colors ${
           selected
-            ? "bg-accent-400 text-brand-900"
-            : dark
-              ? "border border-white/25 text-white/50 group-hover:border-accent-400 group-hover:text-accent-400"
-              : "border border-brand-300 text-brand-400 group-hover:border-accent-700 group-hover:text-bronze"
+            ? "border-accent-700 text-accent-700 bg-accent-50"
+            : "border-brand-300 text-brand-400 group-hover:border-accent-700 group-hover:text-accent-700 group-hover:bg-accent-50"
         }`}
       >
         {letter}
@@ -749,26 +660,20 @@ function Field({
   label,
   hint,
   required,
-  dark,
   children,
 }: {
   label: string;
   hint?: string;
   required?: boolean;
-  dark: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <label className={`block text-sm font-medium mb-1.5 ${dark ? "text-white/70" : "text-brand-600"}`}>
+      <label className="block text-sm font-medium text-brand-600 mb-1">
         {label}
-        {required && (
-          <span className={`ml-0.5 ${dark ? "text-accent-400" : "text-bronze"}`}>*</span>
-        )}
+        {required && <span className="text-accent-700 ml-0.5">*</span>}
         {hint && (
-          <span className={`text-xs font-normal ml-1 ${dark ? "text-white/40" : "text-brand-400"}`}>
-            ({hint})
-          </span>
+          <span className="text-xs text-brand-400 font-normal ml-1">({hint})</span>
         )}
       </label>
       {children}
@@ -776,27 +681,18 @@ function Field({
   );
 }
 
-/* ── Golden ticket — the success artifact (same copy, screenshot-worthy) ── */
 function SuccessCard({ title, message }: { title: string; message: string }) {
-  const reduced = useReducedMotion();
   return (
     <motion.div
-      initial={reduced ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 24, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: reduced ? 0 : 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-      className="relative overflow-hidden rounded-3xl bg-ink border border-white/10 px-8 py-14 sm:px-14 sm:py-16 text-center"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-white rounded-2xl shadow-xl border border-brand-100 p-10 text-center"
     >
-      <div aria-hidden className="absolute inset-0 bg-dawn-radial-dark" />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/60 to-transparent"
-      />
-      <div className="relative">
-        <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white text-balance mb-4">
-          {title}
-        </h3>
-        <p className="text-white/65 leading-relaxed max-w-md mx-auto">{message}</p>
+      <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
+        <CheckCircle size={32} className="text-green-600" />
       </div>
+      <h3 className="text-2xl font-bold text-brand-900 mb-3">{title}</h3>
+      <p className="text-brand-500">{message}</p>
     </motion.div>
   );
 }

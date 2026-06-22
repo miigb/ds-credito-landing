@@ -1,11 +1,11 @@
 {
   "name": "Letraperfeiçoada",
-  "short_name": "Letraperfeiçoada",
+  "short_name": "DS Crédito",
   "description": "Independent credit brokerage for property buyers in Portugal",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1D1D1B",
-  "theme_color": "#F39200",
+  "background_color": "#F8FAFC",
+  "theme_color": "#A30F4F",
   "icons": [
     {
       "src": "/icon-192.png",
