@@ -47,7 +47,7 @@ function layout(content: string) {
     <div class="header">
       <div class="wordmark"><b>LETRA</b><span>PERFEI&Ccedil;OADA</span></div>
       <div style="font-size:12px;color:#E85D91;letter-spacing:2px;font-weight:600;margin-top:10px;text-transform:uppercase">Uma Quest&atilde;o de Compromisso</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-top:8px">Intermediários de Crédito</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-top:8px">Crédito Simplificado</div>
     </div>
     <div class="body">
       ${content}
@@ -357,7 +357,7 @@ function _header(s: SchemeColors) {
       <div style="font-size:20px;letter-spacing:1.5px;color:${s.headerText}"><b>LETRA</b><span style="font-weight:300">PERFEI&Ccedil;OADA</span></div>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 0 auto">
         <tr>
-          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Intermediários de Crédito</td>
+          <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-right:6px;vertical-align:middle">Crédito Simplificado</td>
           <td style="vertical-align:middle"><img src="${LOGO_URL}" alt="DS" width="18" height="18" style="border-radius:3px;display:block" /></td>
           <td style="font-size:10px;color:${subColor};letter-spacing:0.5px;padding-left:4px;vertical-align:middle">DS Cr&eacute;dito</td>
         </tr>

@@ -35,7 +35,7 @@ export default function Footer() {
                   <span className="font-light">PERFEI&Ccedil;OADA</span>
                 </span>
                 <span className="text-white/30 text-[10px] tracking-wider mt-1">
-                  Intermediários de Crédito
+                  Crédito Simplificado
                 </span>
               </div>
             </div>

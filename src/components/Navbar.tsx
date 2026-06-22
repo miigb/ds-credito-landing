@@ -85,7 +85,7 @@ export default function Navbar() {
                   scrolled ? "text-brand-500" : "text-white/60"
                 }`}
               >
-                Intermediários de Crédito
+                Crédito Simplificado
               </span>
             </div>
           </a>
