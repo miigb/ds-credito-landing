@@ -87,27 +87,6 @@ export const teamMembers: TeamMember[] = [
     order: 4,
   },
   {
-    id: "jose-nobre",
-    name: "José Nobre",
-    role: {
-      pt: "Gestor de Crédito",
-      en: "Credit Manager",
-    },
-    bio: {
-      pt: "Focado no acompanhamento de clientes e na gestão de processos de crédito com rigor e proximidade.",
-      en: "Focused on client support and credit process management with precision and proximity.",
-    },
-    photo: "/team/jose-nobre.jpg",
-    photoPosition: "center 32%",
-    email: "josenobre@dsicredito.pt",
-    phone: "+351 966 587 771",
-    whatsapp: "+351966587771",
-    specializations: ["Crédito Habitação", "Crédito Pessoal"],
-    languages: ["Português", "English"],
-    featured: true,
-    order: 5,
-  },
-  {
     id: "armando-serra",
     name: "Armando Serra",
     role: {
